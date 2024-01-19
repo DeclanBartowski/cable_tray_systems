@@ -5,13 +5,20 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-primevue',
     '@vueuse/nuxt',
+    '@pinia/nuxt'
   ],
+  imports: {
+    dirs: ['stores'],
+  },
   components: [
     {
       path: '~/components',
       pathPrefix: false
     }
   ],
+  pinia: {
+    autoImports: ['defineStore', 'storeToRefs']
+  },
   css: ['~/assets/css/main.css', 'primevue/resources/themes/lara-light-green/theme.css'],
   primevue: {
     components: {

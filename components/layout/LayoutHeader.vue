@@ -1,71 +1,95 @@
 <script setup lang="ts">
+const rootStore = useRootStore()
+const { isOpenMenu } = storeToRefs(rootStore)
+
 const search = ref('')
 </script>
 
 <template>
-  <div class="pt-5 text-black">
+  <div class="pt-5 text-black mobile:pt-4">
     <div class="container">
-      <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-8 laptop:gap-7 tablet:gap-6 mobile:gap-5">
         <div class="pt-1 flex items-center justify-between">
           <nuxt-link to="/">
             <img
               src="/images/logo.png"
               alt="Логотип"
+              class="laptop:w-[120px] mobile:w-20"
             >
           </nuxt-link>
-          <div class="flex items-center gap-10">
+          <div class="flex items-center gap-10 laptop:gap-7 tablet:hidden">
             <div class="flex flex-col gap-1">
               <a
                 href="tel:88003087242"
-                class="text-m font-semibold"
+                class="text-m font-semibold laptop:text-laptopM"
               >8 800 308-72-42</a>
-              <span class="text-xs">Доставка для регионов круглосуточно</span>
+              <span class="text-xs laptop:text-laptopXs">Доставка для регионов круглосуточно</span>
             </div>
             <div class="flex flex-col gap-1">
               <a
                 href="tel:+74958087338"
-                class="text-m font-semibold"
+                class="text-m font-semibold laptop:text-laptopM"
               >+7 495 808-73-38</a>
-              <span class="text-xs">Москва, Пн-Пт с 8.00 до 17.00</span>
+              <span class="text-xs laptop:text-laptopXs">Москва, Пн-Пт с 8.00 до 17.00</span>
             </div>
             <div class="flex flex-col gap-1">
               <a
                 href="tel:+79533080872"
-                class="text-m font-semibold"
+                class="text-m font-semibold laptop:text-laptopM"
               >+7 953 308-08-72</a>
-              <span class="text-xs">Доставка для регионов круглосуточно</span>
+              <span class="text-xs laptop:text-laptopXs">Доставка для регионов круглосуточно</span>
             </div>
           </div>
-          <div class="flex items-center gap-[50px]">
+          <div class="flex items-center gap-[50px] laptop:gap-9 mobile:gap-4">
             <button class="border-none relative">
-              <heart />
-              <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%]">0</span>
+              <heart class="mobile:w-6 mobile:h-6" />
+              <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
             </button>
             <button class="border-none relative">
-              <bar />
-              <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%]">0</span>
+              <bar class="mobile:w-6 mobile:h-6" />
+              <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
             </button>
             <button class="border-none relative">
-              <cart />
-              <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%]">0</span>
+              <cart class="mobile:w-6 mobile:h-6" />
+              <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
             </button>
           </div>
-          <ui-button text="Войти" />
-        </div>
-        <div class="flex items-center justify-between">
           <ui-button
-            item="icon"
-            text="Каталог"
+            text="Войти"
+            class="tablet:w-[138px] mobile:hidden"
+          />
+          <button
+            class="hidden border-none tablet:flex"
+            @click="isOpenMenu = true"
           >
-            <close v-if="false" />
-            <catalog />
-          </ui-button>
-          <nav class="flex items-end gap-6">
-            <ul class="flex items-center gap-14">
+            <img
+              src="/svg/menu.svg"
+              alt="Меню"
+              class="mobile:w-6 mobile:h-6"
+            >
+          </button>
+        </div>
+        <div class="flex items-center justify-between mobile:flex-col mobile:gap-4">
+          <div class="mobile:flex mobile:items-center mobile:gap-4">
+            <ui-button
+              item="icon"
+              fill="fill"
+              text="Каталог"
+            >
+              <close v-if="false" />
+              <catalog />
+            </ui-button>
+            <ui-button
+              text="Войти"
+              class="hidden mobile:flex w-[138px]"
+            />
+          </div>
+          <nav class="flex items-end gap-6 laptop:gap-5 tablet:hidden">
+            <ul class="flex items-center gap-14 laptop:gap-10">
               <li
                 v-for="nav in headerNav"
                 :key="nav.name"
-                class="text-m"
+                class="text-m laptop:text-laptopM"
               >
                 <nuxt-link :to="nav.path">
                   {{ nav.name }}
@@ -79,8 +103,9 @@ const search = ref('')
           <ui-input
             v-model="search"
             item="icon"
+            class-name="small"
             placeholder="Поиск по каталогу"
-            class="max-w-[420px]"
+            class="max-w-[420px] laptop:max-w-[320px]"
           >
             <img
               src="/svg/search.svg"
@@ -92,4 +117,5 @@ const search = ref('')
       </div>
     </div>
   </div>
+  <layout-mobile-menu v-if="isOpenMenu" />
 </template>
