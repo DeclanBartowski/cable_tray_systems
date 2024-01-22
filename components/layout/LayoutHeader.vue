@@ -3,6 +3,7 @@ const rootStore = useRootStore()
 const { isOpenMenu } = storeToRefs(rootStore)
 
 const search = ref('')
+const isOpenMore = ref(false)
 </script>
 
 <template>
@@ -21,21 +22,21 @@ const search = ref('')
             <div class="flex flex-col gap-1">
               <a
                 href="tel:88003087242"
-                class="text-m font-semibold laptop:text-laptopM"
+                class="text-m font-add font-semibold laptop:text-laptopM"
               >8 800 308-72-42</a>
               <span class="text-xs laptop:text-laptopXs">Доставка для регионов круглосуточно</span>
             </div>
             <div class="flex flex-col gap-1">
               <a
                 href="tel:+74958087338"
-                class="text-m font-semibold laptop:text-laptopM"
+                class="text-m font-add font-semibold laptop:text-laptopM"
               >+7 495 808-73-38</a>
               <span class="text-xs laptop:text-laptopXs">Москва, Пн-Пт с 8.00 до 17.00</span>
             </div>
             <div class="flex flex-col gap-1">
               <a
                 href="tel:+79533080872"
-                class="text-m font-semibold laptop:text-laptopM"
+                class="text-m font-add font-semibold laptop:text-laptopM"
               >+7 953 308-08-72</a>
               <span class="text-xs laptop:text-laptopXs">Доставка для регионов круглосуточно</span>
             </div>
@@ -46,7 +47,7 @@ const search = ref('')
               <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
             </button>
             <button class="border-none relative">
-              <bar class="mobile:w-6 mobile:h-6" />
+              <bar-active class="mobile:w-6 mobile:h-6" />
               <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
             </button>
             <button class="border-none relative">
@@ -84,7 +85,7 @@ const search = ref('')
               class="hidden mobile:flex w-[138px]"
             />
           </div>
-          <nav class="flex items-end gap-6 laptop:gap-5 tablet:hidden">
+          <nav class="relative flex items-end gap-6 laptop:gap-5 tablet:hidden">
             <ul class="flex items-center gap-14 laptop:gap-10">
               <li
                 v-for="nav in headerNav"
@@ -96,9 +97,13 @@ const search = ref('')
                 </nuxt-link>
               </li>
             </ul>
-            <button class="border-none">
+            <button
+              class="border-none"
+              @click="isOpenMore = !isOpenMore"
+            >
               <more />
             </button>
+            <layout-header-more v-if="isOpenMore" />
           </nav>
           <ui-input
             v-model="search"

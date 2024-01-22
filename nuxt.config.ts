@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-primevue',
     '@vueuse/nuxt',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'vue3-carousel-nuxt'
   ],
   imports: {
     dirs: ['stores'],
@@ -23,7 +24,16 @@ export default defineNuxtConfig({
   primevue: {
     components: {
       include: [
+        'Breadcrumb',
+        'RadioButton',
+        'Tooltip',
+        'TabView',
+        'TabPanel',
+        'Accordion',
+        'AccordionTab',
+        'Slider',
         'Checkbox',
+        'Dropdown'
       ]
     }
   },

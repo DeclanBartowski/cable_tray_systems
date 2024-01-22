@@ -16,32 +16,32 @@
       </nuxt-link>
     </div>
     <div class="grid grid-cols-3 gap-5 tablet:gap-4 mobile:grid-cols-2">
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-7.png"
         title="Кабеля"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-8.png"
         title="Выключатели автоматические"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-9.png"
         title="Розетки"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-10.png"
         title="Осветительные изделия"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-11.png"
         title="Щитовое оборудование"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-12.png"
         title="Местный и строительный крепёж"

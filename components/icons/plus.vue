@@ -1,27 +1,21 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <svg
-    width="32"
-    height="32"
-    viewBox="0 0 32 32"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M24 26.6663V13.333"
-      stroke="#AFB9D2"
+      d="M10 4.16699V15.8337"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <path
-      d="M16 26.6663V5.33301"
-      stroke="#AFB9D2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <path
-      d="M8 26.667V18.667"
-      stroke="#AFB9D2"
+      d="M4.16406 10H15.8307"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
     />

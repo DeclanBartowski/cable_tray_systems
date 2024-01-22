@@ -16,32 +16,32 @@
       </nuxt-link>
     </div>
     <div class="grid grid-cols-3 gap-5 tablet:gap-4 mobile:grid-cols-2">
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-1.png"
         title="Лотки кабельные"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-2.png"
         title="Аксессуары для кабельных лотков"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-3.png"
         title="Стойки и полки кабельные"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-4.png"
         title="Профиль и полосы монтажные"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-5.png"
         title="Коробки и ящики монтажные"
       />
-      <main-products-card
+      <common-products-card
         to="/"
         src="/images/products-6.png"
         title="Электромонтаж"

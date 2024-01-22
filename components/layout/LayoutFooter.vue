@@ -20,21 +20,21 @@ const isHover = ref(false)
             <div class="flex flex-col gap-1 mobile:w-full">
               <a
                 href="tel:88003087242"
-                class="text-m font-semibold laptop:text-laptopM tablet:text-tabletM"
+                class="text-m font-add font-semibold laptop:text-laptopM tablet:text-tabletM"
               >8 800 308-72-42</a>
               <span class="text-xs laptop:text-laptopXs tablet:text-tabletXs">Доставка для регионов круглосуточно</span>
             </div>
             <div class="flex flex-col gap-1 mobile:w-full">
               <a
                 href="tel:+74958087338"
-                class="text-m font-semibold laptop:text-laptopM tablet:text-tabletM"
+                class="text-m font-add font-semibold laptop:text-laptopM tablet:text-tabletM"
               >+7 495 808-73-38</a>
               <span class="text-xs laptop:text-laptopXs tablet:text-tabletXs">Москва, Пн-Пт с 8.00 до 17.00</span>
             </div>
             <div class="flex flex-col gap-1 mobile:w-full">
               <a
                 href="tel:+79533080872"
-                class="text-m font-semibold laptop:text-laptopM tablet:text-tabletM"
+                class="text-m font-add font-semibold laptop:text-laptopM tablet:text-tabletM"
               >+7 953 308-08-72</a>
               <span class="text-xs laptop:text-laptopXs tablet:text-tabletXs">Доставка для регионов круглосуточно</span>
             </div>
