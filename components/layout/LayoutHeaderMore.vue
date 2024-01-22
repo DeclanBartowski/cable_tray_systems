@@ -7,7 +7,7 @@
     <nav>
       <ul class="flex flex-col gap-4">
         <li class="text-m laptop:text-laptopM">
-          <nuxt-link to="/">
+          <nuxt-link to="/promotion">
             Акции (распродажи)
           </nuxt-link>
         </li>

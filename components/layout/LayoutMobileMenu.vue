@@ -28,7 +28,7 @@ useHead({
         </ul>
         <ul class="flex flex-col gap-6">
           <li class="text-tabletM">
-            <nuxt-link to="/">
+            <nuxt-link to="/promotion">
               Акции (распродажи)
             </nuxt-link>
           </li>
