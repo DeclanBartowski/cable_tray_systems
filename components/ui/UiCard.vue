@@ -30,7 +30,7 @@ const minusCurrent = (): void => {
 <template>
   <nuxt-link
     :to="to"
-    class="relative bg-white pt-5 px-6 pb-[22px] flex flex-col gap-3 border border-solid rounded-s w-[310px] tablet:py-5 tablet:px-5 mobile:py-4 mobile:px-4 mobile:max-w-[280px]"
+    class="relative bg-white pt-5 px-6 pb-[22px] w-full min-w-[310px] flex flex-col gap-3 border border-solid rounded-s tablet:py-5 tablet:px-5 mobile:py-4 mobile:px-4 mobile:min-w-[280px]"
     :class="isHover ? 'border-yellow' : 'border-gray100'"
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"

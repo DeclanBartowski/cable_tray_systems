@@ -33,7 +33,7 @@ useHead({
             </nuxt-link>
           </li>
           <li class="text-tabletM">
-            <nuxt-link to="/">
+            <nuxt-link to="/metal-trim">
               Металлическая обрезь (обрезки производства)
             </nuxt-link>
           </li>

@@ -12,7 +12,7 @@
           </nuxt-link>
         </li>
         <li class="text-m laptop:text-laptopM">
-          <nuxt-link to="/">
+          <nuxt-link to="/metal-trim">
             Металлическая обрезь (обрезки производства)
           </nuxt-link>
         </li>
