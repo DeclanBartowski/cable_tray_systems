@@ -4,7 +4,7 @@ defineProps<{ src: string, text: string }>()
 
 <template>
   <div
-    class="pt-[30px] px-[30px] pb-[26px] bg-white border border-solid border-gray100 rounded-s flex flex-col gap-6 laptop:gap-5 laptop:px-6 laptop:pt-6 laptop:pb-5 mobile:py-4 mobile:px-4 mobile:gap-5"
+    class="pt-[30px] px-[30px] pb-[26px] bg-white border border-solid border-gray100 rounded-s flex flex-col gap-6 laptop:gap-5 laptop:px-6 laptop:pt-6 laptop:pb-5 tablet:h-[160px] mobile:py-4 mobile:px-4 mobile:gap-5"
   >
     <img
       :src="src"

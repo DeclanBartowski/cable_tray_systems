@@ -1,5 +1,5 @@
 export const headerNav = ref([
-  { name: 'О компании', path: '/' },
+  { name: 'О компании', path: '/about' },
   { name: 'Контакты', path: '/' },
   { name: 'Доставка', path: '/' },
   { name: 'Прайс лист', path: '/' },
@@ -7,7 +7,7 @@ export const headerNav = ref([
 ])
 
 export const footerNavLeft = ref([
-  { name: 'О компании', path: '/' },
+  { name: 'О компании', path: '/about' },
   { name: 'Услуги', path: '/' },
   { name: 'Доставка', path: '/' },
   { name: 'Прайс лист', path: '/' },
