@@ -42,18 +42,27 @@ const isOpenMore = ref(false)
             </div>
           </div>
           <div class="flex items-center gap-[50px] laptop:gap-9 mobile:gap-4">
-            <button class="border-none relative">
+            <nuxt-link
+              to="/favorites"
+              class="border-none relative"
+            >
               <heart class="mobile:w-6 mobile:h-6" />
               <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
-            </button>
-            <button class="border-none relative">
+            </nuxt-link>
+            <nuxt-link
+              to="/"
+              class="border-none relative"
+            >
               <bar-active class="mobile:w-6 mobile:h-6" />
               <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
-            </button>
-            <button class="border-none relative">
+            </nuxt-link>
+            <nuxt-link
+              to="/"
+              class="border-none relative"
+            >
               <cart class="mobile:w-6 mobile:h-6" />
               <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
-            </button>
+            </nuxt-link>
           </div>
           <ui-button
             text="Войти"
