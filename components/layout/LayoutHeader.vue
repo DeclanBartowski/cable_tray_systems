@@ -50,7 +50,7 @@ const isOpenMore = ref(false)
               <span class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs">0</span>
             </nuxt-link>
             <nuxt-link
-              to="/"
+              to="/comparison"
               class="border-none relative"
             >
               <bar-active class="mobile:w-6 mobile:h-6" />
@@ -86,7 +86,10 @@ const isOpenMore = ref(false)
               fill="fill"
               text="Каталог"
             >
-              <close v-if="false" />
+              <close
+                v-if="false"
+                class="text-black"
+              />
               <catalog />
             </ui-button>
             <ui-button

@@ -68,7 +68,7 @@ useHead({
         class="absolute top-6 right-6 border-none"
         @click="isOpenMenu = false"
       >
-        <close />
+        <close class="text-black" />
       </button>
     </div>
   </div>

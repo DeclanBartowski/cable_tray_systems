@@ -11,7 +11,6 @@ defineProps<{
 const isHover = ref(false)
 const isFavorite = ref(false)
 const isBar = ref(false)
-const isCart = ref(false)
 const current = ref<number>(100)
 
 const plusCurrent = (): void => {
@@ -107,21 +106,7 @@ const minusCurrent = (): void => {
             <plus class="text-black" />
           </button>
         </div>
-        <button
-          class="border-none"
-          @click.prevent="isCart = !isCart"
-        >
-          <img
-            v-if="isCart === false"
-            src="/svg/cart.svg"
-            alt="Добавить в корзину"
-          >
-          <img
-            v-else
-            src="/svg/in-cart.svg"
-            alt="Убрать из корзины"
-          >
-        </button>
+        <common-button-cart />
       </div>
     </div>
     <ui-promotion class="top-4 right-4" />
