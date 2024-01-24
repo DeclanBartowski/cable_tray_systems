@@ -102,7 +102,7 @@ const isOpenMore = ref(false)
               <li
                 v-for="nav in headerNav"
                 :key="nav.name"
-                class="text-m laptop:text-laptopM"
+                class="text-m transition-all laptop:text-laptopM hover:text-gray300"
               >
                 <nuxt-link :to="nav.path">
                   {{ nav.name }}

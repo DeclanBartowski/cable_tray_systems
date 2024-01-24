@@ -6,8 +6,11 @@ export default defineNuxtConfig({
     'nuxt-primevue',
     '@vueuse/nuxt',
     '@pinia/nuxt',
-    'vue3-carousel-nuxt'
+    'nuxt-swiper'
   ],
+  devServer: {
+    host: '0.0.0.0'
+  },
   imports: {
     dirs: ['stores'],
   },
@@ -20,7 +23,10 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ['defineStore', 'storeToRefs']
   },
-  css: ['~/assets/css/main.css', 'primevue/resources/themes/lara-light-green/theme.css'],
+  css: [
+    '~/assets/css/main.css',
+    'primevue/resources/themes/lara-light-green/theme.css'
+  ],
   primevue: {
     components: {
       include: [
@@ -32,12 +38,12 @@ export default defineNuxtConfig({
         'Accordion',
         'AccordionTab',
         'Slider',
-        'Checkbox',
-        'Dropdown'
+        'Dropdown',
+        'Dialog'
       ]
     }
   },
-  postcss: {
+    postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},

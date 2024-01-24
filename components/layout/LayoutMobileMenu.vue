@@ -19,7 +19,7 @@ useHead({
           <li
             v-for="nav in headerNav"
             :key="nav.name"
-            class="text-tabletM"
+            class="text-tabletM transition-all hover:text-gray300"
           >
             <nuxt-link :to="nav.path">
               {{ nav.name }}
@@ -27,12 +27,12 @@ useHead({
           </li>
         </ul>
         <ul class="flex flex-col gap-6">
-          <li class="text-tabletM">
+          <li class="text-tabletM transition-all hover:text-gray300">
             <nuxt-link to="/promotion">
               Акции (распродажи)
             </nuxt-link>
           </li>
-          <li class="text-tabletM">
+          <li class="text-tabletM transition-all hover:text-gray300">
             <nuxt-link to="/metal-trim">
               Металлическая обрезь (обрезки производства)
             </nuxt-link>

@@ -18,3 +18,7 @@
 		@apply max-w-[1920px] my-0 mx-auto px-[310px] laptop:max-w-[1500px] laptop:px-[100px] tablet:max-w-[1420px] tablet:px-[60px] mobile:max-w-[1340px] mobile:px-5;
 	}
 }
+
+.active .icon {
+  transform: rotate(180deg);
+}

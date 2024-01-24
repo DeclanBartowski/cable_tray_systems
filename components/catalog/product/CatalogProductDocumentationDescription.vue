@@ -11,31 +11,31 @@
       <ul class="flex flex-col gap-2">
         <li class="flex items-center justify-between">
           <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Высота борта, мм</span>
-          <span class="text-s">100</span>
+          <span class="text-s lining-nums proportional-nums">100</span>
         </li>
         <li class="flex items-center justify-between">
           <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Ширина основания, мм</span>
-          <span class="text-s">200</span>
+          <span class="text-s lining-nums proportional-nums">200</span>
         </li>
         <li class="flex items-center justify-between">
           <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Длина основания, мм</span>
-          <span class="text-s">2000</span>
+          <span class="text-s lining-nums proportional-nums">2000</span>
         </li>
         <li class="flex items-center justify-between">
           <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Толщина металла</span>
-          <span class="text-s">37</span>
+          <span class="text-s lining-nums proportional-nums">37</span>
         </li>
         <li class="flex items-center justify-between">
           <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Материал</span>
-          <span class="text-s">49</span>
+          <span class="text-s lining-nums proportional-nums">49</span>
         </li>
         <li class="flex items-center justify-between">
           <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Масса</span>
-          <span class="text-s">36</span>
+          <span class="text-s lining-nums proportional-nums">36</span>
         </li>
         <li class="flex items-center justify-between">
           <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Климатическое исполнение</span>
-          <span class="text-s">18</span>
+          <span class="text-s lining-nums proportional-nums">18</span>
         </li>
       </ul>
     </div>

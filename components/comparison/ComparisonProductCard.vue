@@ -14,7 +14,7 @@ defineProps<{ src: string, name: string, price: string }>()
         {{ name }}
       </h4>
       <div class="flex items-end justify-between">
-        <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">{{ price }} ₽</span>
+        <span class="text-m font-medium lining-nums proportional-nums  laptop:text-laptopM mobile:text-mobileM">{{ price }} ₽</span>
         <common-button-cart />
       </div>
     </div>

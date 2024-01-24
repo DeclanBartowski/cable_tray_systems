@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="grid grid-cols-4 gap-5 laptop:grid-cols-3 tablet:grid-cols-2 tablet:gap-4 mobile:grid-cols-1">
+  <div class="grid grid-cols-4 gap-5 items-start laptop:grid-cols-3 tablet:grid-cols-2 tablet:gap-4 mobile:grid-cols-1">
     <ui-card
       v-for="product in products"
       :key="product.to"

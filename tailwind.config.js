@@ -36,6 +36,7 @@ export default {
       tabletM: ['12px', '16px'],
       tabletXl3: ['24px', '28px'],
       tabletXl4: ['28px', '36px'],
+      mobileXl2: ['14px', '18px'],
       mobileXl3: ['22px', '26px'],
       mobileXl4: ['18px', '26px'],
       mobileM: ['12px', '16px'],
@@ -55,9 +56,11 @@ export default {
       blue: '#0C54A0'
     },
     borderRadius: {
+      none: '0px',
       full: '9999px',
       checkbox: '3px',
       select: '8px',
+      popup: '20px',
       xs: '5px',
       s: '10px',
       m: '30px',

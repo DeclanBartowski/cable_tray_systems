@@ -23,7 +23,7 @@ withDefaults(defineProps<{
     <input
       v-model="modelValue"
       :className="className"
-      class="py-4 border border-solid border-gray100 flex items-center outline-none w-full font-sans text-m text-black placeholder:text-m placeholder:text-gray300 placeholder:font-sans laptop:text-laptopM laptop:placeholder:text-laptopM mobile:text-mobileM mobile:placeholder:text-mobileM"
+      class="py-4 border border-solid border-gray100 flex items-center outline-none w-full font-sans text-m text-black lining-nums proportional-nums placeholder:lining-nums placeholder:proportional-nums placeholder:text-m placeholder:text-gray300 placeholder:font-sans laptop:text-laptopM laptop:placeholder:text-laptopM mobile:text-mobileM mobile:placeholder:text-mobileM"
       :class="[
         item === 'default' ? 'px-[22px]' : '', 
         item === 'icon' ? 'pl-[23px] pr-[47px]' : '',

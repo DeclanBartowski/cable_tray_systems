@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const isHover = ref(false)
+const isHoverVk = ref(false)
+const isHoverTelegram = ref(false)
+const isHoverWhatsapp = ref(false)
 </script>
 
 <template>
@@ -93,11 +95,11 @@ const isHover = ref(false)
               <a
                 href="#"
                 class="cursor-pointer"
-                @mouseenter="isHover = true"
-                @mouseleave="isHover = false"
+                @mouseenter="isHoverVk = true"
+                @mouseleave="isHoverVk = false"
               >
                 <vk
-                  v-if="isHover === false"
+                  v-if="isHoverVk === false"
                   class="tablet:w-8 tablet:h-8"
                 />
                 <vk-active
@@ -108,11 +110,11 @@ const isHover = ref(false)
               <a
                 href="#"
                 class="cursor-pointer"
-                @mouseenter="isHover = true"
-                @mouseleave="isHover = false"
+                @mouseenter="isHoverTelegram = true"
+                @mouseleave="isHoverTelegram = false"
               >
                 <telegram
-                  v-if="isHover === false"
+                  v-if="isHoverTelegram === false"
                   class="tablet:w-8 tablet:h-8"
                 />
                 <telegram-active
@@ -123,11 +125,11 @@ const isHover = ref(false)
               <a
                 href="#"
                 class="cursor-pointer"
-                @mouseenter="isHover = true"
-                @mouseleave="isHover = false"
+                @mouseenter="isHoverWhatsapp = true"
+                @mouseleave="isHoverWhatsapp = false"
               >
                 <whatsapp
-                  v-if="isHover === false"
+                  v-if="isHoverWhatsapp === false"
                   class="tablet:w-8 tablet:h-8"
                 />
                 <whatsapp-active

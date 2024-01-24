@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const rootStore = useRootStore()
+const { isOpenModalSuccess } = storeToRefs(rootStore)
+
 const form = ref({
 	name: '',
 	tel: '',
@@ -7,6 +10,10 @@ const form = ref({
 	website: '',
 	inn: ''
 })
+
+const onSubmit = () => {
+  isOpenModalSuccess.value = true
+}
 </script>
 
 <template>
@@ -18,7 +25,10 @@ const form = ref({
         class="h-full"
       >
     </div>
-    <form class="flex flex-col gap-10 w-full max-w-[640px] laptop:max-w-[50%] laptop:pr-[100px] laptop:gap-9 tablet:pr-0 tablet:max-w-full tablet:gap-8 mobile:gap-7">
+    <form
+      class="flex flex-col gap-10 w-full max-w-[640px] laptop:max-w-[50%] laptop:pr-[100px] laptop:gap-9 tablet:pr-0 tablet:max-w-full tablet:gap-8 mobile:gap-7"
+      @submit.prevent="onSubmit"
+    >
       <div class="flex flex-col justify-center items-center">
         <h2 class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4">
           Хотите стать дилером?
@@ -54,7 +64,7 @@ const form = ref({
           placeholder="www.cait.ru"
         />
         <ui-input
-          v-model="form.name"
+          v-model="form.inn"
           label="ИНН"
           placeholder="54869524455665"
         />

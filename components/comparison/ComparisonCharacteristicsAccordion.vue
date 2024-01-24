@@ -32,7 +32,7 @@
             Климатическое исполнение
           </th>
         </tr>
-        <tr class="flex flex-col text-s">
+        <tr class="flex flex-col text-s lining-nums proportional-nums">
           <td class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]">
             50 мм
           </td>
@@ -55,7 +55,7 @@
             Красный
           </td>
         </tr>
-        <tr class="flex flex-col text-s">
+        <tr class="flex flex-col text-s lining-nums proportional-nums">
           <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
             50 мм
           </td>
@@ -78,7 +78,7 @@
             Красный
           </td>
         </tr>
-        <tr class="flex flex-col text-s">
+        <tr class="flex flex-col text-s lining-nums proportional-nums">
           <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
             50 мм
           </td>
@@ -101,7 +101,7 @@
             Красный
           </td>
         </tr>
-        <tr class="flex flex-col text-s w-full">
+        <tr class="flex flex-col text-s w-full lining-nums proportional-nums">
           <td class="pt-[22px] pb-2.5 pl-[61px] border-b border-solid border-gray100 laptop:pl-14 tablet:w-[170px]">
             50 мм
           </td>

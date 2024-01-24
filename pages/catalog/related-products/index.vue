@@ -21,7 +21,7 @@ const breadcrumbs = ref([
             <catalog-related-filter />
             <catalog-related-products />
           </div>
-          <common-slider title="Возможно, вас заинтересует" />
+          <catalog-related-slider-interesting />
         </div>
       </div>
     </div>

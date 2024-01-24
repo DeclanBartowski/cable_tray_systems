@@ -22,8 +22,8 @@ const breadcrumbs = ref([
     <catalog-product-documentation />
     <div class="container">
       <div class="flex flex-col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
-        <common-slider title="Сопутствующие товары" />
-        <common-slider title="Похожие товары" />
+        <catalog-product-slider-related />
+        <catalog-product-slider-similar />
       </div>
     </div>
   </div>

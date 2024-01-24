@@ -80,10 +80,10 @@ const minusCurrent = (): void => {
       </div>
       <div class="flex items-end gap-2">
         <div class="flex items-end gap-0.5">
-          <span class="text-xl2 font-medium">{{ price }} ₽</span>
-          <span class="text-xxs">за 100 шт</span>
+          <span class="text-xl2 font-medium lining-nums proportional-nums">{{ price }} ₽</span>
+          <span class="text-xxs lining-nums proportional-nums">за 100 шт</span>
         </div>
-        <span class="text-s text-gray200">{{ oldPrice }} ₽</span>
+        <span class="text-s text-gray200 lining-nums proportional-nums">{{ oldPrice }} ₽</span>
       </div>
       <div
         v-if="isHover"
@@ -96,7 +96,7 @@ const minusCurrent = (): void => {
           >
             <minus :class="current <= 100 ? 'text-gray100' : 'text-black'" />
           </button>
-          <span class="py-2.5 px-[15px] flex items-center justify-center text-xl font-medium relative after:absolute after:w-[1px] after:h-5 after:bg-gray100 after:top-[50%] after:right-[1px] after:translate-y-[-50%] before:absolute before:w-[1px] before:h-5 before:bg-gray100 before:top-[50%] before:left-[1px] before:translate-y-[-50%]">
+          <span class="py-2.5 px-[15px] flex items-center justify-center text-xl font-medium lining-nums proportional-nums relative after:absolute after:w-[1px] after:h-5 after:bg-gray100 after:top-[50%] after:right-[1px] after:translate-y-[-50%] before:absolute before:w-[1px] before:h-5 before:bg-gray100 before:top-[50%] before:left-[1px] before:translate-y-[-50%]">
             {{ current }}
           </span>
           <button

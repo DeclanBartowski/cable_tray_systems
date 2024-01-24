@@ -21,4 +21,5 @@ const breadcrumbs = ref([
       </div>
     </div>
   </div>
+  <catalog-cable-modal />
 </template>

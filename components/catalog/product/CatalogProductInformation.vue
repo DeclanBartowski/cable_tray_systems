@@ -25,7 +25,7 @@ const minusCurrent = (): void => {
           <h2 class="text-tabletXl3 font-medium w-full max-w-[500px] laptop:max-w-[80%] laptop:text-laptopXl3 tablet:text-tabletXl3 mobile:text-mobileXl3">
             Кабельный лоток перфорированный простой 50*50
           </h2>
-          <div class="flex gap-8 text-s text-gray300 laptop:gap-7 tablet:gap-5 mobile:gap-2 mobile:flex-wrap">
+          <div class="flex gap-8 text-s lining-nums proportional-nums text-gray300 laptop:gap-7 tablet:gap-5 mobile:gap-2 mobile:flex-wrap">
             <span>Код товара: 36831</span>
             <span>Габариты: 50х50 мм</span>
             <span>Заказ: по 7000 шт</span>
@@ -147,9 +147,9 @@ const minusCurrent = (): void => {
             <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Ваша цена</span>
             <ui-tooltip class="absolute border-none -right-4 -top-1" />
           </div>
-          <span class="text-xl3 font-medium">8 900 ₽</span>
+          <span class="text-xl3 font-medium lining-nums proportional-nums">8 900 ₽</span>
         </div>
-        <div class="flex items-center justify-between text-gray200 text-s">
+        <div class="flex items-center justify-between text-gray200 text-s lining-nums proportional-nums">
           <span>Розничная цена</span>
           <span>8 900 ₽</span>
         </div>

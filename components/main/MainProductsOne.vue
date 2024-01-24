@@ -10,7 +10,7 @@
       </h2>
       <nuxt-link
         to="/"
-        class="text-m font-medium laptop:text-laptopM mobile:text-mobileM"
+        class="text-m font-medium transition-all hover:text-gray300 laptop:text-laptopM mobile:text-mobileM"
       >
         Показать все
       </nuxt-link>
