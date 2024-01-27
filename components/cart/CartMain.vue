@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="pt-4 tablet:pt-0 tablet:w-full">
-      <common-order />
+      <cart-order />
     </div>
   </div>
 </template>

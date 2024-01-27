@@ -8,10 +8,12 @@ withDefaults(defineProps<{
   labelFor: string,
   text: string,
   amount?: string,
-  item?: string
+  item?: string,
+  addText?: string
 }>(), {
   amount: '',
-  item: 'default'
+  item: 'default',
+  addText: ''
 })
 </script>
 
@@ -53,4 +55,22 @@ withDefaults(defineProps<{
     </label>
     <span class="text-s text-gray200 lining-nums proportional-nums">{{ amount }}</span>
   </div>
+
+  <label
+    v-if="item === 'orders'"
+    :item="item"
+    :for="labelFor"
+    class="relative py-5 px-6 flex flex-col gap-2 text-m font-medium border border-solid rounded-s text-black lining-nums proportional-nums laptop:text-laptopM laptop:px-5 mobile:text-mobileM mobile:py-4 mobile:px-4"
+    :class="modelValue === text ? 'border-yellow' : 'border-gray100'"
+  >
+    <RadioButton
+      v-model="modelValue"
+      :pt="{ root: { class: 'absolute w-5 h-5 rounded-full top-3 right-3' }, input: ({ props }) => ({ class: props.modelValue === value ? 'flex items-center justify-center w-5 h-5 rounded-full shadow-none bg-white border border-solid border-yellow' : 'hidden' }), icon: { class: 'w-2.5 h-2.5 bg-yellow rounded-full' } }"
+      :input-id="inputId"
+      :name="name"
+      :value="value"
+    />
+    <span class="w-[232px] tablet:w-[220px]">{{ text }}</span>
+    <span class="text-s text-gray300">{{ addText }}</span>
+  </label>
 </template>
