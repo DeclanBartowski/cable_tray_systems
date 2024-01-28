@@ -9,27 +9,31 @@
         Новости
       </h2>
       <ui-button
-        to="/"
+        to="/news"
         text="Все новости"
       />
     </div>
     <div class="grid grid-cols-2 gap-5 tablet:gap-4">
-      <main-description-news-card
+      <common-news-card
+        to="/news/1"
         src="/test/news-1.png"
         title="Заключаем контракты на поставку кабельной продукции"
         text="В начале года мы решаем, продолжить работать с существующими"
       />
-      <main-description-news-card
+      <common-news-card
+        to="/news/1"
         src="/test/news-2.png"
         title="Заключаем контракты на поставку кабельной продукции"
         text="В начале года мы решаем, продолжить работать с существующими"
       />
-      <main-description-news-card
+      <common-news-card
+        to="/news/1"
         src="/test/news-3.png"
         title="Заключаем контракты на поставку кабельной продукции"
         text="В начале года мы решаем, продолжить работать с существующими"
       />
-      <main-description-news-card
+      <common-news-card
+        to="/news/1"
         src="/test/news-4.png"
         title="Заключаем контракты на поставку кабельной продукции"
         text="В начале года мы решаем, продолжить работать с существующими"

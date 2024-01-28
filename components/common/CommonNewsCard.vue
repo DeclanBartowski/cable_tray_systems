@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineProps<{ src: string, title: string, text: string }>()
+defineProps<{ src: string, title: string, text: string, to: string }>()
 </script>
 
 <template>
   <nuxt-link
-    to="/"
+    :to="to"
     class="w-[310px] laptop:w-full"
   >
     <img

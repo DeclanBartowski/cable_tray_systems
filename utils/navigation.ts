@@ -16,6 +16,6 @@ export const footerNavLeft = ref([
 
 export const footerNavRight = ref([
   { name: 'Акции', path: '/promotion' },
-  { name: 'Новости', path: '/' },
+  { name: 'Новости', path: '/news' },
   { name: 'Металлическая обрезь', path: '/metal-trim' },
 ])

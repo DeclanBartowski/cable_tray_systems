@@ -117,19 +117,20 @@ const isOpenMore = ref(false)
             </button>
             <layout-header-more v-if="isOpenMore" />
           </nav>
-          <ui-input
-            v-model="search"
-            item="icon"
-            class-name="small"
-            placeholder="Поиск по каталогу"
-            class="max-w-[420px] laptop:max-w-[320px]"
-          >
-            <img
-              src="/svg/search.svg"
-              alt="Поиск"
-              class="absolute top-[50%] right-[23px] translate-y-[-50%]"
+          <div class="w-full max-w-[420px] laptop:max-w-[320px]">
+            <ui-input
+              v-model="search"
+              item="icon"
+              class-name="small"
+              placeholder="Поиск по каталогу"
             >
-          </ui-input> 
+              <img
+                src="/svg/search.svg"
+                alt="Поиск"
+                class="absolute top-[50%] right-[23px] translate-y-[-50%]"
+              >
+            </ui-input> 
+          </div>
         </div>
       </div>
     </div>
