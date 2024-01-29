@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const rootStore = useRootStore()
-const { isOpenOrderFast } = storeToRefs(rootStore)
+const { isOpenOrderFast, isOpenAuthModal } = storeToRefs(rootStore)
 </script>
 
 <template>
@@ -9,4 +9,5 @@ const { isOpenOrderFast } = storeToRefs(rootStore)
   </NuxtLayout>
   <common-modal-success />
   <cart-order-fast v-if="isOpenOrderFast" />
+  <auth-modal v-if="isOpenAuthModal" />
 </template>

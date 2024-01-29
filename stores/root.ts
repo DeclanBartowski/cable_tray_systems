@@ -3,6 +3,7 @@ export const useRootStore = defineStore('root', () => {
 	const isOpenModalSuccess = ref(false)
 	const isOpenModalIndividual = ref(false)
 	const isOpenOrderFast = ref(false)
+	const isOpenAuthModal = ref(false)
 
-	return { isOpenMenu, isOpenModalSuccess, isOpenModalIndividual, isOpenOrderFast }
+	return { isOpenMenu, isOpenModalSuccess, isOpenModalIndividual, isOpenOrderFast, isOpenAuthModal }
 })
