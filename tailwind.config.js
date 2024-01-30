@@ -40,7 +40,10 @@ export default {
       mobileXl3: ['22px', '26px'],
       mobileXl4: ['18px', '26px'],
       mobileM: ['12px', '16px'],
-      description: ['14px', '20px']
+      description: ['14px', '20px'],
+      tabs: ['16px', '16px'],
+      laptopTabs: ['14px', '14px'],
+      mobileTabs: ['12px', '12px']
     },
     colors: {
       transparent: 'transparent',
@@ -75,7 +78,8 @@ export default {
       boxShadow: {
         default: '0px 15px 10px 0px rgba(72, 102, 172, 0.03), 0px -5px 10px 0px rgba(72, 102, 172, 0.03)',
         slider: '0px 10px 20px 0px rgba(0, 0, 0, 0.03), 0px -10px 20px 0px rgba(0, 0, 0, 0.03)',
-        select: '0px 15px 20px 0px rgba(72, 102, 172, 0.05), 0px -5px 20px 0px rgba(72, 102, 172, 0.05)'
+        select: '0px 15px 20px 0px rgba(72, 102, 172, 0.05), 0px -5px 20px 0px rgba(72, 102, 172, 0.05)',
+        header: '0px 4px 30px 0px rgba(26, 65, 123, 0.10)'
       }
     },
   },

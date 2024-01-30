@@ -11,7 +11,7 @@ useHead({
 
 <template>
   <div
-    class="bg-white text-black text-laptopM absolute top-0 right-0 h-auto overflow-hidden w-[calc(100%-24px)] z-10"
+    class="bg-white text-black text-laptopM absolute top-0 right-[-60px] h-auto overflow-hidden w-[calc(100%-24px)] z-[150] mobile:-right-5"
   >
     <div class="relative px-6 py-6">
       <nav class="flex flex-col gap-6 pb-6 border-b border-b-solid border-b-gray">
