@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-fonts',
     'nuxt-primevue',
     '@vueuse/nuxt',
     '@pinia/nuxt',
@@ -48,13 +47,6 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
-  },
-  googleFonts: {
-    families: {
-      Raleway: [400, 500, 600],
-      Montserrat: [400, 500, 600],
-      display: 'swap'
-    }
   },
   devtools: { enabled: false }
 })
