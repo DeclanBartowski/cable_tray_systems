@@ -10,7 +10,7 @@ const form = ref({
 </script>
 
 <template>
-  <form class="flex items-start gap-5 tablet:flex-col tablet:gap-8 mobile:gap-6">
+  <form class="flex items-start gap-5 laptop:justify-between tablet:flex-col tablet:gap-8 mobile:gap-6">
     <div class="flex flex-col gap-10 laptop:gap-9 tablet:gap-8 mobile:gap-7">
       <div class="flex flex-col gap-6 text-m font-medium lining-nums proportional-nums laptop:text-laptopM tablet:gap-5 mobile:text-mobileM">
         1. Контактная информация

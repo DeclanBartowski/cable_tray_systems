@@ -5,7 +5,7 @@
 <template>
   <div class="container">
     <div class="flex items-start gap-5 tablet:gap-4 mobile:flex-col mobile:gap-6">
-      <div class="flex flex-col gap-14 w-full max-w-[420px] text-m laptop:gap-10 laptop:text-laptopM laptop:max-w-[50%] tablet:gap-8 mobile:gap-6 mobile:text-mobileM mobile:max-w-full">
+      <div class="flex flex-col gap-10 w-full max-w-[420px] text-m laptop:gap-9 laptop:text-laptopM laptop:max-w-[50%] tablet:gap-8 mobile:gap-6 mobile:text-mobileM mobile:max-w-full">
         <div class="flex items-center gap-7 laptop:gap-6 tablet:gap-5 mobile:gap-4">
           <img
             src="/svg/contacts-phone.svg"

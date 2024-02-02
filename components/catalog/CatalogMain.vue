@@ -19,7 +19,7 @@
     </div>
     <div class="bg-[url('/images/catalog-main-2.jpg')] bg-cover bg-center bg-no-repeat w-[50%] tablet:flex tablet:justify-center tablet:items-center tablet:py-4 tablet:px-4 mobile:w-full mobile:h-[200px]">
       <div class="flex flex-col gap-8 mt-[140px] ml-[120px] tablet:mt-0 tablet:ml-0 tablet:items-center">
-        <h3 class="text-xl3 font-medium text-white laptop:text-laptopXl3 tablet:text-tabletXl3 tablet:text-center mobile:text-mobileXl3">
+        <h3 class="text-xl3 font-medium text-white w-full max-w-[485px] laptop:text-laptopXl3 tablet:text-tabletXl3 tablet:text-center mobile:text-mobileXl3">
           Сопутствующие товары комплексных инженерных систем
         </h3>
         <ui-button

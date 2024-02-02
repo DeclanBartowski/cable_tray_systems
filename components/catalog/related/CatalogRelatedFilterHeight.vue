@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const height = ref<string>('')
+const height = ref<string[]>([])
 </script>
 
 <template>
@@ -10,93 +10,84 @@ const height = ref<string>('')
     >
       <div class="flex flex-col gap-5 tablet:gap-4">
         <div class="height h-[212px] overflow-y-auto flex flex-col gap-3">
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="allHeight"
-            label-for="allHeight"
+            for-label="allHeight"
             value="Все"
-            text="Все"
+            label="Все"
           />
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="50mm"
-            label-for="50mm"
+            for-label="50mm"
             value="50 мм"
-            text="50 мм"
+            label="50 мм"
             amount="2"
           />
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="60mm"
-            label-for="60mm"
+            for-label="60mm"
             value="60 мм"
-            text="60 мм"
+            label="60 мм"
             amount="2"
           />
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="65mm"
-            label-for="65mm"
+            for-label="65mm"
             value="65 мм"
-            text="65 мм"
+            label="65 мм"
             amount="2"
           />
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="100mm"
-            label-for="100mm"
+            for-label="100mm"
             value="100 мм"
-            text="100 мм"
+            label="100 мм"
             amount="2"
           />
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="150mm"
-            label-for="150mm"
+            for-label="150mm"
             value="150 мм"
-            text="150 мм"
+            label="150 мм"
             amount="2"
           />
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="200mm"
-            label-for="200mm"
+            for-label="200mm"
             value="200 мм"
-            text="200 мм"
+            label="200 мм"
             amount="2"
           />
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="250mm"
-            label-for="250mm"
+            for-label="250mm"
             value="250 мм"
-            text="250 мм"
+            label="250 мм"
             amount="2"
           />
-          <ui-radio
+          <ui-checkbox
             v-model="height"
-            item="filter"
             name="height"
             input-id="300mm"
-            label-for="300mm"
+            for-label="300mm"
             value="300 мм"
-            text="300 мм"
+            label="300 мм"
             amount="2"
           />
         </div>

@@ -76,5 +76,10 @@ const form = ref({
         </div>
       </fieldset>
     </div>
+    <ui-button
+      type="submit"
+      text="Сохранить изменения"
+      class="w-[237px]"
+    />
   </form>
 </template>

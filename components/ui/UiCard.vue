@@ -30,7 +30,7 @@ const minusCurrent = (): void => {
   <nuxt-link
     :to="to"
     class="relative bg-white pt-5 px-6 pb-[22px] w-full min-w-[310px] flex flex-col gap-3 border border-solid rounded-s tablet:py-5 tablet:px-5 mobile:py-4 mobile:px-4 mobile:min-w-[280px]"
-    :class="isHover ? 'border-yellow' : 'border-gray100'"
+    :class="isHover ? 'border-yellow z-50' : 'border-gray100'"
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
   >
@@ -83,7 +83,7 @@ const minusCurrent = (): void => {
           <span class="text-xl2 font-medium lining-nums proportional-nums">{{ price }} ₽</span>
           <span class="text-xxs lining-nums proportional-nums">за 100 шт</span>
         </div>
-        <span class="text-s text-gray200 lining-nums proportional-nums">{{ oldPrice }} ₽</span>
+        <del class="text-s text-gray200 lining-nums proportional-nums">{{ oldPrice }} ₽</del>
       </div>
       <div
         v-if="isHover"

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="py-8 px-8 rounded-s bg-gray flex flex-col w-[420px] laptop:w-[380px] laptop:py-7 laptop:px-7 tablet:py-6 tablet:px-6 tablet:w-full mobile:py-4 mobile:px-4">
+  <div class="sticky top-[150px] py-8 px-8 rounded-s bg-gray flex flex-col w-[420px] laptop:w-[380px] laptop:py-7 laptop:px-7 tablet:py-6 tablet:px-6 tablet:w-full mobile:py-4 mobile:px-4">
     <h3 class="text-xl2 font-semibold mb-[25px] laptop:mb-6 tablet:mb-5">
       Ваша корзина
     </h3>

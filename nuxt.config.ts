@@ -38,7 +38,8 @@ export default defineNuxtConfig({
         'AccordionTab',
         'Slider',
         'Dropdown',
-        'Dialog'
+        'Dialog',
+        'Checkbox'
       ]
     }
   },

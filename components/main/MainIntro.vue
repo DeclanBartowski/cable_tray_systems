@@ -21,6 +21,7 @@
             </div>
             <ui-button
               to="/"
+              item="border"
               text="Подробнее"
               class="w-[152px] mobile:w-full"
             />

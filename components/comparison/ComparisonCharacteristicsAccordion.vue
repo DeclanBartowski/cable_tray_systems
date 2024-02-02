@@ -6,7 +6,7 @@
   <Accordion unstyled>
     <AccordionTab
       header="Технические характеристики"
-      :pt="{ headerAction: { class: 'flex flex-row-reverse items-center gap-[21px]' }, headerTitle: { class: 'text-xl2 font-medium font-sans text-gray300' }, header: { class: 'flex py-0 pr-0 pl-6' }, headerIcon: ({ context }) => ({ class: context.active ? 'w-5 h-5 rotate-180' : 'w-5 h-5 rotate-90' }), content: { class: 'b-transparent font-sans text-black' } }"
+      :pt="{ headerAction: ({ context }) => ({ class: context.active ? 'active flex flex-row-reverse items-center gap-[21px]' : 'flex flex-row-reverse items-center gap-[21px]' }), headerTitle: { class: 'text-xl2 font-medium font-sans text-gray300' }, header: { class: 'flex py-0 pr-0 pl-6' }, content: { class: 'b-transparent font-sans text-black' } }"
     >
       <table class="flex tablet:overflow-x-auto">
         <tr class="flex flex-col items-start text-m">
@@ -125,6 +125,12 @@
           </td>
         </tr>
       </table>
+      <template #headericon>
+        <img
+          src="/svg/chevron-down.svg"
+          class="icon w-5 h-5"
+        >
+      </template>
     </AccordionTab>
   </Accordion>
 </template>

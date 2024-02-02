@@ -9,7 +9,7 @@
       <ui-select />
     </div>
     <div class="flex flex-col gap-5 tablet:gap-4">
-      <div class="grid grid-cols-3 gap-5 items-start tablet:gap-4 laptop:grid-cols-2 mobile:grid-cols-1">
+      <div class="grid grid-cols-3 auto-rows-default laptop:auto-rows-defaultLaptop tablet:auto-rows-defaultTablet mobile:auto-rows-defaultMobile gap-5 items-start tablet:gap-4 laptop:grid-cols-2 mobile:grid-cols-1">
         <ui-card
           v-for="product in products"
           :key="product.to"

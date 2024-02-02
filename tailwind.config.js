@@ -80,6 +80,12 @@ export default {
         slider: '0px 10px 20px 0px rgba(0, 0, 0, 0.03), 0px -10px 20px 0px rgba(0, 0, 0, 0.03)',
         select: '0px 15px 20px 0px rgba(72, 102, 172, 0.05), 0px -5px 20px 0px rgba(72, 102, 172, 0.05)',
         header: '0px 4px 30px 0px rgba(26, 65, 123, 0.10)'
+      },
+      gridAutoRows: {
+        default: 'minmax(0, 310px)',
+        defaultLaptop: 'minmax(0, 294px)',
+        defaultTablet: 'minmax(0, 292px)',
+        defaultMobile: 'minmax(0, 262px)'
       }
     },
   },

@@ -96,7 +96,7 @@ const minusCurrent = (): void => {
           </div>
         </div>
       </div>
-      <div class="flex items-center gap-5 tablet:gap-4">
+      <div class="flex items-end gap-5 tablet:gap-4">
         <span class="text-xl2 font-medium laptop:text-laptopXl2 mobile:text-mobileXl2">{{ price }} ₽</span>
         <del
           v-if="oldPrice"
