@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { DealerDto } from '~/types/common'
+
 const rootStore = useRootStore()
 const { isOpenModalSuccess } = storeToRefs(rootStore)
 
@@ -14,13 +16,20 @@ const form = ref({
 const onSubmit = () => {
   isOpenModalSuccess.value = true
 }
+
+const { data: dealer } = await useContentFetch<DealerDto>('diler-form', {
+  method: 'GET'
+})
+
+const config = useRuntimeConfig()
 </script>
 
 <template>
   <div class="flex gap-[130px] laptop:gap-[100px] tablet:container tablet:pb-20 mobile:pb-6">
     <div class="laptop:w-full laptop:min-w-[550px] laptop:h-[560px] tablet:hidden">
       <img
-        src="/images/form.png"
+        v-if="dealer"
+        :src="`${config.public.baseURL}${dealer.data.picture}`"
         alt="Изображение"
         class="h-full"
       >
@@ -30,11 +39,17 @@ const onSubmit = () => {
       @submit.prevent="onSubmit"
     >
       <div class="flex flex-col justify-center items-center">
-        <h2 class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4">
-          Хотите стать дилером?
+        <h2
+          v-if="dealer"
+          class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4"
+        >
+          {{ dealer.data.title }}
         </h2>
-        <p class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM mobile:text-center">
-          Оставьте данные своей организации и мы с вами свяжемся!
+        <p
+          v-if="dealer"
+          class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM mobile:text-center"
+        >
+          {{ dealer.data.description }}
         </p>
       </div>
       <fieldset class="grid grid-cols-2 gap-5 tablet:gap-4 mobile:grid-cols-1">
