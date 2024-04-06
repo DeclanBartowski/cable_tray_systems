@@ -49,3 +49,21 @@ export interface FileTitle {
 	file: string
 	title: string
 }
+
+export interface ListSrcValue {
+	list: DescriptionValue[]
+	src: string
+	value: string
+}
+
+interface DescriptionValue {
+	description: string
+	value: string
+}
+
+export interface CodeLinkSvgTitle {
+	code: string
+	link: string
+	svg: string
+	title: string
+}
