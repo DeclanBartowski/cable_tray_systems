@@ -10,6 +10,11 @@ export default defineNuxtConfig({
   devServer: {
     host: '0.0.0.0'
   },
+  runtimeConfig: {
+    public: {
+      baseURL: process.env.BASE_URL
+    },
+  },
   imports: {
     dirs: ['stores'],
   },
@@ -43,7 +48,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-    postcss: {
+  postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
