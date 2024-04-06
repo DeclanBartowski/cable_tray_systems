@@ -5,7 +5,7 @@ export function useContentFetch<T>(url: string, options: UseFetchOptions<T> = {}
   const config = useRuntimeConfig()
 
   const defaults: UseFetchOptions<T> = {
-    baseURL: config.public.baseURL,
+    baseURL: config.public.baseAPI,
     key: url,
     retry: 1,
     retryStatusCodes: [401],

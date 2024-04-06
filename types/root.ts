@@ -19,3 +19,14 @@ export interface Seo {
 	keywords: string
 	title: string
 }
+
+export interface DescriptionPictureTitle {
+	description: string
+	picture: string
+	title: string
+}
+
+export interface SvgTitle {
+	svg: string
+	title: string
+}
