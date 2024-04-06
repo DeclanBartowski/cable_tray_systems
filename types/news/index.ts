@@ -1,4 +1,4 @@
-import type { Breadcrumb, Page, PreviewsTextTitleUrl, Seo } from '../root'
+import type { Breadcrumb, LinkTextTitle, Page, PreviewsTextTitleUrl, Seo } from '../root'
 
 export interface NewsDto {
 	data: NewsData
@@ -12,4 +12,16 @@ export interface NewsData {
 	page: Page
 	seo: Seo
 	title: string
+}
+
+export interface NewsDetailDto {
+	data: NewsDetailData
+	error: string[],
+	success: string
+}
+
+export interface NewsDetailData {
+	breadcrumb: Breadcrumb[]
+	info: LinkTextTitle
+	seo: Seo
 }
