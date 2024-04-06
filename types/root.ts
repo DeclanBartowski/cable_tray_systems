@@ -30,3 +30,17 @@ export interface SvgTitle {
 	svg: string
 	title: string
 }
+
+export interface PreviewsTextTitleUrl {
+	preview: string
+	text: string
+	title: string
+	url: string
+}
+
+export interface Page {
+	itemsCount: number
+	pageCount: number
+	pageCurrent: number
+	pageSize: number
+}

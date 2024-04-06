@@ -39,7 +39,7 @@ useServerSeoMeta({
       </h2>
       <delivery-main
         v-if="delivery"
-        :data="delivery.data"
+        :data="delivery.data.card"
       />
     </div>
   </div>
