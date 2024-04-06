@@ -35,7 +35,7 @@ useServerSeoMeta({
         v-if="contacts"
         class="text-xl4 font-medium mb-[33px] laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4 laptop:mb-8 tablet:mb-7 mobile:mb-6"
       >
-        Контакты
+        {{ contacts.data.title }}
       </h2>
     </div>
     <div

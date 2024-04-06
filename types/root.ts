@@ -67,3 +67,9 @@ export interface CodeLinkSvgTitle {
 	svg: string
 	title: string
 }
+
+export interface LinkTextTitle {
+	link: string
+	text: string
+	title: string
+}
