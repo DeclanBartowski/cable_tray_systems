@@ -28,7 +28,10 @@ useServerSeoMeta({
 <template>
   <div class="pt-8 pb-[100px] text-black laptop:pt-7 laptop:pb-20 tablet:pt-6 tablet:pb-14 mobile:pb-6">
     <div class="container">
-      <div class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden">
+      <div
+        v-if="news"
+        class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden"
+      >
         <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
       </div>
       <h2

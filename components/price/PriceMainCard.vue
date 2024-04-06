@@ -1,5 +1,8 @@
 <script setup lang="ts">
-defineProps<{ title: string }>()
+defineProps<{ 
+  title: string,
+  src: string 
+}>()
 </script>
 
 <template>
@@ -10,7 +13,7 @@ defineProps<{ title: string }>()
       {{ title }}
     </h3>
     <img
-      src="/svg/inbox.svg"
+      :src="src"
       class="mx-auto"
     >
   </div>

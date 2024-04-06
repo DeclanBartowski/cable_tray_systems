@@ -44,3 +44,8 @@ export interface Page {
 	pageCurrent: number
 	pageSize: number
 }
+
+export interface FileTitle {
+	file: string
+	title: string
+}
