@@ -4,6 +4,8 @@ import type { DealerDto } from '~/types/common'
 const rootStore = useRootStore()
 const { isOpenModalSuccess } = storeToRefs(rootStore)
 
+const { $api } = useNuxtApp()
+
 const form = ref({
 	name: '',
 	tel: '',
@@ -13,12 +15,29 @@ const form = ref({
 	inn: ''
 })
 
-const onSubmit = () => {
-  isOpenModalSuccess.value = true
-}
-
 const { data: dealer } = await useContentFetch<DealerDto>('diler-form', {
   method: 'GET'
+})
+
+const { refresh } = await useAsyncData(
+  'form',
+  () => $api('diler-form', {
+    method: 'POST',
+    body: {
+      organization: form.value.name,
+      phone: form.value.tel,
+      manager: form.value.manager,
+      email: form.value.email,
+      site: form.value.website,
+      inn: form.value.inn
+    },
+    onResponse({ response }) {
+      if (response.status == 201) {
+        isOpenModalSuccess.value = true
+      }
+    }
+  }), {
+  immediate: false
 })
 
 const config = useRuntimeConfig()
@@ -36,7 +55,7 @@ const config = useRuntimeConfig()
     </div>
     <form
       class="flex flex-col gap-10 w-full max-w-[640px] laptop:max-w-[50%] laptop:pr-[100px] laptop:gap-9 tablet:pr-0 tablet:max-w-full tablet:gap-8 mobile:gap-7"
-      @submit.prevent="onSubmit"
+      @submit.prevent="refresh()"
     >
       <div class="flex flex-col justify-center items-center">
         <h2
