@@ -1,28 +1,30 @@
 <script setup lang="ts">
+import type { HomeAbout } from '~/types/home'
 
+defineProps<{
+  data: HomeAbout
+}>()
 </script>
 
 <template>
   <div class="flex flex-col gap-7 w-full max-w-[530px] laptop:max-w-[50%] laptop:gap-6 tablet:max-w-full tablet:gap-8 mobile:gap-7">
     <div class="flex justify-between items-center">
       <h2 class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4">
-        О нас
+        {{ data.title }}
       </h2>
       <ui-button
-        to="/"
-        text="Подробнее"
+        :to="data.btn_link"
+        :text="data.btn_title"
       />
     </div>
     <div class="flex flex-col gap-6 laptop:gap-5 mobile:gap-4">
       <h3 class="text-xl font-medium laptop:text-laptopXl">
-        Компания «СКЛ» предлагает кабельные лотки, короба и аксессуары
+        {{ data.subtitle }}
       </h3>
-      <div class="flex flex-col gap-6 text-l laptop:gap-5 laptop:text-laptopL mobile:gap-4 mobile:text-mobileM">
-        <p>Мы изготавливаем товары по индивидуальным размерам и любым, в том числе, нетиповым параметрам. Принимая во внимание индивидуальность каждого проекта, специалисты компании готовы всегда идти навстречу своим клиентам, обсуждая с ними возможные усовершенствования и доработки.</p>
-        <p>Стандартные размеры кабельных коробов составляют: ширина — 50–600 мм, высота — 50–200 мм, толщина стали 0,55–1,5 мм. Индивидуальные же параметры могут быть на порядок больше указанных — все зависит от заявки заказчика и предполагаемых условий эксплуатации изделий.</p>
-        <p>Следует отметить, что заказы на нестандартные размеры лотков и коробов выполняются квалифицированными специалистами гарантированно качественно и в максимально короткие сроки.</p>
-        <p>Гарантией правильно и бесперебойно работающих кабельных систем, а также защиты сетей от повреждений различного характера и происхождения являются кабельные аксессуары, с помощью которых осуществляется монтаж сетей электропитания, информационных систем и аппаратуры.</p>
-      </div>
+      <div
+        class="flex flex-col gap-6 text-l laptop:gap-5 laptop:text-laptopL mobile:gap-4 mobile:text-mobileM"
+        v-html="data.text"
+      />
     </div>
   </div>
 </template>

@@ -73,3 +73,20 @@ export interface LinkTextTitle {
 	text: string
 	title: string
 }
+
+export interface IconTitle {
+	icon: string
+	title: string
+}
+
+export interface DescriptionTitle {
+	description: string
+	title: string
+}
+
+export interface IdLinkNamePicture {
+	id: number
+	link: string
+	name: string
+	picture: string
+}
