@@ -1,7 +1,11 @@
 <script setup lang="ts">
-const isHoverVk = ref(false)
-const isHoverTelegram = ref(false)
-const isHoverWhatsapp = ref(false)
+import type { LayoutData } from '~/types/layout'
+
+defineProps<{
+  data: LayoutData
+}>()
+
+const config = useRuntimeConfig()
 </script>
 
 <template>
@@ -19,26 +23,16 @@ const isHoverWhatsapp = ref(false)
             >
           </nuxt-link>
           <div class="flex items-center gap-[79px] laptop:gap-[60px] tablet:gap-11 mobile:flex-col mobile:gap-4">
-            <div class="flex flex-col gap-1 mobile:w-full">
+            <div
+              v-for="d in data.phones"
+              :key="d.href"
+              class="flex flex-col gap-1 mobile:w-full"
+            >
               <a
-                href="tel:88003087242"
+                :href="d.href"
                 class="text-m font-add font-semibold laptop:text-laptopM tablet:text-tabletM"
-              >8 800 308-72-42</a>
-              <span class="text-xs laptop:text-laptopXs tablet:text-tabletXs">Доставка для регионов круглосуточно</span>
-            </div>
-            <div class="flex flex-col gap-1 mobile:w-full">
-              <a
-                href="tel:+74958087338"
-                class="text-m font-add font-semibold laptop:text-laptopM tablet:text-tabletM"
-              >+7 495 808-73-38</a>
-              <span class="text-xs laptop:text-laptopXs tablet:text-tabletXs">Москва, Пн-Пт с 8.00 до 17.00</span>
-            </div>
-            <div class="flex flex-col gap-1 mobile:w-full">
-              <a
-                href="tel:+79533080872"
-                class="text-m font-add font-semibold laptop:text-laptopM tablet:text-tabletM"
-              >+7 953 308-08-72</a>
-              <span class="text-xs laptop:text-laptopXs tablet:text-tabletXs">Доставка для регионов круглосуточно</span>
+              >{{ d.title }}</a>
+              <span class="text-xs laptop:text-laptopXs tablet:text-tabletXs">{{ d.text }}</span>
             </div>
           </div>
         </div>
@@ -46,21 +40,21 @@ const isHoverWhatsapp = ref(false)
           <nav class="flex gap-[133px] text-m mr-[151px] laptop:gap-[100px] laptop:mr-[100px] laptop:text-laptopM tablet:gap-10 tablet:mr-10 mobile:mr-0 mobile:text-mobileM">
             <ul class="flex flex-col gap-5 tablet:gap-4 mobile:w-20">
               <li
-                v-for="nav in footerNavLeft"
-                :key="nav.name"
+                v-for="d in data.footer_first"
+                :key="d.link"
               >
-                <nuxt-link :to="nav.path">
-                  {{ nav.name }}
+                <nuxt-link :to="d.link">
+                  {{ d.title }}
                 </nuxt-link>
               </li>
             </ul>
             <ul class="flex flex-col gap-5 tablet:gap-4">
               <li
-                v-for="nav in footerNavRight"
-                :key="nav.name"
+                v-for="d in data.footer_second"
+                :key="d.link"
               >
-                <nuxt-link :to="nav.path">
-                  {{ nav.name }}
+                <nuxt-link :to="d.link">
+                  {{ d.title }}
                 </nuxt-link>
               </li>
             </ul>
@@ -68,81 +62,47 @@ const isHoverWhatsapp = ref(false)
           <div class="flex flex-col gap-5 w-[375px] text-m mr-[63px] laptop:text-laptopM laptop:mr-14 laptop:w-[270px] tablet:text-tabletM tablet:mr-8 tablet:gap-4 tablet:w-[180px] mobile:w-full mobile:mr-0 mobile:text-mobileM">
             <div class="flex items-start gap-[11px] laptop:gap-2.5 tablet:gap-2 tablet:items-center">
               <img
-                src="/svg/mail.svg"
+                :src="`${config.public.baseURL}${data.info.email.src}`"
                 alt="Почта"
               >
-              <a href="mailto:info@korob.ru">info@korob.ru</a>
+              <a href="`mailto:${data.info.email.value}`">{{ data.info.email.value }}</a>
             </div>
             <div class="flex items-start gap-[11px] laptop:gap-2.5 tablet:gap-2">
               <img
-                src="/svg/home.svg"
+                :src="`${config.public.baseURL}${data.info.address.src}`"
                 alt="Дом"
               >
               <address class="not-italic">
-                Россия, Москва.ю 2-я улица Зелёная д5. Территория завода «Компрессор»
+                {{ data.info.address.value }}
               </address>
             </div>
             <div class="flex items-start gap-[11px] laptop:gap-2.5 tablet:gap-2 tablet:items-center">
               <img
-                src="/svg/clock.svg"
+                :src="`${config.public.baseURL}${data.info.worktime.src}`"
                 alt="Часы"
               >
-              <span>Пн-Пт: 9.00–17.00</span>
+              <span>{{ data.info.worktime.value }}</span>
             </div>
           </div>
           <div class="flex flex-col gap-5 tablet:gap-4">
             <div class="flex items-center gap-4">
-              <a
+              <nuxt-link
+                v-for="d in data.socials"
+                :key="d.link"
+                :to="d.link"
                 href="#"
                 class="cursor-pointer"
-                @mouseenter="isHoverVk = true"
-                @mouseleave="isHoverVk = false"
               >
-                <vk
-                  v-if="isHoverVk === false"
-                  class="tablet:w-8 tablet:h-8"
-                />
-                <vk-active
-                  v-else
-                  class="tablet:w-8 tablet:h-8"
-                />
-              </a>
-              <a
-                href="#"
-                class="cursor-pointer"
-                @mouseenter="isHoverTelegram = true"
-                @mouseleave="isHoverTelegram = false"
-              >
-                <telegram
-                  v-if="isHoverTelegram === false"
-                  class="tablet:w-8 tablet:h-8"
-                />
-                <telegram-active
-                  v-else
-                  class="tablet:w-8 tablet:h-8"
-                />
-              </a>
-              <a
-                href="#"
-                class="cursor-pointer"
-                @mouseenter="isHoverWhatsapp = true"
-                @mouseleave="isHoverWhatsapp = false"
-              >
-                <whatsapp
-                  v-if="isHoverWhatsapp === false"
-                  class="tablet:w-8 tablet:h-8"
-                />
-                <whatsapp-active
-                  v-else
-                  class="tablet:w-8 tablet:h-8"
-                />
-              </a>
+                <div v-html="d.svg" />
+              </nuxt-link>
             </div>
             <nuxt-link
-              to="/"
+              v-for="d in data.politic"
+              :key="d.link"
+              :to="d.link"
               class="text-xs laptop:text-laptopXs"
             >
-              Политика конфиденциальности
+              {{ d.title }}
             </nuxt-link>
           </div>
         </div>

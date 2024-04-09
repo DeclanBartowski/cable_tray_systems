@@ -1,10 +1,27 @@
 <script setup lang="ts">
+import type { LayoutData, LayoutLink } from '~/types/layout'
+
 const rootStore = useRootStore()
 const { isOpenMenu, isOpenCatalog, isHeaderActive } = storeToRefs(rootStore)
+
+const props = defineProps<{
+  data: LayoutData
+}>()
+const { data } = toRefs(props)
 
 const search = ref('')
 const isOpenMore = ref(false)
 const isOpenSearch = ref(false)
+const contactsLink = ref<LayoutLink | undefined>(undefined)
+const deliveryLink = ref<LayoutLink | undefined>(undefined)
+
+watchEffect(() => {
+  if (data.value) {
+    data.value.menuHeader.splice(5)
+    contactsLink.value = data.value.menuHeader.find((el: LayoutLink) => el.title === 'Контакты')
+    deliveryLink.value = data.value.menuHeader.find((el: LayoutLink) => el.title === 'Доставка')
+  }
+})
 
 onMounted(() => {
   document.addEventListener("scroll", () => {
@@ -41,26 +58,16 @@ onMounted(() => {
             v-if="!isHeaderActive"
             class="flex items-center gap-10 laptop:gap-7 tablet:hidden"
           >
-            <div class="flex flex-col gap-1">
+            <div
+              v-for="d in data.phones"
+              :key="d.href"
+              class="flex flex-col gap-1"
+            >
               <a
-                href="tel:88003087242"
+                :href="d.href"
                 class="text-m font-add font-semibold laptop:text-laptopM"
-              >8 800 308-72-42</a>
-              <span class="text-xs laptop:text-laptopXs">Доставка для регионов круглосуточно</span>
-            </div>
-            <div class="flex flex-col gap-1">
-              <a
-                href="tel:+74958087338"
-                class="text-m font-add font-semibold laptop:text-laptopM"
-              >+7 495 808-73-38</a>
-              <span class="text-xs laptop:text-laptopXs">Москва, Пн-Пт с 8.00 до 17.00</span>
-            </div>
-            <div class="flex flex-col gap-1">
-              <a
-                href="tel:+79533080872"
-                class="text-m font-add font-semibold laptop:text-laptopM"
-              >+7 953 308-08-72</a>
-              <span class="text-xs laptop:text-laptopXs">Доставка для регионов круглосуточно</span>
+              >{{ d.title }}</a>
+              <span class="text-xs laptop:text-laptopXs">{{ d.text }}</span>
             </div>
           </div>
           <div
@@ -165,12 +172,12 @@ onMounted(() => {
           >
             <ul class="flex items-center gap-14 laptop:gap-10">
               <li
-                v-for="nav in headerNav"
-                :key="nav.name"
+                v-for="d in data.menuHeader"
+                :key="d.link"
                 class="text-m transition-all laptop:text-laptopM hover:text-gray300"
               >
-                <nuxt-link :to="nav.path">
-                  {{ nav.name }}
+                <nuxt-link :to="d.link">
+                  {{ d.title }}
                 </nuxt-link>
               </li>
             </ul>
@@ -187,14 +194,20 @@ onMounted(() => {
             class="relative flex items-end mr-[77px] gap-[57px] laptop:gap-10 laptop:mr-12 tablet:hidden"
           >
             <ul class="flex items-center gap-14 laptop:gap-10">
-              <li class="text-m transition-all laptop:text-laptopM hover:text-gray300">
-                <nuxt-link to="/contacts">
-                  Контакты
+              <li
+                v-if="contactsLink"
+                class="text-m transition-all laptop:text-laptopM hover:text-gray300"
+              >
+                <nuxt-link :to="contactsLink.link">
+                  {{ contactsLink.title }}
                 </nuxt-link>
               </li>
-              <li class="text-m transition-all laptop:text-laptopM hover:text-gray300">
-                <nuxt-link to="/delivery">
-                  Доставка
+              <li
+                v-if="deliveryLink"
+                class="text-m transition-all laptop:text-laptopM hover:text-gray300"
+              >
+                <nuxt-link :to="deliveryLink.link">
+                  {{ deliveryLink.title }}
                 </nuxt-link>
               </li>
             </ul>
@@ -265,10 +278,10 @@ onMounted(() => {
           class="flex flex-col gap-1 tablet:hidden"
         >
           <a
-            href="tel:+74958087338"
+            :href="data.phones[1].href"
             class="text-m font-add font-semibold laptop:text-laptopM"
-          >+7 495 808-73-38</a>
-          <span class="text-xs laptop:text-laptopXs">Москва, Пн-Пт с 8.00 до 17.00</span>
+          >{{ data.phones[1].title }}</a>
+          <span class="text-xs laptop:text-laptopXs">{{ data.phones[1].text }}</span>
         </div>
         <button
           v-if="isHeaderActive"
