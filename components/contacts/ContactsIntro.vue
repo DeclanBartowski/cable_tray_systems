@@ -58,10 +58,9 @@ const config = useRuntimeConfig()
           </a>
         </div>
       </div>
-      <img
-        src="/test/map.png"
-        class="laptop:w-[50%] mobile:w-full"
-      >
+      <div class="rounded-popup h-[620px] laptop:w-[50%] mobile:w-full">
+        <contacts-map :data="data.map.cordinate" />
+      </div>
     </div>
   </div>
 </template>

@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     'nuxt-primevue',
     '@vueuse/nuxt',
     '@pinia/nuxt',
-    'nuxt-swiper'
+    'nuxt-swiper',
+    'vue-yandex-maps/nuxt'
   ],
   devServer: {
     host: '0.0.0.0'
@@ -15,6 +16,9 @@ export default defineNuxtConfig({
       baseURL: process.env.BASE_URL,
       baseAPI: process.env.BASE_API
     },
+  },
+  yandexMaps: {
+    apikey: 'b1b1f0d8-af65-4ce4-8911-b8207fa4cc06',
   },
   imports: {
     dirs: ['stores'],
