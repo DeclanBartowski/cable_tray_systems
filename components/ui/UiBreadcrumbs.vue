@@ -1,24 +1,18 @@
 <script setup lang="ts">
-import type { Breadcrumbs } from '~/types/root'
+import type { Breadcrumb } from '~/types/root'
 
-const p = defineProps<{ breadcrumbs: Breadcrumbs[] }>()
-
-const home = ref({
-  label: 'Главная',
-  route: '/'
-})
+const p = defineProps<{ breadcrumbs: Breadcrumb[] }>()
 </script>
 
 <template>
   <Breadcrumb
     :pt="{ root: { class: 'bg-transparent py-0 px-0 font-sans' }, action: ({ context }) => ({ class: context.index === p.breadcrumbs.length - 1 ? 'text-black' : 'text-gray200' }) }"
-    :home="home"
     :model="breadcrumbs"
   >
     <template #item="{ item, props }">
       <nuxt-link
         v-slot="{ href, navigate }"
-        :to="item.route"
+        :to="item.url"
         custom
       >
         <a
@@ -26,7 +20,7 @@ const home = ref({
           v-bind="props.action"
           @click="navigate"
         >
-          <span class="text-s">{{ item.label }}</span>
+          <span class="text-s">{{ item.title }}</span>
         </a>
       </nuxt-link>
     </template>

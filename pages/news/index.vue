@@ -2,19 +2,20 @@
 <script setup lang="ts">
 import type { NewsDto } from '~/types/news'
 
-const { data: news } = await useContentFetch<NewsDto>('news', {
-  method: 'GET',
-  query: {
-    page: '3'
-  }
-})
+const { $api } = useNuxtApp()
 
-const breadcrumbs = ref([
-  {
-    label: news.value!.data.breadcrumb[1].title,
-    route: news.value!.data.breadcrumb[1].url
-  }
-])
+const page = ref(1)
+
+const { data: news } = await useAsyncData<NewsDto>(
+  'news',
+  (): Promise<NewsDto> => $api('news', {
+    method: 'GET',
+    params: {
+      page: page.value
+    }
+  }), {
+  watch: [page]
+})
 
 useServerSeoMeta({
   ogTitle: () => news.value!.data.seo.title,
@@ -32,7 +33,7 @@ useServerSeoMeta({
         v-if="news"
         class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden"
       >
-        <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
+        <ui-breadcrumbs :breadcrumbs="news.data.breadcrumb" />
       </div>
       <h2
         v-if="news"
@@ -44,6 +45,9 @@ useServerSeoMeta({
         v-if="news"
         :data="news.data.elements"
       />
+      <div class="mt-5 tablet:mt-4">
+        <common-button-more @click="page += 1" />
+      </div>
     </div>
   </div>
 </template>

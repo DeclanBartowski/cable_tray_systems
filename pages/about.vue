@@ -6,13 +6,6 @@ const { data: about } = await useContentFetch<AboutDto>('about', {
   method: 'GET'
 })
 
-const breadcrumbs = ref([
-  {
-    label: about.value!.data.breadcrumb[1].title,
-    route: about.value!.data.breadcrumb[1].url
-  }
-])
-
 useServerSeoMeta({
   ogTitle: () => about.value!.data.seo.title,
   title: () => about.value!.data.seo.title,
@@ -29,7 +22,7 @@ useServerSeoMeta({
         v-if="about"
         class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden"
       >
-        <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
+        <ui-breadcrumbs :breadcrumbs="about.data.breadcrumb" />
       </div>
       <h2
         v-if="about"

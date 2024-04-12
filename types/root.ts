@@ -1,8 +1,3 @@
-export interface Breadcrumbs {
-	label: string
-	route: string
-}
-
 export interface Breadcrumb {
 	title: string
 	url: string

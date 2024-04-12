@@ -10,7 +10,7 @@ defineProps<{
   <yandex-map
     :settings="{
       location: {
-        center: [37.753869, 55.759796],
+        center: [Number(data[1]), Number(data[0])],
         zoom: 14,
       },
     }"

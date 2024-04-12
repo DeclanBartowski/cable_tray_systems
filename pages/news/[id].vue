@@ -6,17 +6,6 @@ const { data: detailNews } = await useContentFetch<NewsDetailDto>('news/zaklyuch
   method: 'GET'
 })
 
-const breadcrumbs = ref([
-  {
-    label: detailNews.value!.data.breadcrumb[1].title,
-    route: detailNews.value!.data.breadcrumb[1].url
-  },
-  {
-    label: detailNews.value!.data.breadcrumb[2].title,
-    route: detailNews.value!.data.breadcrumb[2].url
-  },
-])
-
 useServerSeoMeta({
   ogTitle: () => detailNews.value!.data.seo.title,
   title: () => detailNews.value!.data.seo.title,
@@ -33,7 +22,7 @@ useServerSeoMeta({
         v-if="detailNews"
         class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden"
       >
-        <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
+        <ui-breadcrumbs :breadcrumbs="detailNews.data.breadcrumb" />
       </div>
     </div>
     <news-detail-main

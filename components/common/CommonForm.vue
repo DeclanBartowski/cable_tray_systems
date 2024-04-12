@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import useVuelidate from '@vuelidate/core'
+import { email, helpers, required } from '@vuelidate/validators'
 import type { DealerDto } from '~/types/common'
 
 const rootStore = useRootStore()
@@ -7,21 +9,48 @@ const { isOpenModalSuccess } = storeToRefs(rootStore)
 const { $api } = useNuxtApp()
 
 const form = ref({
-	name: '',
-	tel: '',
-	manager: '',
-	email: '',
-	website: '',
-	inn: ''
+  name: '',
+  tel: '',
+  manager: '',
+  email: '',
+  website: '',
+  inn: ''
 })
+
+const rules = computed(() => ({
+  name: {
+    required: helpers.withMessage('Обязательно для заполнения', required)
+  },
+  tel: {
+    required: helpers.withMessage('Обязательно для заполнения', required)
+  },
+  manager: {
+    required: helpers.withMessage('Обязательно для заполнения', required)
+  },
+  email: {
+    required: helpers.withMessage('Обязательно для заполнения', required),
+    email
+  },
+  website: {
+    required: helpers.withMessage('Обязательно для заполнения', required)
+  },
+  inn: {
+    required: helpers.withMessage('Обязательно для заполнения', required)
+  }
+}))
+
+const v$ = useVuelidate(rules, form.value)
 
 const { data: dealer } = await useContentFetch<DealerDto>('diler-form', {
   method: 'GET'
 })
 
-const { refresh } = await useAsyncData(
-  'form',
-  () => $api('diler-form', {
+const sendForm = async (): Promise<void> => {
+  const result = await v$.value.$validate()
+  if (!result) {
+    return
+  }
+  await $api('diler-form', {
     method: 'POST',
     body: {
       organization: form.value.name,
@@ -36,9 +65,8 @@ const { refresh } = await useAsyncData(
         isOpenModalSuccess.value = true
       }
     }
-  }), {
-  immediate: false
-})
+  })
+}
 
 const config = useRuntimeConfig()
 </script>
@@ -55,7 +83,7 @@ const config = useRuntimeConfig()
     </div>
     <form
       class="flex flex-col gap-10 w-full max-w-[640px] laptop:max-w-[50%] laptop:pr-[100px] laptop:gap-9 tablet:pr-0 tablet:max-w-full tablet:gap-8 mobile:gap-7"
-      @submit.prevent="refresh()"
+      @submit.prevent="sendForm()"
     >
       <div class="flex flex-col justify-center items-center">
         <h2
@@ -73,37 +101,49 @@ const config = useRuntimeConfig()
       </div>
       <fieldset class="grid grid-cols-2 gap-5 tablet:gap-4 mobile:grid-cols-1">
         <ui-input
-          v-model="form.name"
+          v-model="v$.name.$model"
+          :error="v$.name.$error"
+          :error-message="v$.name.required.$message"
           label="Организация"
           placeholder="Название организации"
         />
         <ui-input
-          v-model="form.tel"
+          v-model="v$.tel.$model"
+          :error="v$.tel.$error"
+          :error-message="v$.tel.required.$message"
           label="Телефон"
           placeholder="8 800 792-92-92"
         />
         <ui-input
-          v-model="form.manager"
+          v-model="v$.manager.$model"
+          :error="v$.manager.$error"
+          :error-message="v$.manager.required.$message"
           label="Менеджер"
           placeholder="Укажите ФИО"
         />
         <ui-input
-          v-model="form.email"
+          v-model="v$.email.$model"
+          :error="v$.email.$error"
+          :error-message="v$.email.required.$message"
           label="Электронная почта"
           placeholder="Введите почту"
         />
         <ui-input
-          v-model="form.website"
+          v-model="v$.website.$model"
+          :error="v$.website.$error"
+          :error-message="v$.website.required.$message"
           label="Сайт компании"
           placeholder="www.cait.ru"
         />
         <ui-input
-          v-model="form.inn"
+          v-model="v$.inn.$model"
+          :error="v$.inn.$error"
+          :error-message="v$.inn.required.$message"
           label="ИНН"
           placeholder="54869524455665"
         />
       </fieldset>
-      <div class="flex flex-col justify-center items-center gap-2"> 
+      <div class="flex flex-col justify-center items-center gap-2">
         <ui-button
           type="submit"
           text="Отправить"

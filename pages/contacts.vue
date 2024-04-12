@@ -6,13 +6,6 @@ const { data: contacts } = await useContentFetch<ContactsDto>('contacts', {
   method: 'GET'
 })
 
-const breadcrumbs = ref([
-  {
-    label: contacts.value!.data.breadcrumb[1].title,
-    route: contacts.value!.data.breadcrumb[1].url
-  }
-])
-
 useServerSeoMeta({
   ogTitle: () => contacts.value!.data.seo.title,
   title: () => contacts.value!.data.seo.title,
@@ -29,7 +22,7 @@ useServerSeoMeta({
         v-if="contacts"
         class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden"
       >
-        <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
+        <ui-breadcrumbs :breadcrumbs="contacts.data.breadcrumb" />
       </div>
       <h2
         v-if="contacts"

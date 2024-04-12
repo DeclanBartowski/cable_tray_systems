@@ -6,13 +6,6 @@ const { data: policy } = await useContentFetch<PolicyDto>('text-page/policy', {
   method: 'GET'
 })
 
-const breadcrumbs = ref([
-  {
-    label: policy.value!.data.breadcrumb[1].title,
-    route: policy.value!.data.breadcrumb[1].url
-  }
-])
-
 useServerSeoMeta({
   ogTitle: () => policy.value!.data.seo.title,
   title: () => policy.value!.data.seo.title,
@@ -29,7 +22,7 @@ useServerSeoMeta({
         v-if="policy"
         class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden"
       >
-        <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
+        <ui-breadcrumbs :breadcrumbs="policy.data.breadcrumb" />
       </div>
     </div>
     <policy-main

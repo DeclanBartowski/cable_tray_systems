@@ -6,13 +6,6 @@ const { data: delivery } = await useContentFetch<DeliveryDto>('delivery', {
   method: 'GET'
 })
 
-const breadcrumbs = ref([
-  {
-    label: delivery.value!.data.breadcrumb[1].title,
-    route: delivery.value!.data.breadcrumb[1].url
-  }
-])
-
 useServerSeoMeta({
   ogTitle: () => delivery.value!.data.seo.title,
   title: () => delivery.value!.data.seo.title,
@@ -29,7 +22,7 @@ useServerSeoMeta({
         v-if="delivery"
         class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden"
       >
-        <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
+        <ui-breadcrumbs :breadcrumbs="delivery.data.breadcrumb" />
       </div>
       <h2
         v-if="delivery"

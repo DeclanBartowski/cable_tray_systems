@@ -6,13 +6,6 @@ const { data: price } = await useContentFetch<PriceDto>('pricelist', {
   method: 'GET'
 })
 
-const breadcrumbs = ref([
-  {
-    label: price.value!.data.breadcrumb[1].title,
-    route: price.value!.data.breadcrumb[1].url
-  }
-])
-
 useServerSeoMeta({
   ogTitle: () => price.value!.data.seo.title,
   title: () => price.value!.data.seo.title,
@@ -29,7 +22,7 @@ useServerSeoMeta({
         v-if="price"
         class="mb-10 laptop:mb-19 tablet:mb-8 mobile:hidden"
       >
-        <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
+        <ui-breadcrumbs :breadcrumbs="price.data.breadcrumb" />
       </div>
       <h2
         v-if="price"
