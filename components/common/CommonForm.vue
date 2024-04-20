@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useVuelidate from '@vuelidate/core'
-import { email, helpers, required } from '@vuelidate/validators'
+import { email, helpers, required, minLength, maxLength } from '@vuelidate/validators'
 import type { DealerDto } from '~/types/common'
 
 const rootStore = useRootStore()
@@ -22,7 +22,9 @@ const rules = computed(() => ({
     required: helpers.withMessage('Обязательно для заполнения', required)
   },
   tel: {
-    required: helpers.withMessage('Обязательно для заполнения', required)
+    required: helpers.withMessage('Обязательно для заполнения', required),
+    minLength: minLength(15),
+    maxLength: maxLength(15)
   },
   manager: {
     required: helpers.withMessage('Обязательно для заполнения', required)
@@ -105,13 +107,16 @@ const config = useRuntimeConfig()
           label="Организация"
           placeholder="Название организации"
         />
-        <ui-input
-          v-model="v$.tel.$model"
-          :error="v$.tel.$error"
-          :error-message="v$.tel.required.$message"
-          label="Телефон"
-          placeholder="8 800 792-92-92"
-        />
+        <client-only>
+          <ui-input
+            v-model="v$.tel.$model"
+            :error="v$.tel.$error"
+            :error-message="v$.tel.required.$message"
+            label="Телефон"
+            placeholder="8 800 792-92-92"
+            point="phone"
+          />
+        </client-only>
         <ui-input
           v-model="v$.manager.$model"
           :error="v$.manager.$error"

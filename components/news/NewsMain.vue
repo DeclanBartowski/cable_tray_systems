@@ -2,7 +2,7 @@
 import type { PreviewsTextTitleUrl } from '~/types/root'
 
 defineProps<{
-  data: PreviewsTextTitleUrl[]
+  data: PreviewsTextTitleUrl[] | undefined
 }>()
 
 const config = useRuntimeConfig()
