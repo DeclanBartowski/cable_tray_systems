@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useVuelidate from '@vuelidate/core'
-import { email, helpers, required, minLength, maxLength } from '@vuelidate/validators'
+import { email, helpers, maxLength, minLength, required } from '@vuelidate/validators'
 import type { DealerDto } from '~/types/common'
 
 const rootStore = useRootStore()
@@ -65,6 +65,14 @@ const sendForm = async (): Promise<void> => {
   })
   if (response) {
     isOpenModalSuccess.value = true
+    form.value = {
+      name: '',
+      tel: '',
+      manager: '',
+      email: '',
+      website: '',
+      inn: ''
+    }
   }
 }
 
@@ -74,93 +82,43 @@ const config = useRuntimeConfig()
 <template>
   <div class="flex gap-[130px] laptop:gap-[100px] tablet:container tablet:pb-20 mobile:pb-6">
     <div class="laptop:w-full laptop:min-w-[550px] laptop:h-[560px] tablet:hidden">
-      <img
-        v-if="dealer"
-        :src="`${config.public.baseURL}${dealer.data.picture}`"
-        alt="Изображение"
-        class="h-full"
-      >
+      <img v-if="dealer" :src="`${config.public.baseURL}${dealer.data.picture}`" alt="Изображение" class="h-full">
     </div>
     <form
       class="flex flex-col gap-10 w-full max-w-[640px] laptop:max-w-[50%] laptop:pr-[100px] laptop:gap-9 tablet:pr-0 tablet:max-w-full tablet:gap-8 mobile:gap-7"
-      @submit.prevent="sendForm()"
-    >
+      @submit.prevent="sendForm()">
       <div class="flex flex-col justify-center items-center">
-        <h2
-          v-if="dealer"
-          class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4"
-        >
+        <h2 v-if="dealer"
+          class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4">
           {{ dealer.data.title }}
         </h2>
-        <p
-          v-if="dealer"
-          class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM mobile:text-center"
-        >
+        <p v-if="dealer" class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM mobile:text-center">
           {{ dealer.data.description }}
         </p>
       </div>
       <fieldset class="grid grid-cols-2 gap-5 tablet:gap-4 mobile:grid-cols-1">
-        <ui-input
-          v-model="v$.name.$model"
-          :error="v$.name.$error"
-          :error-message="v$.name.required.$message"
-          label="Организация"
-          placeholder="Название организации"
-        />
+        <ui-input v-model="v$.name.$model" :error="v$.name.$error" :error-message="v$.name.required.$message"
+          label="Организация" placeholder="Название организации" />
         <client-only>
-          <ui-input
-            v-model="v$.tel.$model"
-            :error="v$.tel.$error"
-            :error-message="v$.tel.required.$message"
-            label="Телефон"
-            placeholder="8 800 792-92-92"
-            point="phone"
-          />
+          <ui-input v-model="v$.tel.$model" :error="v$.tel.$error" :error-message="v$.tel.required.$message"
+            label="Телефон" placeholder="8 800 792-92-92" point="phone" />
         </client-only>
-        <ui-input
-          v-model="v$.manager.$model"
-          :error="v$.manager.$error"
-          :error-message="v$.manager.required.$message"
-          label="Менеджер"
-          placeholder="Укажите ФИО"
-        />
-        <ui-input
-          v-model="v$.email.$model"
-          :error="v$.email.$error"
-          :error-message="v$.email.required.$message"
-          label="Электронная почта"
-          placeholder="Введите почту"
-        />
-        <ui-input
-          v-model="v$.website.$model"
-          :error="v$.website.$error"
-          :error-message="v$.website.required.$message"
-          label="Сайт компании"
-          placeholder="www.cait.ru"
-        />
-        <ui-input
-          v-model="v$.inn.$model"
-          :error="v$.inn.$error"
-          :error-message="v$.inn.required.$message"
-          label="ИНН"
-          placeholder="54869524455665"
-        />
+        <ui-input v-model="v$.manager.$model" :error="v$.manager.$error" :error-message="v$.manager.required.$message"
+          label="Менеджер" placeholder="Укажите ФИО" />
+        <ui-input v-model="v$.email.$model" :error="v$.email.$error" :error-message="v$.email.required.$message"
+          label="Электронная почта" placeholder="Введите почту" />
+        <ui-input v-model="v$.website.$model" :error="v$.website.$error" :error-message="v$.website.required.$message"
+          label="Сайт компании" placeholder="www.cait.ru" />
+        <ui-input v-model="v$.inn.$model" :error="v$.inn.$error" :error-message="v$.inn.required.$message" label="ИНН"
+          placeholder="54869524455665" />
       </fieldset>
       <div class="flex flex-col justify-center items-center gap-2">
-        <ui-button
-          type="submit"
-          text="Отправить"
-          fill="fill"
-          class="w-[146px]"
-        />
+        <ui-button type="submit" text="Отправить" fill="fill" class="w-[146px]" />
         <div class="flex flex-col justify-center items-center text-s laptop:text-laptopS">
           <p class="text-gray300">
             Нажимая на кнопку, вы соглашаетесь
           </p>
-          <nuxt-link
-            to="/"
-            class="text-blue"
-          >
+          <nuxt-link to="/" class="text-blue">
             на обработку ваших персональных данных
           </nuxt-link>
         </div>
