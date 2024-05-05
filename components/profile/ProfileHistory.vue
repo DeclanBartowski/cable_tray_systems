@@ -1,5 +1,12 @@
 <script setup lang="ts">
+const { $api } = useNuxtApp()
 
+const { data: orders } = await useAsyncData(
+  'orders-history',
+  () => $api('history/', {
+    method: 'GET'
+  })
+)
 </script>
 
 <template>

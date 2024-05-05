@@ -4,6 +4,9 @@ import type { LayoutData, LayoutLink } from '~/types/layout'
 const rootStore = useRootStore()
 const { isOpenMenu, isOpenCatalog, isHeaderActive } = storeToRefs(rootStore)
 
+const { isOpenAuthModal } = useRoot()
+const { user } = useAuth()
+
 const props = defineProps<{
   data: LayoutData
 }>()
@@ -103,10 +106,18 @@ onMounted(() => {
             </nuxt-link>
           </div>
           <ui-button
-            v-if="!isHeaderActive"
+            v-if="!isHeaderActive && !user"
             text="Войти"
             class="tablet:w-[138px] mobile:hidden"
+            @click="isOpenAuthModal = true"
           />
+          <nuxt-link
+            v-else
+            to="/profile"
+            class="mobile:hidden"
+          >
+            <img src="/svg/user.svg">
+          </nuxt-link>
           <button
             v-if="!isHeaderActive"
             class="hidden border-none tablet:flex"
@@ -161,10 +172,18 @@ onMounted(() => {
               >
             </nuxt-link>
             <ui-button
-              v-if="!isHeaderActive"
+              v-if="!isHeaderActive && !user"
               text="Войти"
               class="hidden mobile:flex w-[138px]"
+              @click="isOpenAuthModal = true"
             />
+            <nuxt-link
+              v-else
+              to="/profile"
+              class="hidden mobile:flex"
+            >
+              <img src="/svg/user.svg">
+            </nuxt-link>
           </div>
           <nav
             v-if="!isHeaderActive"
@@ -187,7 +206,7 @@ onMounted(() => {
             >
               <more />
             </button>
-            <layout-header-more v-if="isOpenMore" />
+            <lazy-layout-header-more v-if="isOpenMore" />
           </nav>
           <nav
             v-if="isHeaderActive"
@@ -294,8 +313,8 @@ onMounted(() => {
             class="mobile:w-6 mobile:h-6"
           >
         </button>
-        <layout-catalog v-if="isOpenCatalog" />
-        <layout-mobile-menu v-if="isOpenMenu" />
+        <lazy-layout-catalog v-if="isOpenCatalog" />
+        <lazy-layout-mobile-menu v-if="isOpenMenu" />
       </div>
     </div>
   </div>

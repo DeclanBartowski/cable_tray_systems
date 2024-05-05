@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { user } = useAuth()
+
 const form = ref({
 	name: '',
 	organization: '',
@@ -8,6 +10,16 @@ const form = ref({
 	oldPassword: '',
 	newPassword: '',
 	confirmPassword: ''
+})
+
+watchEffect(() => {
+  if (user.value) {
+    form.value.name = user.value.name
+    form.value.organization = user.value.company
+    form.value.email = user.value.email
+    form.value.inn = user.value.inn
+    form.value.tel = user.value.phone
+  }
 })
 </script>
 
@@ -24,6 +36,7 @@ const form = ref({
           placeholder="Иванов"
         />
         <ui-input
+          v-if="user?.company"
           v-model="form.organization"
           label="Организация"
           placeholder="ОАО “Строймир”"
@@ -34,6 +47,7 @@ const form = ref({
           placeholder="pochtaivanova@mail.ru"
         />
         <ui-input
+          v-if="user?.inn"
           v-model="form.inn"
           label="ИНН"
           placeholder="4565556545"

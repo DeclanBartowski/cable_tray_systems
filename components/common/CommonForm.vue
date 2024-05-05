@@ -52,7 +52,7 @@ const sendForm = async (): Promise<void> => {
   if (!result) {
     return
   }
-  const response = await $api('diler-form', {
+  await $api('diler-form', {
     method: 'POST',
     body: {
       organization: form.value.name,
@@ -61,19 +61,21 @@ const sendForm = async (): Promise<void> => {
       email: form.value.email,
       site: form.value.website,
       inn: form.value.inn
+    },
+    onResponse({ response }) {
+      if (response.status == 201 || response.status == 200) {
+        isOpenModalSuccess.value = true
+        form.value = {
+          name: '',
+          tel: '',
+          manager: '',
+          email: '',
+          website: '',
+          inn: ''
+        }
+      }
     }
   })
-  if (response) {
-    isOpenModalSuccess.value = true
-    form.value = {
-      name: '',
-      tel: '',
-      manager: '',
-      email: '',
-      website: '',
-      inn: ''
-    }
-  }
 }
 
 const config = useRuntimeConfig()
