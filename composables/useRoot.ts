@@ -6,5 +6,8 @@ export const useRoot = () => {
 	const isShowPasswordTwo = useState('is-show-password-two', () => false)
 	const isShowPasswordSuccess = useState('is-show-password-success', () => false)
 
-	return { isOpenAuthModal, isShowLogin, isShowRegister, isShowPassword, isShowPasswordTwo, isShowPasswordSuccess }
+  const checkword = useState<string | undefined>('user', () => undefined)
+	const login = useState<string | undefined>('user', () => undefined)
+
+	return { isOpenAuthModal, isShowLogin, isShowRegister, isShowPassword, isShowPasswordTwo, isShowPasswordSuccess, checkword, login }
 }

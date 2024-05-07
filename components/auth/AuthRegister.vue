@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div class="py-10 px-[104px] flex flex-col gap-6 tablet:gap-5 mobile:py-6 mobile:px-6">
     <h2 class="text-xl2 font-medium text-center mobile:text-mobileXl2">

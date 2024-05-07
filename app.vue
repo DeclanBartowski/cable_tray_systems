@@ -5,7 +5,7 @@ const { isOpenOrderFast } = storeToRefs(rootStore)
 const { $api } = useNuxtApp()
 
 const { token, user, userInfo } = useAuth()
-const { isOpenAuthModal } = useRoot()
+const { isOpenAuthModal, isShowLogin, isShowRegister, isShowPassword, isShowPasswordTwo, checkword, login } = useRoot()
 
 const getUser = async () => {
   await $api('user-info/', {
@@ -22,6 +22,14 @@ const getUser = async () => {
 watchEffect(async () => {
   if (token.value) {
     await getUser()
+  }
+
+  if (checkword.value && login.value) {
+    isOpenAuthModal.value = true
+    isShowLogin.value = false
+    isShowRegister.value = false
+    isShowPassword.value = false
+    isShowPasswordTwo.value = true
   }
 })
 </script>

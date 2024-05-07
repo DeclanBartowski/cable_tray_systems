@@ -4,7 +4,7 @@ import { helpers, required, sameAs } from '@vuelidate/validators'
 
 const { $api } = useNuxtApp()
 
-const { isOpenAuthModal } = useRoot()
+const { isShowPasswordTwo, isShowPasswordSuccess,checkword, login } = useRoot()
 
 const form = ref({
   password: '',
@@ -24,8 +24,9 @@ const rules = computed(() => ({
 const v$ = useVuelidate(rules, form.value)
 
 const route = useRoute()
-const checkword = computed(() => route.path.split('/')[1])
-const login = computed(() => route.path.split('/')[2])
+
+checkword.value = route.path.split('&')[2]
+login.value = route.path.split('&')[3]
 
 const onSubmit = async () => {
   const result = await v$.value.$validate()
@@ -42,7 +43,8 @@ const onSubmit = async () => {
     },
     onResponse({ response }) {
       if (response.status == 201 || response.status == 200) {
-        isOpenAuthModal.value = false
+        isShowPasswordTwo.value = false
+        isShowPasswordSuccess.value = true
         form.value = {
           password: '',
           confirmPassword: ''
@@ -51,6 +53,16 @@ const onSubmit = async () => {
     }
   })
 }
+
+watchEffect(() => {
+  if (checkword.value) {
+    checkword.value.split('=')[1]
+  }
+
+  if (login.value) {
+    login.value.split('=')[1]
+  }
+})
 </script>
 
 <template>

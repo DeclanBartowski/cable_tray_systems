@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const { isOpenAuthModal } = useRoot()
 </script>
 
 <template>
@@ -18,6 +18,7 @@
       text="Понятно"
       class="w-[310px] mobile:w-[230px]"
       fill="fill"
+      @click="isOpenAuthModal = false"
     />
   </div>
 </template>
