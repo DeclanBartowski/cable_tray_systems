@@ -87,6 +87,7 @@ withDefaults(defineProps<{
 
   <label
     v-if="point === 'password'"
+    :error="error"
     :item="item"
     :point="point"
     class="relative w-full"
@@ -103,7 +104,8 @@ withDefaults(defineProps<{
         item === 'default' ? 'pl-[22px] pr-[47px]' : '', 
         item === 'icon' ? 'pl-[23px] pr-[47px]' : '',
         className === 'default' ? 'rounded-l' : '',
-        className === 'small' ? 'rounded-m' : ''
+        className === 'small' ? 'rounded-m' : '',
+        error ? 'border-red placeholder:text-red' : 'border-gray100 placeholder:text-gray300'
       ]"
       :placeholder="placeholder"
     >
@@ -117,10 +119,15 @@ withDefaults(defineProps<{
         item === 'default' ? 'pl-[22px] pr-[47px]' : '', 
         item === 'icon' ? 'pl-[23px] pr-[47px]' : '',
         className === 'default' ? 'rounded-l' : '',
-        className === 'small' ? 'rounded-m' : ''
+        className === 'small' ? 'rounded-m' : '',
+        error ? 'border-red placeholder:text-red' : 'border-gray100 placeholder:text-gray300'
       ]"
       :placeholder="placeholder"
     >
+    <span
+      v-if="error"
+      class="absolute top-[-1px] right-0 text-red text-xs"
+    >{{ errorMessage }}</span>
     <button
       type="button"
       class="absolute top-[38px] right-4 border-none text-gray200 transition-all hover:text-gray300 laptop:top-9"

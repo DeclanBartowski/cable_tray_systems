@@ -1,14 +1,13 @@
 <script setup lang="ts">
-const rootStore = useRootStore()
-const { isOpenAuthModal } = storeToRefs(rootStore)
+const { isOpenAuthModal, isShowLogin, isShowRegister, isShowPassword, isShowPasswordTwo, isShowPasswordSuccess } = useRoot()
 </script>
 
 <template>
   <ui-modal v-model="isOpenAuthModal">
-    <auth-login />
-    <auth-register v-if="false" />
-    <auth-forgot-password v-if="false" />
-    <auth-forgot-password-two v-if="false" />
-    <auth-forgot-password-success v-if="false" />
+    <auth-login v-show="isShowLogin" />
+    <auth-register v-show="isShowRegister" />
+    <auth-forgot-password v-show="isShowPassword" />
+    <auth-forgot-password-two v-show="isShowPasswordTwo" />
+    <auth-forgot-password-success v-if="isShowPasswordSuccess" />
   </ui-modal>
 </template>
