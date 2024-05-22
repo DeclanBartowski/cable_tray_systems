@@ -1,5 +1,26 @@
 <script setup lang="ts">
-const height = ref<string[]>([])
+
+import type {Filter, Value} from '../../../types/catalog/related-products/index';
+import {useFilterStore} from "~/stores/filters";
+
+defineProps<{
+  heightFilter: Filter;
+}>();
+
+const router = useRouter();
+
+defineEmits(['resetFilters']);
+const {height, query} = toRefs(useFilterStore());
+
+const addFilter = (heightItem: Value) => {
+  if(height.value.find((el) => el == heightItem.VALUE)) {
+    query.value[heightItem.CONTROL_NAME] = heightItem.HTML_VALUE;
+  } else {
+    delete query.value[heightItem.CONTROL_NAME];
+  }
+  router.push({query: {...query.value}});
+}
+
 </script>
 
 <template>
@@ -10,88 +31,19 @@ const height = ref<string[]>([])
     >
       <div class="flex flex-col gap-5 tablet:gap-4">
         <div class="height h-[212px] overflow-y-auto flex flex-col gap-3">
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="allHeight"
-            for-label="allHeight"
-            value="Все"
-            label="Все"
-          />
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="50mm"
-            for-label="50mm"
-            value="50 мм"
-            label="50 мм"
-            amount="2"
-          />
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="60mm"
-            for-label="60mm"
-            value="60 мм"
-            label="60 мм"
-            amount="2"
-          />
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="65mm"
-            for-label="65mm"
-            value="65 мм"
-            label="65 мм"
-            amount="2"
-          />
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="100mm"
-            for-label="100mm"
-            value="100 мм"
-            label="100 мм"
-            amount="2"
-          />
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="150mm"
-            for-label="150mm"
-            value="150 мм"
-            label="150 мм"
-            amount="2"
-          />
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="200mm"
-            for-label="200mm"
-            value="200 мм"
-            label="200 мм"
-            amount="2"
-          />
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="250mm"
-            for-label="250mm"
-            value="250 мм"
-            label="250 мм"
-            amount="2"
-          />
-          <ui-checkbox
-            v-model="height"
-            name="height"
-            input-id="300mm"
-            for-label="300mm"
-            value="300 мм"
-            label="300 мм"
-            amount="2"
+          <ui-checkbox v-for="heightItem in heightFilter.VALUES"
+              v-model="height"
+              name="type"
+              :input-id="heightItem.VALUE"
+              :for-label="heightItem.VALUE"
+              :value="heightItem.VALUE"
+              :label="heightItem.VALUE"
+
+               @click="addFilter(heightItem)"
+              amount="2"
           />
         </div>
-        <button class="flex items-center justify-center py-[14px] px-8 border-none bg-white rounded-l text-m font-medium text-gray300 transition-all hover:bg-gray300 hover:text-white laptop:text-laptopM mobile:text-mobileM">
+        <button @click="$emit('resetFilters')" class="flex items-center justify-center py-[14px] px-8 border-none bg-white rounded-l text-m font-medium text-gray300 transition-all hover:bg-gray300 hover:text-white laptop:text-laptopM mobile:text-mobileM">
           Сбросить фильтр
         </button>
       </div>

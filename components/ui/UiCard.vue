@@ -1,16 +1,19 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
 	to: string,
 	src: string,
 	name: string,
 	description: string,
 	price: string,
-	oldPrice: string
+	oldPrice: string;
+  ratio?: string;
+  isFavorite?: boolean;
+  isBar?: boolean;
 }>()
 
 const isHover = ref(false)
-const isFavorite = ref(false)
-const isBar = ref(false)
+const isFavorite = ref(props.isFavorite || false);
+const isBar = ref(props.isBar || false)
 const current = ref<number>(100)
 
 const plusCurrent = (): void => {
@@ -80,10 +83,10 @@ const minusCurrent = (): void => {
       </div>
       <div class="flex items-end gap-2">
         <div class="flex items-end gap-0.5">
-          <span class="text-xl2 font-medium lining-nums proportional-nums">{{ price }} ₽</span>
-          <span class="text-xxs lining-nums proportional-nums">за 100 шт</span>
+          <span class="text-xl2 font-medium lining-nums proportional-nums" v-html="price"></span>
+          <span class="text-xxs lining-nums proportional-nums">за {{ratio || 1}} шт</span>
         </div>
-        <del class="text-s text-gray200 lining-nums proportional-nums">{{ oldPrice }} ₽</del>
+        <del class="text-s text-gray200 lining-nums proportional-nums" v-html="oldPrice"></del>
       </div>
       <div
         v-if="isHover"

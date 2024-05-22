@@ -1,5 +1,31 @@
 <script setup lang="ts">
-const type = ref<string>('')
+import type {Filter, Value} from '../../../types/catalog/related-products/index';
+import {useFilterStore} from "~/stores/filters";
+
+const props = defineProps<{
+  typeFilter: Filter;
+}>();
+
+const {type, query} = toRefs(useFilterStore());
+const router = useRouter();
+
+for(const filterItem in props.typeFilter.VALUES) {
+  if(props.typeFilter.VALUES[filterItem].CHECKED) {
+    type.value = props.typeFilter.VALUES[filterItem].VALUE;
+  }
+}
+
+watch(type, (value, oldValue, onCleanup) => {
+  for(const typeItem in props.typeFilter.VALUES) {
+    if(typeItem == value) {
+      query.value[props.typeFilter.VALUES[typeItem].CONTROL_NAME] = props.typeFilter.VALUES[typeItem].HTML_VALUE;
+    } else {
+      delete query.value[props.typeFilter.VALUES[typeItem].CONTROL_NAME];
+    }
+  }
+  router.push({query: {...query.value}});
+})
+
 </script>
 
 <template>
@@ -9,35 +35,15 @@ const type = ref<string>('')
       :pt="{ headerAction: ({ context }) => ({ class: context.active ? 'active flex flex-row-reverse items-center justify-between' : 'flex flex-row-reverse items-center justify-between'}), headerTitle: { class: 'text-xl font-medium font-sans text-black' }, header: { class: 'pt-6 pb-5 px-6 bg-gray' }, content: { class: 'pl-6 pr-20 pb-6 bg-gray text-m font-sans text-black' } }"
     >
       <div class="flex flex-col gap-3">
-        <ui-radio
+        <ui-radio v-for="typeItem in typeFilter.VALUES"
           v-model="type"
           item="filter"
           name="type"
-          input-id="allType"
-          label-for="allType"
-          value="Все"
-          text="Все"
+          :input-id="typeItem.VALUE"
+          :label-for="typeItem.VALUE"
+          :value="typeItem.VALUE"
+          :text="typeItem.VALUE"
           amount="24"
-        />
-        <ui-radio
-          v-model="type"
-          item="filter"
-          name="type"
-          input-id="simple"
-          label-for="simple"
-          value="Простой"
-          text="Простой"
-          amount="12"
-        />
-        <ui-radio
-          v-model="type"
-          item="filter"
-          name="type"
-          input-id="castle"
-          label-for="castle"
-          value="Замковый"
-          text="Замковый"
-          amount="12"
         />
       </div>
       <template #headericon>

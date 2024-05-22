@@ -17,8 +17,10 @@
 		"@vueuse/nuxt": "^10.7.2",
 		"defu": "^6.1.4",
 		"maska": "^2.1.11",
+		"nuxt-storage": "^1.2.2",
 		"nuxt-swiper": "^1.2.2",
 		"pinia": "^2.1.7",
+		"uuid": "^9.0.1",
 		"vue-yandex-maps": "^2.1.1"
 	},
 	"devDependencies": {

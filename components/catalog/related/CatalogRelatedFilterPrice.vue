@@ -1,19 +1,39 @@
 <script setup lang="ts">
-const price = ref<number[]>([600, 150000])
-const from = ref(price.value[0])
-const to = ref(price.value[1])
+import type {Filter} from '~/types/catalog/related-products';
+import {useFilterStore} from "~/stores/filters";
+
+const props = defineProps<{
+  priceFilter: Filter;
+}>();
+
+const max = props.priceFilter.VALUES['MAX'];
+const min = props.priceFilter.VALUES['MIN'];
+
+const filters = useFilterStore();
+
+const {priceTo, priceFrom, query} = toRefs(useFilterStore());
+
+const price = ref<number[]>([+min.VALUE, +max.VALUE]);
+filters.setPriceFrom(price.value[0]);
+filters.setPriceTo(price.value[1]);
+
+const router = useRouter();
 
 watch(() => price.value, () => {
-  from.value = price.value[0]
-  to.value = price.value[1]
+  filters.setPriceFrom(price.value[0]);
+  filters.setPriceTo(price.value[1]);
 })
 
-watch(() => from.value, () => {
-  price.value[0] = from.value
+watch(() => filters.getPriceFrom, () => {
+  price.value[0] = filters.getPriceFrom;
+  query.value[min.CONTROL_NAME] = filters.getPriceFrom;
+  router.replace({query: {...query.value }});
 })
 
-watch(() => to.value, () => {
-  price.value[1] = to.value
+watch(() => filters.getPriceTo, () => {
+  price.value[1] = filters.getPriceTo;
+  query.value[max.CONTROL_NAME] = filters.getPriceTo;
+  router.replace({query: {...query.value }});
 })
 </script>
 
@@ -28,14 +48,14 @@ watch(() => to.value, () => {
         <div class="flex items-center gap-3">
           <label>
             <input
-              v-model="from"
+              v-model="priceFrom"
               class="w-[84px] py-2 pr-[5px] pl-[14px] text-m font-medium lining-nums proportional-nums font-sans text-black bg-white outline-none border-none rounded-xs laptop:text-laptopM mobile:text-mobileM"
             >
           </label>
           <span class="text-m laptop:text-laptopM mobile:text-mobileM">-</span>
           <label>
             <input
-              v-model="to"
+              v-model="priceTo"
               class="w-[84px] py-2 pr-[5px] pl-[14px] text-m font-medium lining-nums proportional-nums font-sans text-black bg-white outline-none border-none rounded-xs laptop:text-laptopM mobile:text-mobileM"
             >
           </label>
