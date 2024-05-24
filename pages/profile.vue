@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-const { userInfo } = useAuth()
+const { userInfo } = useAuth();
+if(!userInfo.value) navigateTo({path: '/'});
 
 useServerSeoMeta({
   ogTitle: () => userInfo.value!.data.seo.title,

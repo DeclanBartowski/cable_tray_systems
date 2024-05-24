@@ -7,7 +7,7 @@ export function useContentFetch<T>(url: string, options: UseFetchOptions<T> = {}
   const config = useRuntimeConfig();
 	const userSession = nuxtStorage.localStorage.getData('userSession');
 	if(!userSession) {
-		nuxtStorage.localStorage.setData('userSession', uuidv4());
+		nuxtStorage.localStorage.setData('userSession', uuidv4(), 5000, 'd');
 	}
 
   const defaults: UseFetchOptions<T> = {
@@ -17,7 +17,7 @@ export function useContentFetch<T>(url: string, options: UseFetchOptions<T> = {}
     retryStatusCodes: [401],
     retryDelay: 500,
 		headers: {
-			'user-session': nuxtStorage.localStorage.getData('userSession'),
+			'user-session': userSession,
 		}
   }
 

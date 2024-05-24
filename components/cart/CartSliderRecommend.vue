@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import type {RecommendedItem} from "~/types/cart";
 
+defineProps<{
+  recommendedItems: RecommendedItem[];
+}>();
 </script>
 
 <template>
@@ -45,17 +49,17 @@
       class="w-full"
     >
       <swiper-slide
-        v-for="slide in slides"
-        :key="slide.to"
+        v-for="item in recommendedItems"
+        :key="`catalog/${item.section_code}/${item.id}`"
         class="!w-[310px] laptop:!w-auto"
       >
         <ui-card
-          :to="slide.to"
-          :src="slide.src"
-          :name="slide.name"
-          :description="slide.description"
-          :price="slide.price"
-          :old-price="slide.oldPrice"
+          :to="`catalog/${item.section_code}/${item.id}`"
+          :src="item.image?.src || ''"
+          :name="item.name"
+          :description="item.text"
+          :price="item.discount ? item.discount : item.price"
+          :old-price="item.discount ? item.price : ''"
         />
       </swiper-slide>
     </swiper>

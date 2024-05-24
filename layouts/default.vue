@@ -3,7 +3,7 @@
 import type { LayoutDto } from '~/types/layout'
 
 const rootStore = useRootStore()
-const { isOpenMenu, isOpenOrderFast, isOpenCatalog } = storeToRefs(rootStore)
+const { isOpenMenu, isOpenOrderFast, isOpenCatalog, isShowHeader } = storeToRefs(rootStore)
 
 const { data: layout } = await useContentFetch<LayoutDto>('getMain', {
   method: 'GET'
@@ -16,7 +16,7 @@ const { data: layout } = await useContentFetch<LayoutDto>('getMain', {
     :class="isOpenMenu || isOpenOrderFast ? 'overflow-hidden after:absolute after:w-full after:h-full after:top-0 after:left-0 after:bg-background after:z-0' : ''"
   >
     <layout-header
-      v-if="layout"
+      v-if="layout && isShowHeader"
       :data="layout.data"
     />
     <main

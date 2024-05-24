@@ -1,16 +1,45 @@
 <script setup lang="ts">
-defineProps<{
+import type {ProductItemParam} from "~/types/cart";
+import {useFavoriteStore} from "~/stores/favorite";
+
+const props = defineProps<{
 	src: string,
 	name: string,
-	characteristic: string,
-	amount: string,
+	characteristics: ProductItemParam[],
 	price: string,
-	oldPrice?: string
+	oldPrice?: string,
+  id: number,
+  isFavorite: boolean,
 }>()
 
+const {$api} = useNuxtApp();
+
+defineEmits<{
+  (e?: 'deleteBasketItem', itemId: number): void
+}
+>();
+
 const current = ref<number>(100)
-const isFavorite = ref(false)
-const isBar = ref(false)
+const isFavorite = ref(props.isFavorite)
+const isBar = ref(false);
+
+const {favorites} = toRefs(useFavoriteStore());
+
+const addToFavorite = async (id: number) => {
+  await $api('add-favorite/', {
+    method: 'POST',
+    body: {
+      id,
+    },
+    onResponse({ response }) {
+      if (response.status == 201 || response.status == 200) {
+        isFavorite.value = true;
+        console.log(response._data);
+        favorites.value = response._data?.data?.products || [];
+      }
+    }
+  })
+}
 
 const plusCurrent = (): void => {
   current.value = current.value + 100
@@ -36,7 +65,7 @@ const minusCurrent = (): void => {
       <div class="absolute top-1.5 -right-10 flex items-center gap-2 mobile:top-1 mobile:-right-4">
         <button
           class="border-none w-6 h-6"
-          @click.prevent="isFavorite = !isFavorite"
+          @click.prevent="addToFavorite(id)"
         >
           <heart
             v-if="isFavorite === false"
@@ -88,23 +117,23 @@ const minusCurrent = (): void => {
               </button>
             </div>
           </div>
-          <div class="flex items-center gap-4">
-            <span class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM">{{ characteristic
+          <div class="flex items-center gap-4" v-for="character in characteristics">
+            <span class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM">{{ character.NAME
             }}:</span>
-            <span class="text-m text-gray300 lining-nums proportional-nums laptop:text-laptopM mobile:text-mobileM">{{ amount
-            }}мм</span>
+            <span class="text-m text-gray300 lining-nums proportional-nums laptop:text-laptopM mobile:text-mobileM">{{ character.VALUE
+            }}</span>
           </div>
         </div>
       </div>
       <div class="flex items-end gap-5 tablet:gap-4">
-        <span class="text-xl2 font-medium laptop:text-laptopXl2 mobile:text-mobileXl2">{{ price }} ₽</span>
+        <span class="text-xl2 font-medium laptop:text-laptopXl2 mobile:text-mobileXl2" v-html="price"></span>
         <del
           v-if="oldPrice"
-          class="text-m text-gray300 lining-nums proportional-nums laptop:text-laptopM mobile:text-mobileM"
-        >{{ oldPrice }} ₽</del>
+          class="text-m text-gray300 lining-nums proportional-nums laptop:text-laptopM mobile:text-mobileM" v-html="oldPrice"
+        ></del>
       </div>
     </div>
-    <button class="absolute top-[9px] right-0 border-none text-gray200 transition-all hover:text-black mobile:top-0 mobile:bottom-[-80%] mobile:right-8">
+    <button @click.once="$emit('deleteBasketItem', id)" class="absolute top-[9px] right-0 border-none text-gray200 transition-all hover:text-black mobile:top-0 mobile:bottom-[-80%] mobile:right-8">
       <delete />
     </button>
   </div>

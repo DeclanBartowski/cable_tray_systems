@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type {HistoryDto} from "~/types/profile";
+
 const { $api } = useNuxtApp()
 
-const { data: orders } = await useAsyncData(
+const { data: orders } = await useAsyncData<HistoryDto>(
   'orders-history',
   () => $api('history/', {
     method: 'GET'
@@ -12,20 +14,20 @@ const { data: orders } = await useAsyncData(
 <template>
   <div class="pl-5 flex-flex-col gap-1 tablet:pl-0">
     <Accordion unstyled>
-      <AccordionTab
+      <AccordionTab v-for="order in orders?.data?.orders"
         :pt="{ headerAction: ({ context }) => ({ class: context.active ? 'active flex flex-row-reverse items-center justify-between mobile:items-start' : 'flex flex-row-reverse items-center justify-between mobile:items-start'}), headerTitle: { class: 'font-sans' }, header: ({ context }) => ({ class: context.active ? 'py-5 pl-12 pr-7 bg-white border-x border-t border-solid border-gray100 border-b-none rounded-xs rounded-b-none transition-all mobile:py-4 mobile:px-6' : 'py-5 pl-12 pr-7 bg-white border border-solid border-gray100 rounded-xs transition-all mobile:py-4 mobile:px-6' }), content: { class: 'pl-12 pr-10 pb-[22px] bg-white font-sans text-black border-x border-b border-solid border-gray100 border-t-none rounded-b-s mobile:px-6 mobile:pb-5' } }"
       >
         <template #header>
           <div class="flex items-center gap-[341px] lining-nums proportional-nums laptop:gap-[200px] tablet:gap-[100px] mobile:flex-col mobile:items-start mobile:gap-4">
-            <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Заказ № 25463</span>
+            <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Заказ № {{order.ID}}</span>
             <div class="flex items-center gap-[37px] text-m text-gray300 laptop:text-laptopM mobile:text-mobileM mobile:flex-col mobile:items-start mobile:gap-3">
               <div class="flex items-center gap-3">
                 <span>Создан:</span>
-                <span>14.12.2023</span>
+                <span>{{order.DATE_CREATE}}</span>
               </div>
               <div class="flex items-center gap-3">
                 <span>Получен:</span>
-                <span>17.12.2023</span>
+                <span>{{order.DATE_CHANGE}}</span>
               </div>
             </div>
           </div>

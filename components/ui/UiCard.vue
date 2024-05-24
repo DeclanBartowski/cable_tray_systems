@@ -83,10 +83,10 @@ const minusCurrent = (): void => {
       </div>
       <div class="flex items-end gap-2">
         <div class="flex items-end gap-0.5">
-          <span class="text-xl2 font-medium lining-nums proportional-nums" v-html="price"></span>
+          <span class="text-xl2 font-medium lining-nums proportional-nums" v-html="price ? price : oldPrice"></span>
           <span class="text-xxs lining-nums proportional-nums">за {{ratio || 1}} шт</span>
         </div>
-        <del class="text-s text-gray200 lining-nums proportional-nums" v-html="oldPrice"></del>
+        <del class="text-s text-gray200 lining-nums proportional-nums" v-html="price ? oldPrice : ''"></del>
       </div>
       <div
         v-if="isHover"

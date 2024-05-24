@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { LayoutData, LayoutLink } from '~/types/layout'
+import {useCartStore} from "~/stores/cart";
+import {useFavoriteStore} from "~/stores/favorite";
 
 const rootStore = useRootStore()
 const { isOpenMenu, isOpenCatalog, isHeaderActive } = storeToRefs(rootStore)
@@ -11,6 +13,8 @@ const props = defineProps<{
   data: LayoutData
 }>()
 const { data } = toRefs(props)
+const {total} = toRefs(useCartStore());
+const {favorites} = toRefs(useFavoriteStore());
 
 const search = ref('')
 const isOpenMore = ref(false)
@@ -84,7 +88,7 @@ onMounted(() => {
               <heart class="mobile:w-6 mobile:h-6" />
               <span
                 class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs"
-              >0</span>
+              >{{favorites.length}}</span>
             </nuxt-link>
             <nuxt-link
               to="/comparison"
@@ -102,7 +106,7 @@ onMounted(() => {
               <cart class="mobile:w-6 mobile:h-6" />
               <span
                 class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs"
-              >0</span>
+              >{{total.count}}</span>
             </nuxt-link>
           </div>
           <ui-button

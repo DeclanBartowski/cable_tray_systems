@@ -1,8 +1,22 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import type {FavoriteDto} from "~/types/favorite";
+
 const breadcrumbs = ref([
 	{ label: 'Избранное', route: '/favorites' },
 ])
+
+const { data: policy } = await useContentFetch<FavoriteDto>('favorite/', {
+  method: 'GET'
+})
+
+useServerSeoMeta({
+  ogTitle: () => policy.value!.data.seo.title,
+  title: () => policy.value!.data.seo.title,
+  description: () => policy.value!.data.seo.description,
+  ogDescription: () => policy.value!.data.seo.description,
+  keywords: () => policy.value!.data.seo.keywords
+})
 </script>
 
 <template>
