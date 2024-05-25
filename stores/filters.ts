@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import type {LocationQuery} from "vue-router";
 import type {SortField} from "~/types/catalog/related-products";
 export const useFilterStore = defineStore('filters', {
 	state: () => ({
@@ -10,6 +9,8 @@ export const useFilterStore = defineStore('filters', {
 		priceTo: 0,
 		query: {} as {[key: string]: string },
 		sortField: {} as SortField,
+		categoryPageSortFields: [] as SortField[],
+		categoryPageSortField: {} as SortField,
 	}),
 	getters: {
 		getHeight: (state) => state.height,

@@ -24,6 +24,7 @@ export interface TotalInfo {
 
 export interface ProductItem {
 	id: number;
+	product_id: number;
 	image: string | null;
 	name: string;
 	quantity: number;

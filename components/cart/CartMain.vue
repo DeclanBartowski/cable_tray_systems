@@ -40,15 +40,17 @@ const deleteAllItemsFromCart = async () => {
         </button>
       </div>
       <div class="flex flex-col gap-5">
-        <cart-card v-for="item in products"
-          :src="`${config.public.baseURL}/${item?.image || ''}`"
-          :name="item.name"
-          :characteristics="item.params"
-          :price="item.discount ? item.discountFormat : item.finalPriceFormat"
-          :old-price="item.discount ? item.finalPriceFormat : ''"
-           @delete-basket-item="deleteItemFromCart"
-           :id="item.id"
-           :is-favorite="item.favorite"
+        <cart-card v-for="(item,index) in products"
+                   :id="item.id"
+                   :key="index"
+                   :product-id="item.product_id"
+                   :src="`${config.public.baseURL}/${item?.image || ''}`"
+                   :name="item.name"
+                   :characteristics="item.params"
+                   :price="item.discount ? item.discountFormat : item.finalPriceFormat"
+                   :old-price="item.discount ? item.finalPriceFormat : ''"
+                   :is-favorite="item.favorite"
+                   :quantity="item.quantity"
         />
       </div>
     </div>

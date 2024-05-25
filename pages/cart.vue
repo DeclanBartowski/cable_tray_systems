@@ -1,11 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import type {CartDto} from "~/types/cart";
-import {useCartStore} from "~/stores/cart";
 
 const {token} = useAuth();
-const { $api } = useNuxtApp()
-const {products, total} = toRefs(useCartStore());
 
 const breadcrumbs = ref([
 	{ label: 'Корзина', route: '/cart' },
@@ -38,9 +35,9 @@ useServerSeoMeta({
         Корзина
       </h2>
       <div class="mb-[100px] laptop:mb-20 tablet:mb-14 mobile:mb-6">
-        <cart-main/>
+        <cart-main />
       </div>
-      <cart-slider-recommend :recommended-items="cart?.data?.recomendItem || []" />
+      <cart-slider-recommend />
     </div>
   </div>
 </template>

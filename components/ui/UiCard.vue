@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {useCartStore, useFavoriteStore} from "#imports";
+
 const props = defineProps<{
 	to: string,
 	src: string,
@@ -9,17 +11,25 @@ const props = defineProps<{
   ratio?: string;
   isFavorite?: boolean;
   isBar?: boolean;
+  quantity?: string;
+  id: number;
+}>()
+
+defineEmits<{
+  toggleFavorite?: [id: number, favoriteStatus: boolean]
 }>()
 
 const isHover = ref(false)
-const isFavorite = ref(props.isFavorite || false);
+const isFavorite = computed(() => props.isFavorite);
 const isBar = ref(props.isBar || false)
-const current = ref<number>(100)
+const current = ref<number>(+props?.quantity || 100)
+
+
+const { addProductInCart } = toRefs(useCartStore());
 
 const plusCurrent = (): void => {
   current.value = current.value + 100
 }
-
 const minusCurrent = (): void => {
   if (current.value === 100) {
     return
@@ -40,10 +50,10 @@ const minusCurrent = (): void => {
     <div class="flex items-center gap-4">
       <button
         class="border-none w-6 h-6"
-        @click.prevent="isFavorite = !isFavorite"
+        @click.prevent="$emit('toggleFavorite', id, isFavorite)"
       >
         <heart
-          v-if="isFavorite === false"
+          v-if="!isFavorite"
           class="w-6 h-6"
         />
         <heart-active
@@ -86,7 +96,10 @@ const minusCurrent = (): void => {
           <span class="text-xl2 font-medium lining-nums proportional-nums" v-html="price ? price : oldPrice"></span>
           <span class="text-xxs lining-nums proportional-nums">за {{ratio || 1}} шт</span>
         </div>
-        <del class="text-s text-gray200 lining-nums proportional-nums" v-html="price ? oldPrice : ''"></del>
+        <del
+          class="text-s text-gray200 lining-nums proportional-nums"
+          v-html="price ? oldPrice : ''"
+        />
       </div>
       <div
         v-if="isHover"
@@ -109,7 +122,7 @@ const minusCurrent = (): void => {
             <plus class="text-black" />
           </button>
         </div>
-        <common-button-cart />
+        <common-button-cart @click="addProductInCart(id, current)" />
       </div>
     </div>
     <ui-promotion class="top-4 right-4" />

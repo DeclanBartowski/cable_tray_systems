@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import type {RecommendedItem} from "~/types/cart";
+import {useCartStore} from "~/stores/cart";
+import {storeToRefs} from "pinia";
+import {useFavoriteStore} from "~/stores/favorite";
 
-defineProps<{
-  recommendedItems: RecommendedItem[];
-}>();
+const {recommendedItems} = storeToRefs(useCartStore());
+const { toggleFavorite } = toRefs(useFavoriteStore());
+
+
+const config = useRuntimeConfig();
 </script>
 
 <template>
@@ -48,18 +52,22 @@ defineProps<{
       }"
       class="w-full"
     >
-      <swiper-slide
+      <swiper-slide v-if="recommendedItems.length"
         v-for="item in recommendedItems"
         :key="`catalog/${item.section_code}/${item.id}`"
         class="!w-[310px] laptop:!w-auto"
       >
         <ui-card
+          :id="item.id"
           :to="`catalog/${item.section_code}/${item.id}`"
-          :src="item.image?.src || ''"
+          :src="`${config.public.baseURL}/${item.image || ''}`"
           :name="item.name"
           :description="item.text"
           :price="item.discount ? item.discount : item.price"
           :old-price="item.discount ? item.price : ''"
+          :quantity="item.ratio"
+          :is-favorite="item.favorite"
+          @toggle-favorite="toggleFavorite"
         />
       </swiper-slide>
     </swiper>

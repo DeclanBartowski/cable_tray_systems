@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {useCartStore} from "~/stores/cart";
 import {useFavoriteStore} from "~/stores/favorite";
+import {storeToRefs} from "pinia";
 
 const rootStore = useRootStore()
 const { isOpenOrderFast } = storeToRefs(rootStore)
@@ -9,8 +10,8 @@ const { $api } = useNuxtApp()
 
 const { token, user, userInfo } = useAuth();
 
-const {total, products } = toRefs(useCartStore());
-const {favorites} = toRefs(useFavoriteStore());
+const {total, products, recommendedItems } = storeToRefs(useCartStore());
+const {favorites} = storeToRefs(useFavoriteStore());
 
 const { isOpenAuthModal, isShowLogin, isShowRegister, isShowPassword, isShowPasswordTwo, checkword, login } = useRoot()
 
@@ -34,6 +35,7 @@ const getCart = async () => {
       if(response._data?.data?.total) {
         total.value = response._data?.data?.total;
       }
+      recommendedItems.value = response._data.data?.recomendItem;
     }
   })
 }

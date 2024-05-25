@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {ProductItemParam} from "~/types/cart";
 import {useFavoriteStore} from "~/stores/favorite";
+import {useCartStore} from "~/stores/cart";
 
 const props = defineProps<{
 	src: string,
@@ -10,36 +11,16 @@ const props = defineProps<{
 	oldPrice?: string,
   id: number,
   isFavorite: boolean,
+  productId: number;
+  quantity?: number;
 }>()
 
-const {$api} = useNuxtApp();
-
-defineEmits<{
-  (e?: 'deleteBasketItem', itemId: number): void
-}
->();
-
-const current = ref<number>(100)
-const isFavorite = ref(props.isFavorite)
+const current = ref<number>(props.quantity || 1);
+const isFavorite = computed(() => props.isFavorite);
 const isBar = ref(false);
 
-const {favorites} = toRefs(useFavoriteStore());
-
-const addToFavorite = async (id: number) => {
-  await $api('add-favorite/', {
-    method: 'POST',
-    body: {
-      id,
-    },
-    onResponse({ response }) {
-      if (response.status == 201 || response.status == 200) {
-        isFavorite.value = true;
-        console.log(response._data);
-        favorites.value = response._data?.data?.products || [];
-      }
-    }
-  })
-}
+const {toggleFavorite} = toRefs(useFavoriteStore());
+const {deleteProductFromCart} = toRefs(useCartStore());
 
 const plusCurrent = (): void => {
   current.value = current.value + 100
@@ -65,10 +46,10 @@ const minusCurrent = (): void => {
       <div class="absolute top-1.5 -right-10 flex items-center gap-2 mobile:top-1 mobile:-right-4">
         <button
           class="border-none w-6 h-6"
-          @click.prevent="addToFavorite(id)"
+          @click.prevent="toggleFavorite(productId, isFavorite).then(res => isFavorite = res)"
         >
           <heart
-            v-if="isFavorite === false"
+            v-if="!isFavorite"
             class="w-6 h-6"
           />
           <heart-active
@@ -117,7 +98,9 @@ const minusCurrent = (): void => {
               </button>
             </div>
           </div>
-          <div class="flex items-center gap-4" v-for="character in characteristics">
+          <div class="flex items-center gap-4"
+               v-for="character in characteristics"
+          >
             <span class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM">{{ character.NAME
             }}:</span>
             <span class="text-m text-gray300 lining-nums proportional-nums laptop:text-laptopM mobile:text-mobileM">{{ character.VALUE
@@ -133,7 +116,7 @@ const minusCurrent = (): void => {
         ></del>
       </div>
     </div>
-    <button @click.once="$emit('deleteBasketItem', id)" class="absolute top-[9px] right-0 border-none text-gray200 transition-all hover:text-black mobile:top-0 mobile:bottom-[-80%] mobile:right-8">
+    <button @click.once="deleteProductFromCart(id)" class="absolute top-[9px] right-0 border-none text-gray200 transition-all hover:text-black mobile:top-0 mobile:bottom-[-80%] mobile:right-8">
       <delete />
     </button>
   </div>
