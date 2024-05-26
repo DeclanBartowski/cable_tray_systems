@@ -69,7 +69,9 @@ const deleteItemFromCart = async (itemId: number) => {
       </div>
       <div class="flex items-center gap-5 tablet:gap-4 pl-9 laptop:pl-10 tablet:pl-7 mobile:px-4 mobile:flex-col">
         <ui-button
+          @click="closeFastOrder"
           text="Оформить заказ"
+          :to="'/orders'"
           fill="fill"
           class="mobile:w-full"
         />

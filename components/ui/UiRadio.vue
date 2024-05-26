@@ -9,7 +9,8 @@ withDefaults(defineProps<{
   text: string,
   amount?: string,
   item?: string,
-  addText?: string
+  addText?: string;
+  error?: boolean;
 }>(), {
   amount: '',
   item: 'default',
@@ -61,7 +62,10 @@ withDefaults(defineProps<{
     :item="item"
     :for="labelFor"
     class="relative py-5 px-6 flex flex-col gap-2 text-m font-medium border border-solid rounded-s text-black lining-nums proportional-nums laptop:text-laptopM laptop:px-5 mobile:text-mobileM mobile:py-4 mobile:px-4"
-    :class="modelValue === text ? 'border-yellow' : 'border-gray100'"
+    :class="[
+        modelValue === text ? 'border-yellow' : 'border-gray100',
+        error? 'border-red': ''
+        ]"
   >
     <RadioButton
       v-model="modelValue"
@@ -70,7 +74,7 @@ withDefaults(defineProps<{
       :name="name"
       :value="value"
     />
-    <span class="w-[232px] tablet:w-[220px]">{{ text }}</span>
-    <span class="text-s text-gray300">{{ addText }}</span>
+    <span class="w-[232px] tablet:w-[220px]" :class="error ? 'text-red' : ''">{{ text }}</span>
+    <span class="text-s text-gray300" :class="error ? 'text-red' : ''">{{ addText }}</span>
   </label>
 </template>
