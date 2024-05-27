@@ -61,8 +61,8 @@ watch(categoryPageSortField, () => {
         <ui-card
           v-for="product in categoryProducts"
           :id="product.id"
-          :key="`/catalog/${product.section_code}/${product.id}`"
-          :to="`/catalog/${product.section_code}/${product.id}`"
+          :key="`/catalog/${product.section_code}/${product.code}`"
+          :to="`/catalog/${product.section_code}/${product.code}`"
           :src="`${config.public.baseURL}${product.image}`"
           :name="product.name"
           :description="product.text"

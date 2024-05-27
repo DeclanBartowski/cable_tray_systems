@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import type {ProductElement} from "~/types/catalog/category/id";
+
 const coating = ref<string>('')
 const thickness = ref<string>('')
 const length = ref<string>('')
 const current = ref<number>(7000)
+
+defineProps<{
+  product: ProductElement;
+}>();
 
 const plusCurrent = (): void => {
   current.value = current.value + 1000
@@ -23,16 +29,15 @@ const minusCurrent = (): void => {
       <div class="flex flex-col gap-5 tablet:gap-4">
         <div class="flex flex-col gap-1 mobile:gap-3">
           <h2 class="text-tabletXl3 font-medium w-full max-w-[500px] laptop:max-w-[80%] laptop:text-laptopXl3 tablet:text-tabletXl3 mobile:text-mobileXl3">
-            Кабельный лоток перфорированный простой 50*50
+            {{ product.name }}
           </h2>
           <div class="flex gap-8 text-s lining-nums proportional-nums text-gray300 laptop:gap-7 tablet:gap-5 mobile:gap-2 mobile:flex-wrap">
-            <span>Код товара: 36831</span>
-            <span>Габариты: 50х50 мм</span>
-            <span>Заказ: по 7000 шт</span>
+            <span>Код товара: {{product.element_code}}</span>
+            <span>Габариты: {{product.gabarite}}</span>
+            <span>Заказ: по {{product.ratio_format}}</span>
           </div>
         </div>
-        <p class="text-description">
-          Лоток кабельный перфорированный простой выполнен в виде п-образного профиля; имеет ровные без замковые борта, а также перфорацию, равномерно распределённую по всей его длине
+        <p class="text-description" v-html="product.detail_text">
         </p>
       </div>
       <div class="flex flex-col gap-5 tablet:gap-4">
@@ -147,11 +152,11 @@ const minusCurrent = (): void => {
             <span class="text-m font-medium laptop:text-laptopM mobile:text-mobileM">Ваша цена</span>
             <ui-tooltip class="absolute border-none -right-4 -top-1" />
           </div>
-          <span class="text-xl3 font-medium lining-nums proportional-nums">8 900 ₽</span>
+          <span class="text-xl3 font-medium lining-nums proportional-nums" v-html="product.price" ></span>
         </div>
         <div class="flex items-center justify-between text-gray200 text-s lining-nums proportional-nums">
           <span>Розничная цена</span>
-          <span>8 900 ₽</span>
+          <span v-html="product.rozn_price"></span>
         </div>
       </div>
       <div class="flex items-center justify-between mobile:flex-col mobile:gap-4">

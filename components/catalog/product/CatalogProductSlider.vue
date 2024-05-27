@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type {SliderItem} from "~/types/catalog/category/id";
+
 const images = ref([
 	'/images/cable-4.png',
 	'/images/cable-5.png',
@@ -6,7 +8,18 @@ const images = ref([
 	'/images/cable-7.png'
 ])
 
-const currentImage = ref<string>('/images/cable-6.png')
+const props = defineProps<{
+  images: SliderItem[];
+}>();
+
+const config = useRuntimeConfig();
+const reactImages = ref<string[]>([]);
+
+props.images.forEach((el) => {
+  reactImages.value.push(config.public.baseURL + el.src);
+})
+
+const currentImage = ref<string>(props.images[0]?.src ? config.public.baseURL + props.images[0]?.src : '');
 const isFavorite = ref(false)
 const isBar = ref(false)
 </script>
@@ -17,7 +30,7 @@ const isBar = ref(false)
       class="flex flex-col laptop:flex-row mobile:grid mobile:grid-cols-2 mobile:gap-4"
     >
       <div
-        v-for="image in images"
+        v-for="image in reactImages"
         :key="image"
         class="py-5 px-10 cursor-pointer transition-all hover:bg-white hover:shadow-slider laptop:px-5 mobile:px-4 mobile:py-4"
         :class="currentImage === image ? 'bg-white shadow-slider' : 'bg-transparent'"

@@ -1,5 +1,10 @@
 <script setup lang="ts">
 
+import type {DocumentItem} from "~/types/catalog/category/id";
+
+defineProps<{
+  documents: DocumentItem[];
+}>();
 </script>
 
 <template>
@@ -19,7 +24,7 @@
             header="Техническая документация"
             :pt="{ headerAction: { class: 'bg-transparent font-sans pt-0 px-0 pb-1 border-b border-solid border-transparent' }, header: { class: 'mobile:flex' } }"
           >
-            <catalog-product-documentation-technical />
+            <catalog-product-documentation-technical :documents="documents"/>
           </TabPanel>
         </TabView>
       </div>

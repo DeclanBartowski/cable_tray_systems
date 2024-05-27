@@ -44,6 +44,7 @@ export interface Value {
 
 export interface Product {
 	id: number;
+	code: string;
 	ratio: string;
 	section_code: string;
 	section_name: string;
