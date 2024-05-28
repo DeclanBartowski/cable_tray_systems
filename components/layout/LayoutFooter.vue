@@ -24,7 +24,7 @@ const config = useRuntimeConfig()
           </nuxt-link>
           <div class="flex items-center gap-[79px] laptop:gap-[60px] tablet:gap-11 mobile:flex-col mobile:gap-4">
             <div
-              v-for="d in data.phones"
+              v-for="d in data?.phones"
               :key="d.href"
               class="flex flex-col gap-1 mobile:w-full"
             >
@@ -40,7 +40,7 @@ const config = useRuntimeConfig()
           <nav class="flex gap-[133px] text-m mr-[151px] laptop:gap-[100px] laptop:mr-[100px] laptop:text-laptopM tablet:gap-10 tablet:mr-10 mobile:mr-0 mobile:text-mobileM">
             <ul class="flex flex-col gap-5 tablet:gap-4 mobile:w-20">
               <li
-                v-for="d in data.footer_first"
+                v-for="d in data?.footer_first"
                 :key="d.link"
               >
                 <nuxt-link :to="d.link">
@@ -50,7 +50,7 @@ const config = useRuntimeConfig()
             </ul>
             <ul class="flex flex-col gap-5 tablet:gap-4">
               <li
-                v-for="d in data.footer_second"
+                v-for="d in data?.footer_second"
                 :key="d.link"
               >
                 <nuxt-link :to="d.link">
@@ -62,32 +62,32 @@ const config = useRuntimeConfig()
           <div class="flex flex-col gap-5 w-[375px] text-m mr-[63px] laptop:text-laptopM laptop:mr-14 laptop:w-[270px] tablet:text-tabletM tablet:mr-8 tablet:gap-4 tablet:w-[180px] mobile:w-full mobile:mr-0 mobile:text-mobileM">
             <div class="flex items-start gap-[11px] laptop:gap-2.5 tablet:gap-2 tablet:items-center">
               <img
-                :src="`${config.public.baseURL}${data.info.email.src}`"
+                :src="`${config.public.baseURL}${data?.info.email.src}`"
                 alt="Почта"
               >
-              <a href="`mailto:${data.info.email.value}`">{{ data.info.email.value }}</a>
+              <a href="`mailto:${data.info.email.value}`">{{ data?.info.email.value }}</a>
             </div>
             <div class="flex items-start gap-[11px] laptop:gap-2.5 tablet:gap-2">
               <img
-                :src="`${config.public.baseURL}${data.info.address.src}`"
+                :src="`${config.public.baseURL}${data?.info.address.src}`"
                 alt="Дом"
               >
               <address class="not-italic">
-                {{ data.info.address.value }}
+                {{ data?.info.address.value }}
               </address>
             </div>
             <div class="flex items-start gap-[11px] laptop:gap-2.5 tablet:gap-2 tablet:items-center">
               <img
-                :src="`${config.public.baseURL}${data.info.worktime.src}`"
+                :src="`${config.public.baseURL}${data?.info.worktime.src}`"
                 alt="Часы"
               >
-              <span>{{ data.info.worktime.value }}</span>
+              <span>{{ data?.info.worktime.value }}</span>
             </div>
           </div>
           <div class="flex flex-col gap-5 tablet:gap-4">
             <div class="flex items-center gap-4">
               <nuxt-link
-                v-for="d in data.socials"
+                v-for="d in data?.socials"
                 :key="d.link"
                 :to="d.link"
                 href="#"
@@ -97,7 +97,7 @@ const config = useRuntimeConfig()
               </nuxt-link>
             </div>
             <nuxt-link
-              v-for="d in data.politic"
+              v-for="d in data?.politic"
               :key="d.link"
               :to="d.link"
               class="text-xs laptop:text-laptopXs"

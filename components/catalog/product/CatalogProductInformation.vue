@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import type {ProductElement} from "~/types/catalog/category/id";
+import {useCartStore} from "~/stores/cart";
 
 const coating = ref<string>('')
 const thickness = ref<string>('')
 const length = ref<string>('')
 const current = ref<number>(7000)
 
+
 defineProps<{
   product: ProductElement;
 }>();
+
+const { addProductInCart } = toRefs(useCartStore());
 
 const plusCurrent = (): void => {
   current.value = current.value + 1000
@@ -37,7 +41,7 @@ const minusCurrent = (): void => {
             <span>Заказ: по {{product.ratio_format}}</span>
           </div>
         </div>
-        <p class="text-description" v-html="product.detail_text">
+        <p class="text-description" v-html="product.text">
         </p>
       </div>
       <div class="flex flex-col gap-5 tablet:gap-4">
@@ -184,6 +188,7 @@ const minusCurrent = (): void => {
           </button>
         </div>
         <ui-button
+            @click="addProductInCart(product.id, current)"
           fill="fill"
           text="В корзину"
           class="w-[142px]"

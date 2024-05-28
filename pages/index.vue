@@ -23,7 +23,7 @@ useServerSeoMeta({
     />
     <main-products
       v-if="home"
-      :data="home.data.sections"
+      :data="home.data?.sections || []"
     />
     <main-description
       v-if="home"

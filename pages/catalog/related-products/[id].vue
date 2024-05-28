@@ -1,10 +1,28 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+
+import type {ProductDto} from "~/types/catalog/category/id";
+
 const breadcrumbs = ref([
 	{ label: 'Каталог', route: '/catalog' },
 	{ label: 'Сопутствующие товары', route: '/catalog/related-products' },
 	{ label: 'Простого типа', route: '/catalog/related-products/id' }
 ])
+
+const route = useRoute();
+
+const { data: product} = await useContentFetch<ProductDto>(`product/${route.params.id}`, {
+  method: 'GET',
+})
+
+
+useServerSeoMeta({
+  ogTitle: () => product?.value!.data.seo.title,
+  title: () => product?.value!.data.seo.title,
+  description: () => product?.value!.data.seo.description,
+  ogDescription: () => product?.value!.data.seo.description,
+  keywords: () => product?.value!.data.seo.keywords
+})
 </script>
 
 <template>
@@ -14,11 +32,11 @@ const breadcrumbs = ref([
         <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
       </div>
       <div class="flex items-start gap-[57px] laptop:gap-12 tablet:gap-10 tablet:flex-col">
-        <catalog-product-slider />
-        <catalog-product-information />
+        <catalog-product-slider  :images="product?.data?.element?.slider || []"  />
+        <catalog-product-information :product="product?.data?.element"  />
       </div>
     </div>
-    <catalog-product-documentation />
+    <catalog-product-documentation  :description="product?.data?.element?.detail_text || ''" :characters="product?.data?.element?.characters" :documents="product?.data?.element?.documents" />
     <div class="container">
       <div class="flex flex-col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
         <catalog-product-slider-related />

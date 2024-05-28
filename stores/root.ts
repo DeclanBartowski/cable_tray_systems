@@ -6,6 +6,7 @@ export const useRootStore = defineStore('root', () => {
 	const isOpenCatalog = ref(false)
 	const isHeaderActive = ref(false)
 	const isShowHeader = ref(true);
+	const isChangeDataSuccessActive = ref(false);
 
-	return { isOpenMenu, isOpenModalSuccess, isOpenModalIndividual, isOpenOrderFast, isOpenCatalog, isHeaderActive, isShowHeader }
+	return { isOpenMenu, isOpenModalSuccess, isOpenModalIndividual, isOpenOrderFast, isOpenCatalog, isHeaderActive, isShowHeader, isChangeDataSuccessActive }
 })

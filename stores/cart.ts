@@ -32,8 +32,23 @@ export const useCartStore = defineStore('cart', {
 			if(cart?.value?.data?.total) {
 				this.total = cart?.value?.data?.total;
 			}
-		}
-	,
+		},
+		async updateProductInCart(productId: number, quantity: number) {
+			const {$api} = useNuxtApp();
+			const { data: cart } = await useAsyncData<CartDto>(
+				'cart',
+				(): Promise<CartDto> => $api('basket-update/', {
+					method: 'POST',
+					body: {
+						basket: productId,
+						quantity,
+					}
+				}));
+			this.products = cart?.value?.data?.products || [];
+			if(cart?.value?.data?.total) {
+				this.total = cart?.value?.data?.total;
+			}
+		},
 		async deleteProductFromCart(itemId: number) {
 			const {$api} = useNuxtApp();
 			const { data: cart } = await useAsyncData<CartDto>(

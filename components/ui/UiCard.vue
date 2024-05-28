@@ -15,6 +15,8 @@ const props = defineProps<{
   id: number;
 }>()
 
+
+
 defineEmits<{
   toggleFavorite?: [id: number, favoriteStatus: boolean]
 }>()

@@ -24,9 +24,9 @@ const deliveryLink = ref<LayoutLink | undefined>(undefined)
 
 watchEffect(() => {
   if (data.value) {
-    data.value.menuHeader.splice(5)
-    contactsLink.value = data.value.menuHeader.find((el: LayoutLink) => el.title === 'Контакты')
-    deliveryLink.value = data.value.menuHeader.find((el: LayoutLink) => el.title === 'Доставка')
+    data.value?.menuHeader.splice(5)
+    contactsLink.value = data.value?.menuHeader.find((el: LayoutLink) => el.title === 'Контакты')
+    deliveryLink.value = data.value?.menuHeader.find((el: LayoutLink) => el.title === 'Доставка')
   }
 })
 
@@ -66,7 +66,7 @@ onMounted(() => {
             class="flex items-center gap-10 laptop:gap-7 tablet:hidden"
           >
             <div
-              v-for="d in data.phones"
+              v-for="d in data?.phones"
               :key="d.href"
               class="flex flex-col gap-1"
             >
@@ -195,7 +195,7 @@ onMounted(() => {
           >
             <ul class="flex items-center gap-14 laptop:gap-10">
               <li
-                v-for="d in data.menuHeader"
+                v-for="d in data?.menuHeader"
                 :key="d.link"
                 class="text-m transition-all laptop:text-laptopM hover:text-gray300"
               >
@@ -301,10 +301,10 @@ onMounted(() => {
           class="flex flex-col gap-1 tablet:hidden"
         >
           <a
-            :href="data.phones[1].href"
+            :href="data?.phones[1]?.href"
             class="text-m font-add font-semibold laptop:text-laptopM"
-          >{{ data.phones[1].title }}</a>
-          <span class="text-xs laptop:text-laptopXs">{{ data.phones[1].text }}</span>
+          >{{ data?.phones[1]?.title }}</a>
+          <span class="text-xs laptop:text-laptopXs">{{ data?.phones[1]?.text }}</span>
         </div>
         <button
           v-if="isHeaderActive"

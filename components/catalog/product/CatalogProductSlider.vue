@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type {SliderItem} from "~/types/catalog/category/id";
+import type {ProductElement, SliderItem} from "~/types/catalog/category/id";
+import {useFavoriteStore} from "~/stores/favorite";
 
 const images = ref([
 	'/images/cable-4.png',
@@ -8,19 +9,50 @@ const images = ref([
 	'/images/cable-7.png'
 ])
 
+const {$api} = useNuxtApp();
+const route = useRoute();
+
 const props = defineProps<{
   images: SliderItem[];
 }>();
 
+const favoriteStore = useFavoriteStore();
+
 const config = useRuntimeConfig();
 const reactImages = ref<string[]>([]);
+
+const productWithUserData = ref<ProductElement | null>(null);
+
+const isFavorite = computed(() => productWithUserData.value?.favorite);
+
+$api(`product/${route.params.id}`, {
+  method: 'GET',
+  onResponse({response}) {
+    if (response.status == 201 || response.status == 200) {
+      productWithUserData.value = response._data?.data?.element || null;
+    }
+  },
+})
+
+const toggleRelatedProductFavorite = async (id: number, favoriteStatus: boolean) => {
+  await favoriteStore.toggleFavorite(id, favoriteStatus);
+
+  await $api(`product/${route.params.id}`, {
+    method: 'GET',
+    onResponse({response}) {
+      if (response.status == 201 || response.status == 200) {
+        productWithUserData.value = response._data?.data?.element || null;
+      }
+    },
+  })
+}
 
 props.images.forEach((el) => {
   reactImages.value.push(config.public.baseURL + el.src);
 })
 
 const currentImage = ref<string>(props.images[0]?.src ? config.public.baseURL + props.images[0]?.src : '');
-const isFavorite = ref(false)
+
 const isBar = ref(false)
 </script>
 
@@ -50,7 +82,7 @@ const isBar = ref(false)
     <div class="absolute top-0 right-0 flex items-center gap-2.5">
       <button
         class="border-none"
-        @click="isFavorite = !isFavorite"
+        @click="toggleRelatedProductFavorite(productWithUserData?.id || 0, isFavorite || false)"
       >
         <heart
           v-if="isFavorite === false"

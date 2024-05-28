@@ -11,8 +11,8 @@ const { toggleFavorite} = toRefs(useFavoriteStore());
     <ui-card
       v-for="item in favorites"
       :id="item.id"
-      :key="`catalog/${item.section_code}/${item.id}`"
-      :to="`catalog/${item.section_code}/${item.id}`"
+      :key="`catalog/${item.section_code}/${item.code}`"
+      :to="`catalog/${item.section_code}/${item.code}`"
       :src="`${config.public.baseURL}/${item.image}`"
       :name="item.name"
       :description="item.text"

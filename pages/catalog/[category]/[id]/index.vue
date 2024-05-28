@@ -28,7 +28,7 @@ useServerSeoMeta({
                 <catalog-product-information :product="product?.data?.element" />
             </div>
         </div>
-        <catalog-product-documentation :documents="product?.data?.element?.documents" />
+        <catalog-product-documentation :description="product?.data?.element?.detail_text || ''" :characters="product?.data?.element?.characters" :documents="product?.data?.element?.documents" />
         <div class="container">
             <div class="flex flex-col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
                 <catalog-product-slider-related />

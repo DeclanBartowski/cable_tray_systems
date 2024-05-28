@@ -49,7 +49,7 @@ export interface SliderItem {
 	alt: string;
 }
 
-interface CharacterItem {
+export interface CharacterItem {
 	title: string;
 	value: string;
 }
@@ -59,7 +59,7 @@ export interface DocumentItem {
 	src: string;
 }
 
-interface Product {
+export interface Product {
 	id: number;
 	code: string;
 	ratio: string;

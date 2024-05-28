@@ -61,6 +61,8 @@ const deleteItemFromCart = async (itemId: number) => {
                    :old-price="item.discount ? item.finalPriceFormat : ''"
                    @delete-basket-item="deleteItemFromCart"
                    :id="item.id"
+                   :product-id="item.product_id"
+                   :quantity="item.quantity"
         />
       </div>
       <div class="flex items-end gap-[65px] pl-9 mb-5 laptop:pl-10 tablet:pl-7 mobile:pl-4 tablet:mb-4">

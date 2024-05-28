@@ -15,11 +15,11 @@ const breadcrumbs = ref([
         <ui-breadcrumbs :breadcrumbs="breadcrumbs" />
       </div>
       <div class="flex items-start gap-[57px] laptop:gap-12 tablet:gap-10 tablet:flex-col">
-        <catalog-product-slider />
-        <catalog-product-information />
+        <catalog-product-slider :images="[]" />
+        <catalog-product-information :product="null" />
       </div>
     </div>
-    <catalog-product-documentation />
+    <catalog-product-documentation :description="''" :characters="[]" :documents="[]" />
     <div class="container">
       <div class="flex flex-col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
         <catalog-product-slider-related />

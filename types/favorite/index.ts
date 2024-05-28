@@ -14,6 +14,7 @@ interface FavoriteData {
 export interface ProductItem {
 	id: number;
 	ratio: number;
+	code: string;
 	section_code: string;
 	section_name: string;
 	name: string;

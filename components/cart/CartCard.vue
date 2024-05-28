@@ -20,7 +20,7 @@ const isFavorite = computed(() => props.isFavorite);
 const isBar = ref(false);
 
 const {toggleFavorite} = toRefs(useFavoriteStore());
-const {deleteProductFromCart} = toRefs(useCartStore());
+const {deleteProductFromCart, updateProductInCart} = toRefs(useCartStore());
 
 const plusCurrent = (): void => {
   current.value = current.value + 100
@@ -81,7 +81,7 @@ const minusCurrent = (): void => {
           <div class="flex items-center gap-4">
             <span class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM">Количество:</span>
             <div class="flex items-center gap-4">
-              <button
+              <button @click="updateProductInCart(id, current)"
                 class="border-none"
                 @click.prevent="minusCurrent"
               >
@@ -91,6 +91,7 @@ const minusCurrent = (): void => {
                 {{ current }} шт
               </span>
               <button
+                  @click="updateProductInCart(id, current)"
                 class="border-none"
                 @click.prevent="plusCurrent"
               >

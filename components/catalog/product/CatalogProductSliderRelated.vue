@@ -1,5 +1,34 @@
 <script setup lang="ts">
 
+import type {Product, ProductDto} from "~/types/catalog/category/id";
+import {useFavoriteStore} from "~/stores/favorite";
+
+const {$api} = useNuxtApp();
+
+const favoriteStore = useFavoriteStore();
+
+const products = ref<Product[]>();
+const route = useRoute();
+
+$api(`product/${route.params.id}`, {
+  method: 'GET',
+  onResponse({response}) {
+    products.value = [...response._data?.data?.element?.more_items] || [];
+  },
+})
+
+
+const toggleRelatedProductFavorite = async (id: number, favoriteStatus: boolean) => {
+  await favoriteStore.toggleFavorite(id, favoriteStatus);
+  await $api(`product/${route.params.id}`, {
+    method: 'GET',
+    onResponse({response}) {
+      products.value = [...response._data?.data?.element?.more_items] || [];
+    },
+  })
+}
+const config = useRuntimeConfig();
+
 </script>
 
 <template>
@@ -45,17 +74,22 @@
       class="w-full"
     >
       <swiper-slide
-        v-for="slide in slides"
-        :key="slide.to"
+        v-for="item in products"
+        :id="item.id"
+        :key="`catalog/${item.code}`"
         class="!w-[310px] laptop:!w-auto"
       >
         <ui-card
-          :to="slide.to"
-          :src="slide.src"
-          :name="slide.name"
-          :description="slide.description"
-          :price="slide.price"
-          :old-price="slide.oldPrice"
+          :id="item.id"
+          :to="`/catalog/${item.section_code}/${item.code}`"
+          :is-favorite="item.favorite"
+          :src="`${config.public.baseURL}${item.image || ''}`"
+          :name="item.name"
+          :description="item.text"
+          :price="item.discount ? item.discount : item.price"
+          :old-price="item.discount ? item.price : ''"
+          :is-bar="item.compare"
+          @toggle-favorite="toggleRelatedProductFavorite"
         />
       </swiper-slide>
     </swiper>

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 
-import type {DocumentItem} from "~/types/catalog/category/id";
+import type {CharacterItem, DocumentItem} from "~/types/catalog/category/id";
 
 defineProps<{
   documents: DocumentItem[];
+  characters: CharacterItem[];
+  description: string;
 }>();
 </script>
 
@@ -18,7 +20,7 @@ defineProps<{
             header="Описание и характеристики"
             :pt="{ headerAction: { class: 'bg-transparent font-sans pt-0 px-0 pb-1 border-b border-solid border-transparent' }, header: { class: 'mobile:flex' } }"
           >
-            <catalog-product-documentation-description />
+            <catalog-product-documentation-description :description="description" :characters="characters" />
           </TabPanel>
           <TabPanel
             header="Техническая документация"
