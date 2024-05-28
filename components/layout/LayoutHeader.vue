@@ -2,6 +2,7 @@
 import type { LayoutData, LayoutLink } from '~/types/layout'
 import {useCartStore} from "~/stores/cart";
 import {useFavoriteStore} from "~/stores/favorite";
+import {useCompareStore} from "~/stores/compare";
 
 const rootStore = useRootStore()
 const { isOpenMenu, isOpenCatalog, isHeaderActive } = storeToRefs(rootStore)
@@ -15,6 +16,7 @@ const props = defineProps<{
 const { data } = toRefs(props)
 const {total} = toRefs(useCartStore());
 const {favorites} = toRefs(useFavoriteStore());
+const {compare} = toRefs(useCompareStore());
 
 const search = ref('')
 const isOpenMore = ref(false)
@@ -97,7 +99,7 @@ onMounted(() => {
               <bar-active class="mobile:w-6 mobile:h-6" />
               <span
                 class="absolute block text-xxs font-medium py-1.5 px-2 rounded-full bg-yellow top-[-40%] right-[-35%] laptop:text-laptopXxs"
-              >0</span>
+              >{{compare.length}}</span>
             </nuxt-link>
             <nuxt-link
               to="/cart"

@@ -2,6 +2,7 @@
 import {useCartStore} from "~/stores/cart";
 import {useFavoriteStore} from "~/stores/favorite";
 import {storeToRefs} from "pinia";
+import {useCompareStore} from "~/stores/compare";
 
 const rootStore = useRootStore()
 const { isOpenOrderFast } = storeToRefs(rootStore)
@@ -12,6 +13,8 @@ const { token, user, userInfo } = useAuth();
 
 const {total, products, recommendedItems } = storeToRefs(useCartStore());
 const {favorites} = storeToRefs(useFavoriteStore());
+
+const {compare} = storeToRefs(useCompareStore());
 
 const { isOpenAuthModal, isShowLogin, isShowRegister, isShowPassword, isShowPasswordTwo, checkword, login } = useRoot()
 
@@ -49,10 +52,21 @@ const getFavorite = async () => {
   })
 }
 
+const getCompare = async () => {
+  await $api('compare/', {
+    method: 'GET',
+    onResponse({response}) {
+      compare.value = response._data?.data?.products || [];
+    }
+  })
+}
+
+
 watchEffect(async () => {
   if (token.value) {
     await getUser();
     await getCart();
+    await getCompare();
     await getFavorite();
   }
 

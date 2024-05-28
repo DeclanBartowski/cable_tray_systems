@@ -3,12 +3,14 @@
 import type {CategoryDto, Product} from "~/types/catalog/category";
 import {useFilterStore} from "~/stores/filters";
 import {useFavoriteStore} from "~/stores/favorite";
+import {useCompareStore} from "~/stores/compare";
 
 const {categoryPageSortFields} = toRefs(useFilterStore());
 
 const route = useRoute();
 
 const favoriteStore = useFavoriteStore();
+const compareStore = useCompareStore();
 
 const { $api } = useNuxtApp()
 
@@ -40,6 +42,24 @@ $api('/catalog/'+route.params.category, {
 
 const toggleFavoriteCategory = async (id: number, favoriteStatus: boolean) => {
   await favoriteStore.toggleFavoriteCategory(id, favoriteStatus);
+
+  $api('/catalog/'+route.params.category, {
+    method: 'GET',
+    params: {
+      page: page.value,
+      sort: sort.value
+    },
+    onResponse({response}) {
+      if (response.status == 201 || response.status == 200) {
+        productsList.value.length -= response?._data?.data?.products.length;
+        productsList.value.push(...response?._data?.data?.products)
+      }
+    },
+  })
+}
+
+const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
+  await compareStore.toggleCompareCategory(id, compareStatus);
 
   $api('/catalog/'+route.params.category, {
     method: 'GET',
@@ -102,7 +122,11 @@ useSeoMeta({
             <h2 class="text-xl4 font-medium mb-[33px] laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4 laptop:mb-8 tablet:mb-7 mobile:mb-6">
                 Акционные товары
             </h2>
-            <promotion-main @toggle-favorite="toggleFavoriteCategory" :category-products="productsList || []" @next-page="nextPage" />
+            <promotion-main
+                @toggle-compare="toggleCompareCategory"
+                @toggle-favorite="toggleFavoriteCategory"
+                :category-products="productsList || []"
+                @next-page="nextPage" />
         </div>
     </div>
 </template>

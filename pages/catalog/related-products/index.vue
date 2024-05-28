@@ -10,10 +10,10 @@ const { data: relatedProducts } = await useContentFetch<RelatedProductsDto>('cat
 const route = useRoute();
 
 
-const priceFilter = ref(relatedProducts.value?.data?.filter.find((el) => el.CODE == 'PRICE'));
-const typeFilter = ref(relatedProducts.value?.data?.filter.find((el) => el.CODE == 'TYPE'));
-const viewFilter = ref(relatedProducts.value?.data?.filter.find((el) => el.CODE == 'VID'));
-const heightFilter = ref(relatedProducts.value?.data?.filter.find((el) => el.CODE == 'BORT'));
+const priceFilter = ref(relatedProducts.value?.data?.filter?.find((el) => el.CODE == 'PRICE'));
+const typeFilter = ref(relatedProducts.value?.data?.filter?.find((el) => el.CODE == 'TYPE'));
+const viewFilter = ref(relatedProducts.value?.data?.filter?.find((el) => el.CODE == 'VID'));
+const heightFilter = ref(relatedProducts.value?.data?.filter?.find((el) => el.CODE == 'BORT'));
 
 const filters = useFilterStore();
 const query = {};

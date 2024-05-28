@@ -18,12 +18,13 @@ const props = defineProps<{
 
 
 defineEmits<{
-  toggleFavorite?: [id: number, favoriteStatus: boolean]
+  toggleFavorite?: [id: number, favoriteStatus: boolean];
+  toggleCompare?: [id: number, compareStatus: boolean];
 }>()
 
 const isHover = ref(false)
 const isFavorite = computed(() => props.isFavorite);
-const isBar = ref(props.isBar || false)
+const isBar = computed(() => props.isBar);
 const current = ref<number>(+props?.quantity || 100)
 
 
@@ -65,7 +66,7 @@ const minusCurrent = (): void => {
       </button>
       <button
         class="border-none w-6 h-6"
-        @click.prevent="isBar = !isBar"
+        @click.prevent="$emit('toggleCompare', id, isBar)"
       >
         <bar
           v-if="isBar === false"

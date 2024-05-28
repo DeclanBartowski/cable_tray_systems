@@ -1,5 +1,35 @@
 <script setup lang="ts">
 
+import type {ProductItem} from "~/types/comparison";
+
+defineProps<{
+  compareItems: ProductItem[];
+}>();
+
+const getCharacters = (compareList: ProductItem[]) => {
+  const resultList: string[] = [];
+  compareList.forEach((el) => {
+    el.charecter.forEach((characterItem) => {
+      if(!resultList.find((item) => item == characterItem.title)) {
+        resultList.push(characterItem.title);
+      }
+    })
+  })
+  return resultList;
+}
+
+const getCharactersForItem = (compareItem: ProductItem, characters: string[]) => {
+  const resultList: string[] = [];
+  characters.forEach((el) => {
+    if(compareItem.charecter.find((item) => item.title == el)) {
+      resultList.push(compareItem.charecter.find((item) => item.title == el)?.value || '-');
+    } else {
+      resultList.push('-');
+    }
+  })
+  return resultList;
+}
+
 </script>
 
 <template>
@@ -10,118 +40,16 @@
     >
       <table class="flex tablet:overflow-x-auto">
         <tr class="flex flex-col items-start text-m">
-          <th class="pt-5 pb-2 text-start font-normal ml-6 w-[300px] border-b border-solid border-gray100 laptop:w-[270px] tablet:w-[230px]">
-            Высота борта
-          </th>
-          <th class="pt-5 pb-2 text-start font-normal ml-6 w-[300px] border-b border-solid border-gray100 laptop:w-[270px] tablet:w-[230px]">
-            Ширина основания
-          </th>
-          <th class="pt-5 pb-2 text-start font-normal ml-6 w-[300px] border-b border-solid border-gray100 laptop:w-[270px] tablet:w-[230px]">
-            Длина основания
-          </th>
-          <th class="pt-5 pb-2 text-start font-normal ml-6 w-[300px] border-b border-solid border-gray100 laptop:w-[270px] tablet:w-[230px]">
-            Толщина металла
-          </th>
-          <th class="pt-5 pb-2 text-start font-normal ml-6 w-[300px] border-b border-solid border-gray100 laptop:w-[270px] tablet:w-[230px]">
-            Материал
-          </th>
-          <th class="pt-5 pb-2 text-start font-normal ml-6 w-[300px] border-b border-solid border-gray100 laptop:w-[270px] tablet:w-[230px]">
-            Вес
-          </th>
-          <th class="pt-5 pb-2 text-start font-normal ml-6 w-[300px] border-b border-solid border-gray100 laptop:w-[270px] tablet:w-[230px]">
-            Климатическое исполнение
+          <th v-for="item in getCharacters(compareItems)" class="pt-5 pb-2 text-start font-normal ml-6 w-[300px] border-b border-solid border-gray100 laptop:w-[270px] tablet:w-[230px]">
+            {{item}}
           </th>
         </tr>
-        <tr class="flex flex-col text-s lining-nums proportional-nums">
-          <td class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]">
-            50 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]">
-            1000 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]">
-            2000 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]">
-            5 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]">
-            металл
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]">
-            1 кг
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]">
-            Красный
-          </td>
-        </tr>
-        <tr class="flex flex-col text-s lining-nums proportional-nums">
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            50 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            1000 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            2000 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            5 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            металл
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            1 кг
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            Красный
-          </td>
-        </tr>
-        <tr class="flex flex-col text-s lining-nums proportional-nums">
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            50 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            1000 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            2000 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            5 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            металл
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            1 кг
-          </td>
-          <td class="pt-[22px] pb-2.5 text-center w-[230px] border-b border-r border-solid border-gray100 laptop:w-[200px] tablet:w-[170px]">
-            Красный
-          </td>
-        </tr>
-        <tr class="flex flex-col text-s w-full lining-nums proportional-nums">
-          <td class="pt-[22px] pb-2.5 pl-[61px] border-b border-solid border-gray100 laptop:pl-14 tablet:w-[170px]">
-            50 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 pl-[61px] border-b border-solid border-gray100 laptop:pl-14 tablet:w-[170px]">
-            1000 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 pl-[61px] border-b border-solid border-gray100 laptop:pl-14 tablet:w-[170px]">
-            2000 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 pl-[61px] border-b border-solid border-gray100 laptop:pl-14 tablet:w-[170px]">
-            5 мм
-          </td>
-          <td class="pt-[22px] pb-2.5 pl-[61px] border-b border-solid border-gray100 laptop:pl-14 tablet:w-[170px]">
-            металл
-          </td>
-          <td class="pt-[22px] pb-2.5 pl-[61px] border-b border-solid border-gray100 laptop:pl-14 tablet:w-[170px]">
-            1 кг
-          </td>
-          <td class="pt-[22px] pb-2.5 pl-[61px] border-b border-solid border-gray100 laptop:pl-14 tablet:w-[170px]">
-            Красный
+        <tr class="flex flex-col text-s lining-nums proportional-nums" v-for="item in compareItems">
+          <td
+              v-for="characterValue in getCharactersForItem(item, getCharacters(compareItems))"
+              class="pt-[22px] pb-2.5 text-center w-[200px] border-b border-r border-solid border-gray100 laptop:w-[170px] tablet:w-[130px]"
+          >
+            {{characterValue}}
           </td>
         </tr>
       </table>

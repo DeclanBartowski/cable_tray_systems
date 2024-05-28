@@ -2,9 +2,11 @@
 import {useCartStore} from "~/stores/cart";
 import {storeToRefs} from "pinia";
 import {useFavoriteStore} from "~/stores/favorite";
+import {useCompareStore} from "~/stores/compare";
 
 const {recommendedItems} = storeToRefs(useCartStore());
 const { toggleFavorite } = toRefs(useFavoriteStore());
+const {toggleCompare} = toRefs(useCompareStore());
 
 
 const config = useRuntimeConfig();
@@ -67,7 +69,9 @@ const config = useRuntimeConfig();
           :old-price="item.discount ? item.price : ''"
           :quantity="item.ratio"
           :is-favorite="item.favorite"
+          :is-bar="item.compare"
           @toggle-favorite="toggleFavorite"
+          @toggle-compare="toggleCompare"
         />
       </swiper-slide>
     </swiper>

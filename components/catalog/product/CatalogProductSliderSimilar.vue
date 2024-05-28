@@ -1,11 +1,13 @@
 <script setup lang="ts">
 
 import type {Product} from "~/types/catalog/category";
+import {useCompareStore} from "~/stores/compare";
 
 const {$api} = useNuxtApp();
 const products = ref<Product[]>();
 const route = useRoute();
 const favoriteStore = useFavoriteStore();
+const compareStore = useCompareStore();
 
 $api(`product/${route.params.id}`, {
   method: 'GET',
@@ -26,6 +28,15 @@ const toggleRelatedProductFavorite = async (id: number, favoriteStatus: boolean)
   })
 }
 
+const toggleRelatedProductCompare = async (id: number, compareStatus: boolean) => {
+  await compareStore.toggleCompare(id, compareStatus);
+  await $api(`product/${route.params.id}`, {
+    method: 'GET',
+    onResponse({response}) {
+      products.value = [...response._data?.data?.element?.similar_items] || [];
+    },
+  })
+}
 
 </script>
 
@@ -88,6 +99,7 @@ const toggleRelatedProductFavorite = async (id: number, favoriteStatus: boolean)
             :old-price="item.discount ? item.price : ''"
             :is-bar="item.compare"
             @toggle-favorite="toggleRelatedProductFavorite"
+            @toggle-compare="toggleRelatedProductCompare"
         />
       </swiper-slide>
     </swiper>

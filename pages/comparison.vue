@@ -1,8 +1,23 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import type {CompareDto} from "~/types/comparison";
+
 const breadcrumbs = ref([
 	{ label: 'Сравнение', route: '/comparison' },
 ])
+
+const { data: compare } = await useContentFetch<CompareDto>('compare/', {
+  method: 'GET'
+})
+
+useServerSeoMeta({
+  ogTitle: () => compare.value!.data.seo.title,
+  title: () => compare.value!.data.seo.title,
+  description: () => compare.value!.data.seo.description,
+  ogDescription: () => compare.value!.data.seo.description,
+  keywords: () => compare.value!.data.seo.keywords
+})
+
 </script>
 
 <template>

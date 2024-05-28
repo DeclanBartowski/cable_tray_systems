@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {ProductElement, SliderItem} from "~/types/catalog/category/id";
 import {useFavoriteStore} from "~/stores/favorite";
+import {useCompareStore} from "~/stores/compare";
 
 const images = ref([
 	'/images/cable-4.png',
@@ -17,13 +18,16 @@ const props = defineProps<{
 }>();
 
 const favoriteStore = useFavoriteStore();
+const compareStore = useCompareStore();
 
 const config = useRuntimeConfig();
 const reactImages = ref<string[]>([]);
 
 const productWithUserData = ref<ProductElement | null>(null);
 
+
 const isFavorite = computed(() => productWithUserData.value?.favorite);
+const isBar = computed(() => productWithUserData.value?.compare);
 
 $api(`product/${route.params.id}`, {
   method: 'GET',
@@ -47,13 +51,26 @@ const toggleRelatedProductFavorite = async (id: number, favoriteStatus: boolean)
   })
 }
 
+const toggleRelatedProductCompare = async (id: number, favoriteStatus: boolean) => {
+  await compareStore.toggleCompare(id, favoriteStatus);
+
+  await $api(`product/${route.params.id}`, {
+    method: 'GET',
+    onResponse({response}) {
+      if (response.status == 201 || response.status == 200) {
+        productWithUserData.value = response._data?.data?.element || null;
+      }
+    },
+  })
+}
+
 props.images.forEach((el) => {
   reactImages.value.push(config.public.baseURL + el.src);
 })
 
 const currentImage = ref<string>(props.images[0]?.src ? config.public.baseURL + props.images[0]?.src : '');
 
-const isBar = ref(false)
+
 </script>
 
 <template>
@@ -95,7 +112,7 @@ const isBar = ref(false)
       </button>
       <button
         class="border-none"
-        @click="isBar = !isBar"
+        @click="toggleRelatedProductCompare(productWithUserData?.id || 0, isBar || false)"
       >
         <bar
           v-if="isBar === false"

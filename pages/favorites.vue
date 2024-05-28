@@ -6,16 +6,16 @@ const breadcrumbs = ref([
 	{ label: 'Избранное', route: '/favorites' },
 ])
 
-const { data: policy } = await useContentFetch<FavoriteDto>('favorite/', {
+const { data: favorite } = await useContentFetch<FavoriteDto>('favorite/', {
   method: 'GET'
 })
 
 useServerSeoMeta({
-  ogTitle: () => policy.value!.data.seo.title,
-  title: () => policy.value!.data.seo.title,
-  description: () => policy.value!.data.seo.description,
-  ogDescription: () => policy.value!.data.seo.description,
-  keywords: () => policy.value!.data.seo.keywords
+  ogTitle: () => favorite.value!.data.seo.title,
+  title: () => favorite.value!.data.seo.title,
+  description: () => favorite.value!.data.seo.description,
+  ogDescription: () => favorite.value!.data.seo.description,
+  keywords: () => favorite.value!.data.seo.keywords
 })
 </script>
 

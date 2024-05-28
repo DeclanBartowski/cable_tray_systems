@@ -1,8 +1,15 @@
 <script setup lang="ts">
+
+import type {TreeItem} from "~/types/catalog/cable-support-systems/category";
+
 const rootStore = useRootStore()
 const { isOpenModalIndividual } = storeToRefs(rootStore)
 
-defineProps<{ title: string, src: string }>()
+defineProps<{
+  title: string;
+  src: string;
+  tree: TreeItem[];
+}>()
 </script>
 
 <template>
@@ -13,11 +20,11 @@ defineProps<{ title: string, src: string }>()
     <div class="flex justify-between tablet:flex-col-reverse tablet:gap-4 tablet:items-center tablet:justify-center">
       <ul class="flex flex-col gap-3">
         <li
-          v-for="size in sizes"
+          v-for="size in tree"
           :key="size.name"
           class="text-s lining-nums proportional-nums transition-all hover:text-gray300"
         >
-          <nuxt-link :to="size.to">
+          <nuxt-link :to="size.link">
             {{ size.name }}
           </nuxt-link>
         </li>
@@ -26,7 +33,7 @@ defineProps<{ title: string, src: string }>()
             class="border-none"
             @click="isOpenModalIndividual = true"
           >
-            по индивидуальным размерам
+            По индивидуальным размерам
           </button>
         </li>
       </ul>

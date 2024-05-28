@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {useFavoriteStore} from "~/stores/favorite";
+import {useCompareStore} from "~/stores/compare";
 
 const {favorites} = toRefs(useFavoriteStore());
 const config = useRuntimeConfig();
 const { toggleFavorite} = toRefs(useFavoriteStore());
+const {toggleCompare} = toRefs(useCompareStore());
 </script>
 
 <template>
@@ -19,7 +21,9 @@ const { toggleFavorite} = toRefs(useFavoriteStore());
       :price="item.discount"
       :old-price="item.price"
       :is-favorite="item.favorite"
+      :is-bar="item.compare"
       @toggle-favorite="toggleFavorite"
+      @toggle-compare="toggleCompare"
     />
   </div>
 </template>

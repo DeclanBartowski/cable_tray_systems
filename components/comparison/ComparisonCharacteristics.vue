@@ -1,5 +1,14 @@
 <script setup lang="ts">
 
+import type {ProductItem} from "~/types/comparison";
+
+defineProps<{
+  compareItems: ProductItem[];
+}>();
+
+const config = useRuntimeConfig();
+
+
 </script>
 
 <template>
@@ -9,28 +18,13 @@
         показать только отличия
       </button>
       <div class="flex gap-5 tablet:overflow-x-auto mobile:overflow-x-hidden">
-        <comparison-product-card
-          src="/images/products-1.png"
-          name="Перфорированные лотки простого типа"
-          price="500"
-        />
-        <comparison-product-card
-          src="/images/products-1.png"
-          name="Перфорированные лотки простого типа"
-          price="500"
-        />
-        <comparison-product-card
-          src="/images/products-1.png"
-          name="Перфорированные лотки простого типа"
-          price="500"
-        />
-        <comparison-product-card
-          src="/images/products-1.png"
-          name="Перфорированные лотки простого типа"
-          price="500"
+        <comparison-product-card v-for="item in compareItems"
+          :src="`${config.public.baseURL}${item.image}`"
+          :name="`${item.name}`"
+          :price="`${item.price}`"
         />
       </div>
     </div>
-    <comparison-characteristics-accordion />
+  <comparison-characteristics-accordion :compare-items="compareItems"/>
   </div>
 </template>

@@ -3,8 +3,6 @@
 import type {Product} from "~/types/catalog/category";
 import {useFilterStore} from "~/stores/filters";
 import type {Seo} from "~/types/root";
-import {useCartStore} from "~/stores/cart";
-import {useFavoriteStore} from "~/stores/favorite";
 
 defineProps<{
   categoryProducts: Product[];
@@ -13,35 +11,17 @@ defineProps<{
 
 const emit = defineEmits<{
   nextPage?: [];
+  toggleCompare?: [id: number, compareStatus: boolean];
   toggleFavorite?: [id: number, favoriteStatus: boolean];
 }>()
 
 const toggleFavoriteCategory = (id: number, favoriteStatus: boolean) => emit('toggleFavorite', id, favoriteStatus);
-
-const {$api} = useNuxtApp();
+const toggleCompareCategory = (id: number, compareStatus: boolean) => emit('toggleCompare', id, compareStatus);
 
 const {categoryPageSortFields, categoryPageSortField, query} = toRefs(useFilterStore());
 
-const {products, total} = toRefs(useCartStore());
-
 const router = useRouter();
 const config = useRuntimeConfig();
-
-const addProductInCart =  async (productId?: number, quantity?: number) => {
-  await $api('basket-add/', {
-    method: 'POST',
-    body: {
-      product: productId,
-      quantity,
-    },
-    onResponse({response}) {
-      products.value = response._data?.data?.products || [];
-      if (response._data?.data?.total) {
-        total.value = response._data?.data?.total;
-      }
-    }
-  })
-}
 
 watch(categoryPageSortField, () => {
   query.value.sort = categoryPageSortField.value.code;
@@ -69,8 +49,9 @@ watch(categoryPageSortField, () => {
           :price="product.discount"
           :old-price="product.price"
           :is-favorite="product.favorite"
+          :is-bar="product.compare"
           @toggle-favorite="toggleFavoriteCategory"
-          @add-product-in-cart="addProductInCart"
+          @toggle-compare="toggleCompareCategory"
         />
       </div>
       <common-button-more @click="$emit('nextPage')" />
