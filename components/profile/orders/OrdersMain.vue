@@ -2,6 +2,8 @@
 import {email, helpers, maxLength, minLength, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import type {OrderDto} from "~/types/orders";
+import type { YMap } from '@yandex/ymaps3-types';
+import { YandexMap, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
 
 const { data: orderInfo } = await useContentFetch<OrderDto>('order-info/', {
   method: 'GET'
@@ -9,6 +11,8 @@ const { data: orderInfo } = await useContentFetch<OrderDto>('order-info/', {
 
 const rootStore = useRootStore()
 const { isOpenModalSuccess } = storeToRefs(rootStore)
+
+const map = shallowRef<null | YMap>(null);
 
 const {$api} = useNuxtApp();
 
@@ -146,10 +150,17 @@ useServerSeoMeta({
             />
           </div>
           <div class="h-[440px] laptop:h-[400px] tablet:h-[380px] mobile:h-[360px]">
-            <img
-              src="/test/map.png"
-              class=" w-full h-[440px] laptop:h-[400px] tablet:h-[380px] mobile:h-[360px]"
+            <yandex-map
+                v-model="map"
+                :settings="{
+        location: {
+          center: [orderInfo?.data?.pont?.GPS_S || 33.12, orderInfo?.data?.pont?.GPS_N || 55.44],
+          zoom: 13,
+        },
+      }"
             >
+              <yandex-map-default-scheme-layer/>
+            </yandex-map>
           </div>
         </div>
       </div>

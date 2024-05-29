@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     'nuxt-swiper',
     'vue-yandex-maps/nuxt'
   ],
+	yandexMaps: {
+		apiKey: 'feb05bcb-4657-41d0-9253-ae1b80dcf4a8'
+	},
   devServer: {
     host: '0.0.0.0'
   },
