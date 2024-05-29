@@ -1,10 +1,15 @@
 <script setup lang="ts">
 
 import type {ProductItem} from "~/types/comparison";
+import {useCompareStore} from "~/stores/compare";
+import {useCartStore} from "~/stores/cart";
 
 defineProps<{
   compareItems: ProductItem[];
 }>();
+
+const compareStore = useCompareStore();
+const cartStore = useCartStore();
 
 const config = useRuntimeConfig();
 
@@ -19,9 +24,12 @@ const config = useRuntimeConfig();
       </button>
       <div class="flex gap-5 tablet:overflow-x-auto mobile:overflow-x-hidden">
         <comparison-product-card v-for="item in compareItems"
+         :id="item.id"
           :src="`${config.public.baseURL}${item.image}`"
           :name="`${item.name}`"
           :price="`${item.price}`"
+          @delete-from-compare="compareStore.deleteFromCompare"
+          @add-in-cart="cartStore.addProductInCart"
         />
       </div>
     </div>

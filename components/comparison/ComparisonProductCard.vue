@@ -1,5 +1,15 @@
 <script setup lang="ts">
-defineProps<{ src: string, name: string, price: string }>()
+defineProps<{
+  src: string;
+  name: string;
+  price: string;
+  id: number;
+}>()
+
+defineEmits<{
+  deleteFromCompare?: [id: number];
+  addInCart?: [id: number, quantity: number];
+}>();
 </script>
 
 <template>
@@ -15,9 +25,9 @@ defineProps<{ src: string, name: string, price: string }>()
       </h4>
       <div class="flex items-end justify-between">
         <span class="text-m font-medium lining-nums proportional-nums  laptop:text-laptopM mobile:text-mobileM" v-html="price"></span>
-        <common-button-cart />
+        <common-button-cart @click="$emit('addInCart', id, 100)" />
       </div>
     </div>
-    <close class="text-gray200 absolute top-2 right-4 transition-all hover:text-black laptop:right-3" />
+    <close @click="$emit('deleteFromCompare', id)" class="text-gray200 absolute top-2 right-4 transition-all hover:text-black laptop:right-3" />
   </div>
 </template>

@@ -30,6 +30,7 @@ const current = ref<number>(+props?.quantity || 100)
 
 const { addProductInCart } = toRefs(useCartStore());
 
+
 const plusCurrent = (): void => {
   current.value = current.value + 100
 }
@@ -69,7 +70,7 @@ const minusCurrent = (): void => {
         @click.prevent="$emit('toggleCompare', id, isBar)"
       >
         <bar
-          v-if="isBar === false"
+          v-if="!isBar"
           class="w-6 h-6"
         />
         <bar-active

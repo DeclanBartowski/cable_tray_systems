@@ -2,6 +2,8 @@ import {defineStore, storeToRefs} from 'pinia'
 import type {CartDto} from "~/types/cart";
 import {useCartStore} from "~/stores/cart";
 import type {CompareDto, ProductItem} from "~/types/comparison";
+import type {FavoriteDto} from "~/types/favorite";
+import {useFavoriteStore} from "~/stores/favorite";
 
 
 export const useCompareStore = defineStore('compare', {
@@ -15,6 +17,7 @@ export const useCompareStore = defineStore('compare', {
 		async toggleCompare (id: number, compareStatus: boolean) {
 			const {$api} = useNuxtApp();
 			const {products, recommendedItems} = storeToRefs(useCartStore());
+			const {favorites} = storeToRefs(useFavoriteStore());
 			if (compareStatus) {
 				const { data: compare } = await useAsyncData<CompareDto>(
 					'compare',
@@ -26,6 +29,18 @@ export const useCompareStore = defineStore('compare', {
 					}))
 
 				this.compare = compare?.value?.data?.products || [];
+
+				const { data: favorite } = await useAsyncData<FavoriteDto>(
+					'favorite',
+					(): Promise<FavoriteDto> => $api('add-favorite/', {
+						method: 'POST',
+						body: {
+							id,
+						},
+
+					}))
+
+				favorites.value = favorite?.value?.data?.products || [];
 
 				const { data: cart } = await useAsyncData<CartDto>(
 					'cart',
@@ -48,6 +63,18 @@ export const useCompareStore = defineStore('compare', {
 					}))
 
 				this.compare = compare?.value?.data?.products || [];
+
+				const { data: favorite } = await useAsyncData<FavoriteDto>(
+					'favorite',
+					(): Promise<FavoriteDto> => $api('add-favorite/', {
+						method: 'POST',
+						body: {
+							id,
+						},
+
+					}))
+
+				favorites.value = favorite?.value?.data?.products || [];
 
 				const { data: cart } = await useAsyncData<CartDto>(
 					'cart',
@@ -88,5 +115,19 @@ export const useCompareStore = defineStore('compare', {
 				this.compare = compare?.value?.data?.products || [];
 				return true;
 			}
+		},
+
+		async deleteFromCompare(id: number) {
+			const {$api} = useNuxtApp();
+			const { data: compare } = await useAsyncData<CompareDto>(
+				'compare',
+				(): Promise<CompareDto> => $api('remove-compare/', {
+					method: 'POST',
+					body: {
+						id,
+					},
+				}))
+
+			this.compare = compare?.value?.data?.products || [];
 		}
 	}})

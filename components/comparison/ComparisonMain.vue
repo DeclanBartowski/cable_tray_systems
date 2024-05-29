@@ -20,10 +20,6 @@ watch(selectedTab, () => {
   filteredCompare.value = compare.value.filter((el) => el.section_code == selectedTab.value);
 })
 
-
-
-
-
 watchEffect(() => {
   if(compare.value) {
     compare.value.forEach((el) => {
@@ -50,7 +46,6 @@ watchEffect(() => {
         :pt="{ headerAction: { class: 'bg-white font-sans font-normal py-5 px-[30px] border border-solid border-gray100 rounded-s' } }"
       >
         <comparison-characteristics
-
             :compare-items="getFilteredCompare(compare, item.code)" />
       </TabPanel>
     </TabView>
