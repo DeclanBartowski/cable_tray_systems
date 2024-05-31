@@ -28,7 +28,7 @@ useServerSeoMeta({
         </h2>
         <div class="flex flex-col gap-5 tablet:gap-4">
           <catalog-cable-main :categories="cableSupportSystems?.data?.sections" />
-          <common-button-more />
+<!--          <common-button-more />-->
         </div>
       </div>
     </div>

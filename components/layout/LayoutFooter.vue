@@ -90,7 +90,6 @@ const config = useRuntimeConfig()
                 v-for="d in data?.socials"
                 :key="d.link"
                 :to="d.link"
-                href="#"
                 class="cursor-pointer"
               >
                 <div v-html="d.svg" />

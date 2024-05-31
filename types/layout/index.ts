@@ -1,5 +1,6 @@
 import type { HomeSections } from '../home'
 import type { CodeLinkSvgTitle, ListSrcValue } from '../root'
+import type {TreeItem} from "~/types/catalog/cable-support-systems/category";
 
 export interface LayoutDto {
 	data: LayoutData
@@ -14,7 +15,7 @@ export interface LayoutData {
 	menuHeader: LayoutLink[]
 	phones: LayoutPhones[]
 	politic: LayoutLink[]
-	sections: HomeSections[]
+	sections: TreeItem[]
 	socials: CodeLinkSvgTitle[]
 }
 

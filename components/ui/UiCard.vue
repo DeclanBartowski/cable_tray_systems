@@ -8,7 +8,7 @@ const props = defineProps<{
 	description: string,
 	price: string,
 	oldPrice: string;
-  ratio?: string;
+  ratio: string;
   isFavorite?: boolean;
   isBar?: boolean;
   quantity?: string;
@@ -25,22 +25,28 @@ defineEmits<{
 const isHover = ref(false)
 const isFavorite = computed(() => props.isFavorite);
 const isBar = computed(() => props.isBar);
-const current = ref<number>(+props?.quantity || 100)
+const current = ref<number>(+props?.ratio || 100)
 
 
 const { addProductInCart } = toRefs(useCartStore());
 
 
 const plusCurrent = (): void => {
-  current.value = current.value + 100
+  current.value = current.value + (+props?.ratio || 1);
 }
 const minusCurrent = (): void => {
-  if (current.value === 100) {
-    return
+  if (current.value <= 1) {
+    current.value = (+props?.ratio || 1);
   } else {
-    current.value = current.value - 100
+    current.value = current.value - (+props?.ratio || 1);
   }
 }
+
+watch(current, () => {
+  if(current.value <= 1) {
+    current.value = (+props?.ratio || 1);
+  }
+})
 </script>
 
 <template>
@@ -79,12 +85,14 @@ const minusCurrent = (): void => {
         />
       </button>
     </div>
-    <div class="mx-auto">
+    <div class="mx-auto" v-if="src">
       <img
         :src="src"
         alt="Продукт"
         class="w-[180px] h-[120px] mobile:w-[160px] mobile:h-[100px]"
       >
+    </div>
+    <div v-else class="w-[180px] h-[120px] mobile:w-[160px] mobile:h-[100px]">
     </div>
     <div class="flex flex-col items-center justify-center gap-4 w-[262px] laptop:w-auto">
       <div class="flex flex-col items-center gap-2">
@@ -114,7 +122,7 @@ const minusCurrent = (): void => {
             class=" border-none py-2.5 px-2.5 flex items-center justify-center"
             @click.prevent="minusCurrent"
           >
-            <minus :class="current <= 100 ? 'text-gray100' : 'text-black'" />
+            <minus class="text-black" />
           </button>
           <span class="py-2.5 px-[15px] flex items-center justify-center text-xl font-medium lining-nums proportional-nums relative after:absolute after:w-[1px] after:h-5 after:bg-gray100 after:top-[50%] after:right-[1px] after:translate-y-[-50%] before:absolute before:w-[1px] before:h-5 before:bg-gray100 before:top-[50%] before:left-[1px] before:translate-y-[-50%]">
             {{ current }}

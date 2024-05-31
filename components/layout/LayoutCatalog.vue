@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {useHeaderStore} from "~/stores/header";
+
 const rootStore = useRootStore()
 const { isOpenCatalog, isHeaderActive } = storeToRefs(rootStore)
 
@@ -7,6 +9,8 @@ useHead({
     class: isOpenCatalog.value ? "overflow-hidden" : "",
   }
 })
+
+const {catalogSections} = toRefs(useHeaderStore());
 </script>
 
 <template>
@@ -19,16 +23,16 @@ useHead({
         :pt="{ root: { class: 'bg-transparent' }, nav: { class: 'flex gap-[49px] bg-transparent text-xl font-medium font-sans text-gray200 pb-1 tablet:flex-col tablet:gap-4' }, panelContainer: { class: 'pt-4 pb-0 px-0 bg-transparent font-sans text-black' } }"
       >
         <TabPanel
-          header="Кабеленесущие системы"
+          :header="catalogSections[0]?.name"
           :pt="{ headerAction: { class: 'bg-transparent font-sans font-medium pt-0 px-0 pb-1 border-b border-solid border-transparent' }, header: { class: 'tablet:flex' } }"
         >
-          <layout-catalog-cable />
+          <layout-catalog-cable :sections="catalogSections[0]?.sub" />
         </TabPanel>
         <TabPanel
-          header="Сопутствующие товары комплексных инженерных систем"
-          :pt="{ headerAction: { class: 'bg-transparent font-sans font-medium pt-0 px-0 pb-1 border-b border-solid border-transparent' }, header: { class: 'tablet:flex' }, headerTitle: { class: 'mobile:text-wrap mobile:w-[240px]' } }"
+                  :header="catalogSections[1]?.name"
+                  :pt="{ headerAction: { class: 'bg-transparent font-sans font-medium pt-0 px-0 pb-1 border-b border-solid border-transparent' }, header: { class: 'tablet:flex' } }"
         >
-          <layout-catalog-related />
+          <layout-catalog-cable :sections="catalogSections[1]?.sub" />
         </TabPanel>
       </TabView>
     </div>

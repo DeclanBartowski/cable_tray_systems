@@ -33,7 +33,7 @@ const deleteAllItemsFromCart = async () => {
 <template>
   <div class="flex items-start justify-between tablet:flex-col tablet:justify-normal tablet:gap-8">
     <div class="flex flex-col gap-6 w-full max-w-[640px] laptop:max-w-[580px] tablet:max-w-full">
-      <div class="pb-2 border-b border-solid border-gray100">
+      <div v-if="products?.length" class="pb-2 border-b border-solid border-gray100">
         <button @click="deleteAllItemsFromCart" class="border-none text-m text-gray200 flex items-center gap-3 laptop:text-laptopM mobile:text-mobileM">
           <close/>
           Удалить все товары
@@ -44,13 +44,15 @@ const deleteAllItemsFromCart = async () => {
                    :id="item.id"
                    :key="index"
                    :product-id="item.product_id"
-                   :src="`${config.public.baseURL}/${item?.image || ''}`"
+                   :src="`${item.image ? config.public.baseURL + '/' +item.image: ''}`"
                    :name="item.name"
                    :characteristics="item.params"
                    :price="item.discount ? item.discountFormat : item.finalPriceFormat"
                    :old-price="item.discount ? item.finalPriceFormat : ''"
                    :is-favorite="item.favorite"
                    :quantity="item.quantity"
+                   :ratio="item.ratio"
+                   :is-bar="item.compare"
         />
       </div>
     </div>

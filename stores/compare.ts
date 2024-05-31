@@ -30,18 +30,6 @@ export const useCompareStore = defineStore('compare', {
 
 				this.compare = compare?.value?.data?.products || [];
 
-				const { data: favorite } = await useAsyncData<FavoriteDto>(
-					'favorite',
-					(): Promise<FavoriteDto> => $api('add-favorite/', {
-						method: 'POST',
-						body: {
-							id,
-						},
-
-					}))
-
-				favorites.value = favorite?.value?.data?.products || [];
-
 				const { data: cart } = await useAsyncData<CartDto>(
 					'cart',
 					(): Promise<CartDto> => $api('basket/', {
@@ -63,18 +51,6 @@ export const useCompareStore = defineStore('compare', {
 					}))
 
 				this.compare = compare?.value?.data?.products || [];
-
-				const { data: favorite } = await useAsyncData<FavoriteDto>(
-					'favorite',
-					(): Promise<FavoriteDto> => $api('add-favorite/', {
-						method: 'POST',
-						body: {
-							id,
-						},
-
-					}))
-
-				favorites.value = favorite?.value?.data?.products || [];
 
 				const { data: cart } = await useAsyncData<CartDto>(
 					'cart',

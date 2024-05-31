@@ -76,7 +76,7 @@ const currentImage = ref<string>(props.images[0]?.src ? config.public.baseURL + 
 <template>
   <div class="relative w-full max-w-[603px] flex items-center gap-[51px] laptop:w-[50%] laptop:flex-col-reverse tablet:w-full mobile:gap-10">
     <div
-      class="flex flex-col laptop:flex-row mobile:grid mobile:grid-cols-2 mobile:gap-4"
+      class="flex flex-col flex-wrap laptop:flex-row mobile:grid mobile:grid-cols-2 mobile:gap-4"
     >
       <div
         v-for="image in reactImages"

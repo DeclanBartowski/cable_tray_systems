@@ -15,7 +15,7 @@ const {toggleCompare} = toRefs(useCompareStore());
       :id="item.id"
       :key="`catalog/${item.section_code}/${item.code}`"
       :to="`catalog/${item.section_code}/${item.code}`"
-      :src="`${config.public.baseURL}/${item.image}`"
+      :src="`${item.image ? config.public.baseURL + item.image : ''}`"
       :name="item.name"
       :description="item.text"
       :price="item.discount"
@@ -24,6 +24,7 @@ const {toggleCompare} = toRefs(useCompareStore());
       :is-bar="item.compare"
       @toggle-favorite="toggleFavorite"
       @toggle-compare="toggleCompare"
+      :ratio="item.ratio"
     />
   </div>
 </template>

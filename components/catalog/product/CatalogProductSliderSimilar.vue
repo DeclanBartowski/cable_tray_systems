@@ -41,7 +41,7 @@ const toggleRelatedProductCompare = async (id: number, compareStatus: boolean) =
 </script>
 
 <template>
-  <div class="flex flex-col gap-8 laptop:gap-7 tablet:gap-6">
+  <div class="flex flex-col gap-8 laptop:gap-7 tablet:gap-6" v-if="products?.length">
     <div class="flex items-center justify-between">
       <h2 class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4">
         Похожие товары
@@ -92,12 +92,13 @@ const toggleRelatedProductCompare = async (id: number, compareStatus: boolean) =
             :id="item.id"
             :to="`/catalog/${item.section_code}/${item.code}`"
             :is-favorite="item.favorite"
-            :src="`${config.public.baseURL}${item.image || ''}`"
+            :src="`${item.image ? config.public.baseURL + item.image : ''}`"
             :name="item.name"
             :description="item.text"
             :price="item.discount ? item.discount : item.price"
             :old-price="item.discount ? item.price : ''"
             :is-bar="item.compare"
+            :ratio="item.ratio"
             @toggle-favorite="toggleRelatedProductFavorite"
             @toggle-compare="toggleRelatedProductCompare"
         />

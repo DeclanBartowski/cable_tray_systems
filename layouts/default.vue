@@ -1,13 +1,17 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import type { LayoutDto } from '~/types/layout'
+import {useHeaderStore} from "~/stores/header";
 
 const rootStore = useRootStore()
 const { isOpenMenu, isOpenOrderFast, isOpenCatalog, isShowHeader } = storeToRefs(rootStore)
+const {catalogSections} = toRefs(useHeaderStore());
 
 const { data: layout } = await useContentFetch<LayoutDto>('getMain', {
   method: 'GET'
 })
+
+catalogSections.value = layout?.value?.data?.sections || [];
 </script>
 
 <template>

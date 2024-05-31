@@ -54,7 +54,7 @@ const deleteItemFromCart = async (itemId: number) => {
       </div>
       <div class="flex flex-col gap-5 pl-4 pr-6 w-full mb-11 laptop:mb-10 tablet:gap-4 tablet:pr-5 tablet:mb-9 mobile:mb-8 mobile:pr-4">
         <cart-card v-for="item in products"
-                   :src="`${config.public.baseURL}/${item.image?.src || ''}`"
+                   :src="`${item.image ? config.public.baseURL + '/' +item.image: ''}`"
                    :name="item.name"
                    :characteristics="item.params"
                    :price="item.discount ? item.discountFormat : item.finalPriceFormat"
@@ -63,6 +63,8 @@ const deleteItemFromCart = async (itemId: number) => {
                    :id="item.id"
                    :product-id="item.product_id"
                    :quantity="item.quantity"
+                   :ratio="item.ratio"
+                   :is-bar="item.compare"
         />
       </div>
       <div class="flex items-end gap-[65px] pl-9 mb-5 laptop:pl-10 tablet:pl-7 mobile:pl-4 tablet:mb-4">

@@ -2,6 +2,7 @@
 import type {ProductItemParam} from "~/types/cart";
 import {useFavoriteStore} from "~/stores/favorite";
 import {useCartStore} from "~/stores/cart";
+import {useCompareStore} from "~/stores/compare";
 
 const props = defineProps<{
 	src: string,
@@ -13,36 +14,48 @@ const props = defineProps<{
   isFavorite: boolean,
   productId: number;
   quantity?: number;
+  ratio: string;
+  isBar: boolean;
 }>()
 
-const current = ref<number>(props.quantity || 1);
+const current = ref<number>(props?.quantity || 1);
 const isFavorite = computed(() => props.isFavorite);
-const isBar = ref(false);
+const isBar =computed(() => props.isBar);
 
 const {toggleFavorite} = toRefs(useFavoriteStore());
+const {toggleCompare} = toRefs(useCompareStore());
 const {deleteProductFromCart, updateProductInCart} = toRefs(useCartStore());
 
 const plusCurrent = (): void => {
-  current.value = current.value + 100
+  current.value = current.value + (+props?.ratio || 1);
 }
 
 const minusCurrent = (): void => {
-  if (current.value === 100) {
-    return
+  if (current.value <= 1) {
+    return;
   } else {
-    current.value = current.value - 100
+    current.value = current.value - (+props?.ratio || 1);
   }
 }
+
+watch(current, () => {
+  if(current.value <= 1) {
+    current.value = (+props?.ratio || 1);
+  }
+})
 </script>
 
 <template>
   <div class="relative px-5 pb-[18px] flex gap-[60px] border-b border-solid border-gray100 mobile:flex-col mobile:gap-9">
     <div class="relative pt-[23px] mobile:pt-0">
-      <img
+      <img v-if="src"
         :src="src"
         alt="Продукт"
         class="w-[140px] h-20"
       >
+      <div v-else
+           class="w-[140px] h-20">
+      </div>
       <div class="absolute top-1.5 -right-10 flex items-center gap-2 mobile:top-1 mobile:-right-4">
         <button
           class="border-none w-6 h-6"
@@ -59,10 +72,10 @@ const minusCurrent = (): void => {
         </button>
         <button
           class="border-none w-6 h-6"
-          @click.prevent="isBar = !isBar"
+          @click.prevent="toggleCompare(productId, isBar).then(res => isBar = res)"
         >
           <bar
-            v-if="isBar === false"
+            v-if="!isBar"
             class="w-6 h-6"
           />
           <bar-active
@@ -81,17 +94,17 @@ const minusCurrent = (): void => {
           <div class="flex items-center gap-4">
             <span class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM">Количество:</span>
             <div class="flex items-center gap-4">
-              <button @click="updateProductInCart(id, current)"
+              <button @click="updateProductInCart(id, current-(+props?.ratio || 1))"
                 class="border-none"
                 @click.prevent="minusCurrent"
               >
-                <minus :class="current <= 100 ? 'text-gray100' : 'text-black'" />
+                <minus class="text-black" />
               </button>
               <span class="text-m lining-nums proportional-nums laptop:text-laptopM mobile:text-mobileM">
                 {{ current }} шт
               </span>
               <button
-                  @click="updateProductInCart(id, current)"
+                @click="updateProductInCart(id, current+(+props?.ratio || 1))"
                 class="border-none"
                 @click.prevent="plusCurrent"
               >

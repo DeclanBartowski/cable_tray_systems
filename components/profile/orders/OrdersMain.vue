@@ -110,11 +110,12 @@ useServerSeoMeta({
             label="Организация"
           />
           <ui-input
-            v-model="v$.tel.$model"
-            :error="v$.tel.$error"
-            :error-message="v$.tel.required.$message"
-            placeholder="8 800 792-92-92"
-            label="Телефон"
+              v-model="v$.tel.$model"
+              :error="v$.tel.$error"
+              :error-message="v$.tel.required.$message"
+              placeholder="8 800 792-92-92"
+              label="Телефон"
+              point="phone"
           />
           <ui-input
             v-model="v$.email.$model"

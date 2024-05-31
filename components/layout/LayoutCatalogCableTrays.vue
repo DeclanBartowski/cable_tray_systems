@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import type {TreeItem} from "~/types/catalog/cable-support-systems/category";
 
+defineProps<{
+  sections: TreeItem[];
+}>();
 </script>
 
 <template>
@@ -7,58 +11,19 @@
     <TabView
       :pt="{ root: { class: 'bg-transparent flex tablet:flex-col' }, nav: { class: 'pl-2.5 flex flex-col bg-white text-tabs font-normal font-sans text-black w-[340px] laptop:text-laptopTabs laptop:w-[300px] tablet:w-[290px] mobile:text-mobileTabs mobile:pl-0' }, panelContainer: { class: 'py-0 px-0 bg-white font-sans text-black' } }"
     >
-      <TabPanel
+      <TabPanel v-for="tabItem in sections"
         :pt="{ headerAction: { class: 'bg-white font-sans font-normal py-2.5 pl-5 pr-6 rounded-none border-l border-solid border-l-transparent border-b-none block w-[340px] h-[53px] border-b-none laptop:w-[300px] tablet:px-4 tablet:w-[290px] mobile:w-[240px] mobile:px-3' } }"
       >
         <template #header>
           <div class="flex items-center justify-between">
-            <span class="text-tabs text-black laptop:text-laptopTabs mobile:text-mobileTabs">Перфорированные лотки простого типа</span>
+            <span class="text-tabs text-black laptop:text-laptopTabs mobile:text-mobileTabs">{{tabItem.name}}</span>
             <img
               src="/svg/next.svg"
               alt="Открыть"
             >
           </div>
         </template>
-      </TabPanel>
-      <TabPanel
-        :pt="{ headerAction: { class: 'bg-white font-sans font-normal py-2.5 pl-5 pr-6 rounded-none border-l border-solid border-l-transparent border-t border-t-gray block w-[340px] h-[53px] border-b-none laptop:w-[300px] tablet:px-4 tablet:w-[290px] mobile:w-[240px] mobile:px-3' } }"
-      >
-        <template #header>
-          <div class="flex items-center justify-between">
-            <span class="text-tabs text-black laptop:text-laptopTabs mobile:text-mobileTabs">Перфорированные лотки замкового типа</span>
-            <img
-              src="/svg/next.svg"
-              alt="Открыть"
-            >
-          </div>
-        </template>
-        <layout-catalog-cable-trays-castle />
-      </TabPanel>
-      <TabPanel
-        :pt="{ headerAction: { class: 'bg-white font-sans font-normal py-4 pl-5 pr-6 rounded-none border-l border-solid border-l-transparent border-t border-t-gray block w-[340px] h-[53px] border-b-none laptop:w-[300px] tablet:px-4 tablet:w-[290px] mobile:w-[240px] mobile:px-3' } }"
-      >
-        <template #header>
-          <div class="flex items-center justify-between">
-            <span class="text-tabs text-black laptop:text-laptopTabs mobile:text-mobileTabs">Глухие лотки простого типа</span>
-            <img
-              src="/svg/next.svg"
-              alt="Открыть"
-            >
-          </div>
-        </template>
-      </TabPanel>
-      <TabPanel
-        :pt="{ headerAction: { class: 'bg-white font-sans font-normal py-4 pl-5 pr-6 rounded-none border-l border-solid border-l-transparent border-t border-t-gray block w-[340px] h-[53px] laptop:w-[300px] tablet:px-4 tablet:w-[290px] mobile:w-[240px] mobile:px-3' } }"
-      >
-        <template #header>
-          <div class="flex items-center justify-between">
-            <span class="text-tabs text-black laptop:text-laptopTabs mobile:text-mobileTabs">Глухие лотки замкового типа</span>
-            <img
-              src="/svg/next.svg"
-              alt="Открыть"
-            >
-          </div>
-        </template>
+        <layout-catalog-cable-trays-castle :sections="tabItem.sub" />
       </TabPanel>
     </TabView>
   </div>

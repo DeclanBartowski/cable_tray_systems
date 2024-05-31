@@ -62,7 +62,7 @@ const config = useRuntimeConfig();
         <ui-card
           :id="item.id"
           :to="`catalog/${item.section_code}/${item.id}`"
-          :src="`${config.public.baseURL}/${item.image || ''}`"
+          :src="`${item.image ? config.public.baseURL + item.image : ''}`"
           :name="item.name"
           :description="item.text"
           :price="item.discount ? item.discount : item.price"
@@ -70,6 +70,7 @@ const config = useRuntimeConfig();
           :quantity="item.ratio"
           :is-favorite="item.favorite"
           :is-bar="item.compare"
+          :ratio="item.ratio"
           @toggle-favorite="toggleFavorite"
           @toggle-compare="toggleCompare"
         />

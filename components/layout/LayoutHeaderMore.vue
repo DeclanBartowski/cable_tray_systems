@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import {useHeaderStore} from "~/stores/header";
 
+const {catalogSections} = toRefs(useHeaderStore());
 </script>
 
 <template>
@@ -7,13 +9,13 @@
     <nav>
       <ul class="flex flex-col gap-4">
         <li class="text-m transition-all hover:text-gray300 laptop:text-laptopM">
-          <nuxt-link to="/promotion">
-            Акции (распродажи)
+          <nuxt-link :to="catalogSections[catalogSections.length - 1].link">
+            {{catalogSections[catalogSections.length - 1].name}}
           </nuxt-link>
         </li>
         <li class="text-m transition-all hover:text-gray300 laptop:text-laptopM">
-          <nuxt-link to="/metal-trim">
-            Металлическая обрезь (обрезки производства)
+          <nuxt-link :to="catalogSections[catalogSections.length - 2].link">
+            {{catalogSections[catalogSections.length - 2].name}}
           </nuxt-link>
         </li>
       </ul>

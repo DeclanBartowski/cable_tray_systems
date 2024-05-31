@@ -2,27 +2,31 @@
 import type {ProductElement} from "~/types/catalog/category/id";
 import {useCartStore} from "~/stores/cart";
 
+
+const props = defineProps<{
+  product: ProductElement;
+}>();
+
+
 const coating = ref<string>('')
 const thickness = ref<string>('')
 const length = ref<string>('')
-const current = ref<number>(7000)
+const current = ref<number>(+props?.product?.ratio || 1)
 
 
-defineProps<{
-  product: ProductElement;
-}>();
+
 
 const { addProductInCart } = toRefs(useCartStore());
 
 const plusCurrent = (): void => {
-  current.value = current.value + 1000
+  current.value = current.value + (+props?.product?.ratio || 1);
 }
 
 const minusCurrent = (): void => {
-  if (current.value === 1000) {
+  if (current.value <= 1) {
     return
   } else {
-    current.value = current.value - 1000
+    current.value = current.value - (+props?.product?.ratio || 1);
   }
 }
 </script>
