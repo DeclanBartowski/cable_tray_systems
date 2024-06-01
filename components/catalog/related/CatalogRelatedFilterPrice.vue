@@ -6,8 +6,8 @@ const props = defineProps<{
   priceFilter: Filter;
 }>();
 
-const max = props.priceFilter.VALUES['MAX'];
-const min = props.priceFilter.VALUES['MIN'];
+const max = props?.priceFilter?.VALUES?.MAX  ? props?.priceFilter?.VALUES?.MAX : 0;
+const min = props?.priceFilter?.VALUES?.MIN ? props?.priceFilter?.VALUES?.MIN : 0;
 
 const filters = useFilterStore();
 

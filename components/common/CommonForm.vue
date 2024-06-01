@@ -41,7 +41,7 @@ const rules = computed(() => ({
   }
 }))
 
-const v$ = useVuelidate(rules, form.value)
+const v$ = useVuelidate(rules, form)
 
 const { data: dealer } = await useContentFetch<DealerDto>('diler-form', {
   method: 'GET'
@@ -73,6 +73,7 @@ const sendForm = async (): Promise<void> => {
           website: '',
           inn: ''
         }
+        v$.value.$reset();
       }
     }
   })

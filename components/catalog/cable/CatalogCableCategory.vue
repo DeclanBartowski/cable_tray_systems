@@ -19,7 +19,7 @@ const config = useRuntimeConfig();
           v-for="subItem in item?.sub"
           :tree="item?.sub"
           :title="subItem?.name"
-          :src="`${config.public.baseURL}${subItem?.picture}`"
+          :src="`${config.public.baseURL}/${subItem?.picture}`"
         />
       </div>
     </div>

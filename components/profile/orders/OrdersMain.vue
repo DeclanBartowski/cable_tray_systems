@@ -11,6 +11,7 @@ const { data: orderInfo } = await useContentFetch<OrderDto>('order-info/', {
 
 const rootStore = useRootStore()
 const { isOpenModalSuccess } = storeToRefs(rootStore)
+const {products} = toRefs(useCartStore());
 
 const map = shallowRef<null | YMap>(null);
 
@@ -50,7 +51,7 @@ const rules = computed(() => ({
   }
 }))
 
-const v$ = useVuelidate(rules, form.value)
+const v$ = useVuelidate(rules, form)
 
 const sendForm = async (): Promise<void> => {
   const result = await v$.value.$validate()
@@ -81,6 +82,8 @@ const sendForm = async (): Promise<void> => {
           receivingPayment: '',
           optionalText: '',
         }
+        v$.value.$reset();
+        products.value = [];
       }
     }
   })

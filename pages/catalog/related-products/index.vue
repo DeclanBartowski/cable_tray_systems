@@ -2,43 +2,11 @@
 <script setup lang="ts">
 import type {RelatedProductsDto} from "~/types/catalog/related-products";
 import {useFilterStore} from "~/stores/filters";
-
-
 const { data: relatedProducts } = await useContentFetch<RelatedProductsDto>('catalog/related-products', {
   method: 'GET',
 });
-const route = useRoute();
 
-
-const priceFilter = ref(relatedProducts.value?.data?.filter?.find((el) => el.CODE == 'PRICE'));
-const typeFilter = ref(relatedProducts.value?.data?.filter?.find((el) => el.CODE == 'TYPE'));
-const viewFilter = ref(relatedProducts.value?.data?.filter?.find((el) => el.CODE == 'VID'));
-const heightFilter = ref(relatedProducts.value?.data?.filter?.find((el) => el.CODE == 'BORT'));
-
-const filters = useFilterStore();
-const query = {};
-for(const key in route.query) {
-  query[key] = route.query[key] || '';
-}
-filters.setQuery(query);
-
-watch(
-    () => route.query,
-    async () => {
-
-      const {data: res} = await useContentFetch<RelatedProductsDto>('catalog/related-products', {
-        method: 'GET',
-        query: {
-          ...route.query,
-          'set_filter': 'Y',
-        }
-      });
-      relatedProducts.value = res.value;
-    }, {
-      deep: true,
-      immediate: true,
-    }
-)
+const config = useRuntimeConfig();
 
 useServerSeoMeta({
   ogTitle: () => relatedProducts.value!.data.seo.title,
@@ -62,16 +30,14 @@ useServerSeoMeta({
         </h2>
         <div class="flex flex-col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
           <div class="flex items-start gap-5 tablet:gap-6 tablet:flex-col">
-            <catalog-related-filter
-                :view-filter="viewFilter"
-                :type-filter="typeFilter"
-                :price-filter="priceFilter"
-                :height-filter="heightFilter"
-            />
-            <catalog-related-products
-                :sort-fields="relatedProducts?.data?.sortFields || []"
-                :products="relatedProducts?.data?.products || []"
-            />
+            <div class="grid grid-cols-4 gap-5 tablet:gap-4 mobile:grid-cols-1">
+              <common-products-card v-for="item in relatedProducts?.data?.tree?.sub  || []"
+                                    :to="item.link"
+                                    :tree="item?.sub"
+                                    :title="item?.name"
+                                    :src="`${config.public.baseURL}/${item?.picture}`"
+              />
+            </div>
           </div>
           <catalog-related-slider-interesting />
         </div>

@@ -18,8 +18,8 @@ const resetFilters = () => {
   filters.setHeight([]);
   filters.setView('');
   filters.setType('');
-  filters.setPriceFrom(+props.priceFilter.VALUES['MIN'].VALUE || 0);
-  filters.setPriceTo(+props.priceFilter.VALUES['MAX'].VALUE || 0);
+  filters.setPriceFrom(+props.priceFilter?.VALUES['MIN'].VALUE || 0);
+  filters.setPriceTo(+props.priceFilter?.VALUES['MAX'].VALUE || 0);
 }
 
 </script>

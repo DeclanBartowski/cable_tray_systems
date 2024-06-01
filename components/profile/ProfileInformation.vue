@@ -45,7 +45,7 @@ const rules = computed(() => ({
   },
 }))
 
-const v$ = useVuelidate(rules, form.value)
+const v$ = useVuelidate(rules, form)
 
 const getUser = async () => {
   await $api('user-info/', {
@@ -89,6 +89,7 @@ const sendForm = async (): Promise<void> => {
           newPassword: '',
           confirmPassword: ''
         }
+        v$.value.$reset();
       }
     }
   })

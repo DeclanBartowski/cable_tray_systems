@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {Product, SortField} from '~/types/catalog/related-products';
 import {useFilterStore} from "~/stores/filters";
-defineProps<{
+const props = defineProps<{
   products: Product[];
   sortFields: SortField[];
 }>()
@@ -12,7 +12,6 @@ const router = useRouter();
 watch(sortField, () => {
   query.value.sort = sortField.value.code;
   router.push({query: {...query.value}});
-
 })
 
 </script>

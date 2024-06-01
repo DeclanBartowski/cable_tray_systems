@@ -1,4 +1,5 @@
 import {type Breadcrumb, type Page, type Seo} from "../../root";
+import type {TreeItem} from "~/types/catalog/cable-support-systems/category";
 
 export interface RelatedProductsDto {
 
@@ -8,12 +9,9 @@ export interface RelatedProductsDto {
 }
 
 interface RelatedProductsData {
-	showFilter: boolean;
-	filter: Filter[];
-	products: Product[];
-	pagination: Page;
-	sortFields: SortField[];
+	tree: TreeItem;
 	section: RelatedProductsDataSection;
+	type: string;
 	seo: Seo;
 	breadcrumb: Breadcrumb[];
 }
@@ -38,6 +36,7 @@ export interface Product {
 	id: number;
 	ratio: string;
 	section_code: string;
+	code:string;
 	section_name: string;
 	name: string;
 	image: null | Picture;
