@@ -1,5 +1,19 @@
 <script setup lang="ts">
+import type {Product} from "~/types/catalog/category";
 
+defineProps<{
+  interested: Product[];
+}>();
+
+const emit = defineEmits<{
+  toggleCompare?: [id: number, compareStatus: boolean];
+  toggleFavorite?: [id: number, favoriteStatus: boolean];
+}>()
+
+const config = useRuntimeConfig();
+
+const toggleFavoriteCategory = (id: number, favoriteStatus: boolean) => emit('toggleFavorite', id, favoriteStatus);
+const toggleCompareCategory = (id: number, compareStatus: boolean) => emit('toggleCompare', id, compareStatus);
 </script>
 
 <template>
@@ -45,17 +59,24 @@
       class="w-full"
     >
       <swiper-slide
-        v-for="slide in slides"
-        :key="slide.to"
+          v-for="product in interested"
+        :key="product.url"
         class="!w-[310px] laptop:!w-auto"
       >
         <ui-card
-          :to="slide.to"
-          :src="slide.src"
-          :name="slide.name"
-          :description="slide.description"
-          :price="slide.price"
-          :old-price="slide.oldPrice"
+            :id="product.id"
+            :key="product.url"
+            :to="product.url"
+            :src="`${product.image ? config.public.baseURL + product.image : ''}`"
+            :name="product.name"
+            :description="product.text"
+            :price="product.discount"
+            :old-price="product.price"
+            :is-favorite="product.favorite"
+            :is-bar="product.compare"
+            :ratio="product.ratio"
+            @toggle-favorite="toggleFavoriteCategory"
+            @toggle-compare="toggleCompareCategory"
         />
       </swiper-slide>
     </swiper>

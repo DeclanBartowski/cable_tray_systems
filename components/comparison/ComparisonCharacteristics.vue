@@ -8,18 +8,20 @@ defineProps<{
   compareItems: ProductItem[];
 }>();
 
+
+const showOnlyDiff = ref(false);
+
 const compareStore = useCompareStore();
 const cartStore = useCartStore();
 
 const config = useRuntimeConfig();
-
 
 </script>
 
 <template>
   <div class="flex flex-col gap-8 laptop:gap-7 tablet:gap-6">
     <div class="flex items-start pl-6 gap-[115px] mobile:flex-col mobile:gap-6 mobile:overflow-x-auto">
-      <button class="border-none text-m font-medium laptop:text-laptopM mobile:text-mobileM">
+      <button @click="showOnlyDiff = !showOnlyDiff" class="border-none text-m font-medium laptop:text-laptopM mobile:text-mobileM">
         показать только отличия
       </button>
       <div class="flex gap-5 tablet:overflow-x-auto mobile:overflow-x-hidden">
@@ -33,6 +35,6 @@ const config = useRuntimeConfig();
         />
       </div>
     </div>
-  <comparison-characteristics-accordion :compare-items="compareItems"/>
+  <comparison-characteristics-accordion :only-diff="showOnlyDiff" :compare-items="compareItems"/>
   </div>
 </template>

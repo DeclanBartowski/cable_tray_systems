@@ -2,11 +2,11 @@
 
 import type {Product} from "~/types/catalog/category";
 import {useFilterStore} from "~/stores/filters";
-import type {Seo} from "~/types/root";
+import type {Page, Seo} from "~/types/root";
 
 defineProps<{
   categoryProducts: Product[];
-  pagination: Seo;
+  pagination: Page;
 }>();
 
 const emit = defineEmits<{
@@ -19,6 +19,7 @@ const toggleFavoriteCategory = (id: number, favoriteStatus: boolean) => emit('to
 const toggleCompareCategory = (id: number, compareStatus: boolean) => emit('toggleCompare', id, compareStatus);
 
 const {categoryPageSortFields, categoryPageSortField, query} = toRefs(useFilterStore());
+categoryPageSortField.value = categoryPageSortFields.value[0] || {};
 
 const router = useRouter();
 const config = useRuntimeConfig();
@@ -41,8 +42,8 @@ watch(categoryPageSortField, () => {
         <ui-card
           v-for="product in categoryProducts"
           :id="product.id"
-          :key="`/catalog/${product.section_code}/${product.code}`"
-          :to="`/catalog/${product.section_code}/${product.code}`"
+          :key="product.url"
+          :to="product.url"
           :src="`${product.image ? config.public.baseURL + product.image : ''}`"
           :name="product.name"
           :description="product.text"
@@ -55,7 +56,7 @@ watch(categoryPageSortField, () => {
           @toggle-compare="toggleCompareCategory"
         />
       </div>
-      <common-button-more @click="$emit('nextPage')" />
+      <common-button-more v-if="pagination?.pageCount > 1" @click="$emit('nextPage')" />
     </div>
   </div>
 </template>

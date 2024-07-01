@@ -10,7 +10,8 @@ interface CategoryData {
 	showFilter: boolean;
 	filter: Filter[];
 	pagination: Page;
-	products: Product;
+	products: Product[];
+	interested: Product[];
 	sortFields: SortField[];
 	section: CategorySection;
 	seo: Seo;
@@ -55,6 +56,7 @@ export interface Product {
 	discount: string;
 	favorite: boolean;
 	compare: boolean;
+	url: string;
 }
 export interface SortField {
 	name: string;

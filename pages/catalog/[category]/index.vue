@@ -18,6 +18,7 @@ const { $api } = useNuxtApp()
 const page = ref(1);
 const sort = ref('');
 const productsList = ref<Product[]>([])
+const interestedList = ref<Product[]>([]);
 const { data: category } = await useAsyncData<CategoryDto>(
     'category',
     (): Promise<CategoryDto> => $api('/catalog/'+route.params.category, {
@@ -27,6 +28,23 @@ const { data: category } = await useAsyncData<CategoryDto>(
         sort: sort.value
       },
 }))
+
+
+$api('/catalog/'+route.params.category, {
+  method: 'GET',
+  params: {
+    page: page.value,
+    sort: sort.value
+  },
+  onResponse({response}) {
+    if (response.status == 201 || response.status == 200) {
+      interestedList.value = response?._data?.data?.interested;
+      productsList.value.push(...response?._data?.data?.products)
+    }
+  },
+})
+
+
 
 
 const priceFilter = ref(category.value?.data?.filter?.find((el) => el.CODE == 'PRICE'));
@@ -61,20 +79,6 @@ watch(
       immediate: true,
     }
 )
-
-$api('/catalog/'+route.params.category, {
-  method: 'GET',
-  params: {
-    page: page.value,
-    sort: sort.value
-  },
-  onResponse({response}) {
-    if (response.status == 201 || response.status == 200) {
-      productsList.value.push(...response?._data?.data?.products)
-    }
-  },
-})
-
 watch(page, () => {
   $api('/catalog/'+route.params.category, {
     method: 'GET',
@@ -124,6 +128,7 @@ const toggleFavoriteCategory = async (id: number, favoriteStatus: boolean) => {
     },
     onResponse({response}) {
       if (response.status == 201 || response.status == 200) {
+        interestedList.value = response?._data?.data?.interested;
         productsList.value.length -= response?._data?.data?.products.length;
         productsList.value.push(...response?._data?.data?.products)
       }
@@ -142,6 +147,7 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
     },
     onResponse({response}) {
       if (response.status == 201 || response.status == 200) {
+        interestedList.value = response?._data?.data?.interested;
         productsList.value.length -= response?._data?.data?.products.length;
         productsList.value.push(...response?._data?.data?.products)
       }
@@ -170,10 +176,15 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
               <promotion-main
                   @toggle-compare="toggleCompareCategory"
                   @toggle-favorite="toggleFavoriteCategory"
-                  :category-products="category?.data?.products || []"
+                  :pagination="category?.data?.pagination || null"
+                  :category-products="productsList || []"
                   @next-page="nextPage" />
             </div>
-            <catalog-related-slider-interesting />
+            <catalog-related-slider-interesting
+                @toggle-compare="toggleCompareCategory"
+                @toggle-favorite="toggleFavoriteCategory"
+                :interested="interestedList || []"
+            />
           </div>
 
         </div>

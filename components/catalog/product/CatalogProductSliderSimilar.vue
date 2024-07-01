@@ -90,7 +90,7 @@ const toggleRelatedProductCompare = async (id: number, compareStatus: boolean) =
       >
         <ui-card
             :id="item.id"
-            :to="`/catalog/${item.section_code}/${item.code}`"
+            :to="item.url"
             :is-favorite="item.favorite"
             :src="`${item.image ? config.public.baseURL + item.image : ''}`"
             :name="item.name"

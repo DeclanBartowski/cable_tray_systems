@@ -1,7 +1,10 @@
 <script setup lang="ts">
 
 import {type SortField} from '~/types/catalog/related-products';
-const modelValue = defineModel<string>()
+const modelValue = defineModel<{
+  name: string;
+  code: string;
+}>()
 defineProps<{
   sortFields: SortField[];
 }>();

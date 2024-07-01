@@ -55,4 +55,5 @@ export interface RecommendedItem {
 	discount: string;
 	favorite: boolean;
 	compare: boolean;
+	url: string;
 }

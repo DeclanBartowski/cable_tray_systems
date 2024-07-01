@@ -68,6 +68,8 @@ watchEffect(async () => {
     await getCart();
     await getCompare();
     await getFavorite();
+  } else {
+    await getFavorite();
   }
 
   if (checkword.value && login.value) {

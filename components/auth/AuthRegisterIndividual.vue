@@ -57,7 +57,7 @@ const onSubmit = async (): Promise<void> => {
     },
     onResponse({ response }) {
       if (response.status == 201 || response.status == 200) {
-        token.value = response._data.data.token.token
+        token.value = response._data.data.token
         isOpenAuthModal.value = false
         form.value = {
           name: '',

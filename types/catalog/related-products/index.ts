@@ -45,6 +45,7 @@ export interface Product {
 	discount: string;
 	favorite: boolean;
 	compare: boolean;
+	url:string;
 }
 
 interface Picture {

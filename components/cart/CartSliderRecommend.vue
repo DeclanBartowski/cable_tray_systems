@@ -56,12 +56,12 @@ const config = useRuntimeConfig();
     >
       <swiper-slide v-if="recommendedItems.length"
         v-for="item in recommendedItems"
-        :key="`catalog/${item.section_code}/${item.id}`"
+        :key="item.url"
         class="!w-[310px] laptop:!w-auto"
       >
         <ui-card
           :id="item.id"
-          :to="`catalog/${item.section_code}/${item.id}`"
+          :to="item.url"
           :src="`${item.image ? config.public.baseURL + item.image : ''}`"
           :name="item.name"
           :description="item.text"

@@ -3,16 +3,22 @@ import type { LayoutData, LayoutLink } from '~/types/layout'
 import {useCartStore} from "~/stores/cart";
 import {useFavoriteStore} from "~/stores/favorite";
 import {useCompareStore} from "~/stores/compare";
+import type {Product} from "~/types/catalog/category";
 
-const rootStore = useRootStore()
+const rootStore = useRootStore();
 const { isOpenMenu, isOpenCatalog, isHeaderActive } = storeToRefs(rootStore)
 
 const { isOpenAuthModal } = useRoot()
 const { user } = useAuth()
 
+const config = useRuntimeConfig();
+
 const props = defineProps<{
   data: LayoutData
 }>()
+
+const { $api } = useNuxtApp()
+
 const { data } = toRefs(props)
 const {total} = toRefs(useCartStore());
 const {favorites} = toRefs(useFavoriteStore());
@@ -23,6 +29,25 @@ const isOpenMore = ref(false)
 const isOpenSearch = ref(false)
 const contactsLink = ref<LayoutLink | undefined>(undefined)
 const deliveryLink = ref<LayoutLink | undefined>(undefined)
+
+const productsList = ref<Product[]>();
+
+watch(search, async (newVal, oldVal) => {
+  if(newVal) {
+    isOpenSearch.value = true;
+    await $api('/search/?q=' + search.value, {
+      method: 'GET',
+      onResponse({response}) {
+        if (response.status == 201 || response.status == 200) {
+          productsList.value = response?._data?.data?.products || [];
+        }
+      },
+    })
+
+  } else {
+    isOpenSearch.value = false;
+  }
+})
 
 watchEffect(() => {
   if (data.value) {
@@ -262,31 +287,24 @@ onMounted(() => {
               v-if="isOpenSearch"
               class="absolute top-[38px] left-0 flex flex-col border-x border-solid border-gray100 rounded-b-m"
             >
-              <div class="flex flex-col px-5 z-50 bg-white">
-                <div
-                  class="pt-[9px] pb-[19px] pr-[27px] flex items-center gap-[31px] bg-white text-gray300 border-b border-solid border-gray100 transition-all hover:bg-gray hover:text-black"
-                >
-                  <img
-                    src="/images/products-1.png"
-                    alt="Товар"
-                    class="w-[60px] h-[60px]"
+              <div v-for="item in productsList" >
+                <nuxt-link :to="item.url" class="flex flex-col px-5 z-50 bg-white">
+                  <div
+                      class="pt-[9px] pb-[19px] pr-[27px] flex items-center gap-[31px] bg-white text-gray300 border-b border-solid border-gray100 transition-all hover:bg-gray hover:text-black"
                   >
-                  <p class="text-s">
-                    Перфорированные лотки простого типа AN-234
-                  </p>
-                </div>
-                <div
-                  class="pt-[9px] pb-[19px] pr-[27px] flex items-center gap-[31px] bg-white text-gray300 border-b border-solid border-gray100 transition-all hover:bg-gray hover:text-black"
-                >
-                  <img
-                    src="/images/products-1.png"
-                    alt="Товар"
-                    class="w-[60px] h-[60px]"
-                  >
-                  <p class="text-s">
-                    Перфорированные лотки простого типа AN-234
-                  </p>
-                </div>
+                    <img
+                        v-if="item.image"
+                        :src="`${item.image ? config.public.baseURL + '/' +item.image: ''}`"
+                        alt="Товар"
+                        class="w-[60px] h-[60px]"
+                    >
+                    <div v-else class="w-[60px] h-[60px]">
+                    </div>
+                    <p class="text-s">
+                      {{item.name}}
+                    </p>
+                  </div>
+                </nuxt-link>
               </div>
               <nuxt-link
                 to="/catalog"
