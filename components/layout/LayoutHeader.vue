@@ -6,7 +6,9 @@ import {useCompareStore} from "~/stores/compare";
 import type {Product} from "~/types/catalog/category";
 
 const rootStore = useRootStore();
-const { isOpenMenu, isOpenCatalog, isHeaderActive } = storeToRefs(rootStore)
+const { isOpenMenu, isOpenCatalog, isHeaderActive } = storeToRefs(rootStore);
+
+const route = useRoute();
 
 const { isOpenAuthModal } = useRoot()
 const { user } = useAuth()
@@ -29,6 +31,13 @@ const isOpenMore = ref(false)
 const isOpenSearch = ref(false)
 const contactsLink = ref<LayoutLink | undefined>(undefined)
 const deliveryLink = ref<LayoutLink | undefined>(undefined)
+
+
+watch(() => route.fullPath, () => {
+  isOpenCatalog.value = false;
+  isOpenSearch.value = false;
+})
+
 
 const productsList = ref<Product[]>();
 
@@ -307,7 +316,7 @@ onMounted(() => {
                 </nuxt-link>
               </div>
               <nuxt-link
-                to="/catalog"
+                :to="`/catalog/search?q=${search}`"
                 class="z-50 py-4 flex items-center justify-center bg-gray300 text-white text-m rounded-b-m laptop:text-laptopM mobile:text-mobileM"
               >
                 <span>Показать все</span>
