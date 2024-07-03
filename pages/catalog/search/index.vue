@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import type {Product} from "~/types/catalog/category";
+import type {CategoryDto, Product} from "~/types/catalog/category";
 import {useFilterStore} from "~/stores/filters";
 import {useFavoriteStore} from "~/stores/favorite";
 import {useCompareStore} from "~/stores/compare";
@@ -49,21 +49,47 @@ $api('/search/', {
   },
 })
 
+watch(
+    () => route.query,
+    () => {
+
+      $api('/search/', {
+        method: 'GET',
+        query: {
+          ...route.query,
+        },
+        params: {
+          page: page.value,
+        },
+
+        onResponse({response}) {
+          if (response.status == 201 || response.status == 200) {
+            if (page.value == 1) {
+              productsList.value = response?._data?.data?.products;
+            } else {
+              productsList.push(...response?._data?.data?.products)
+            }
+          }
+        },
+      })
+    })
 
 watch(page, () => {
-  $api('/catalog/search/', {
+  $api('/search/', {
     method: 'GET',
     params: {
       page: page.value,
       sort: sort.value
     },
-
+    query: {
+      q: route.query?.q || ''
+    },
     onResponse({response}) {
       if (response.status == 201 || response.status == 200) {
         if(page.value == 1) {
-          search.value = response?._data?.data?.products;
+          productsList.value = response?._data?.data?.products;
         } else {
-          search.value?.data?.products.push(...response?._data?.data?.products)
+          productsList.value.push(...response?._data?.data?.products)
         }
       }
     },
@@ -133,7 +159,6 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
               @next-page="nextPage" />
         </div>
       </div>
-
     </div>
   </div>
 </template>

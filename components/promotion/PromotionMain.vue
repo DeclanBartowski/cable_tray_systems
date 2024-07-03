@@ -15,11 +15,15 @@ const emit = defineEmits<{
   toggleFavorite?: [id: number, favoriteStatus: boolean];
 }>()
 
+const route = useRoute();
+
 const toggleFavoriteCategory = (id: number, favoriteStatus: boolean) => emit('toggleFavorite', id, favoriteStatus);
 const toggleCompareCategory = (id: number, compareStatus: boolean) => emit('toggleCompare', id, compareStatus);
 
 const {categoryPageSortFields, categoryPageSortField, query} = toRefs(useFilterStore());
 categoryPageSortField.value = categoryPageSortFields.value[0] || {};
+
+query.value.q = route.query.q?.toString() || '';
 
 const router = useRouter();
 const config = useRuntimeConfig();

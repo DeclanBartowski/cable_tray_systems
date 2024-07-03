@@ -36,6 +36,7 @@ const deliveryLink = ref<LayoutLink | undefined>(undefined)
 watch(() => route.fullPath, () => {
   isOpenCatalog.value = false;
   isOpenSearch.value = false;
+  isOpenMore.value = false;
 })
 
 
@@ -52,7 +53,8 @@ watch(search, async (newVal, oldVal) => {
         }
       },
     })
-
+    isOpenCatalog.value = false;
+    isOpenMore.value = false;
   } else {
     isOpenSearch.value = false;
   }
@@ -316,11 +318,11 @@ onMounted(() => {
                 </nuxt-link>
               </div>
               <nuxt-link
-                :to="`/catalog/search?q=${search}`"
+                :to="productsList?.length ? `/catalog/search?q=${search}` : ''"
                 class="z-50 py-4 flex items-center justify-center bg-gray300 text-white text-m rounded-b-m laptop:text-laptopM mobile:text-mobileM"
               >
                 <span>Показать все</span>
-                <span v-if="false">Нет результата</span>
+                <span v-if="!productsList?.length">Нет результата</span>
               </nuxt-link>
             </div>
           </div>
