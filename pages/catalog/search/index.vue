@@ -67,7 +67,7 @@ watch(
             if (page.value == 1) {
               productsList.value = response?._data?.data?.products;
             } else {
-              productsList.push(...response?._data?.data?.products)
+              productsList.value.push(...response?._data?.data?.products)
             }
           }
         },

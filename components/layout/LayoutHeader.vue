@@ -39,6 +39,18 @@ watch(() => route.fullPath, () => {
   isOpenMore.value = false;
 })
 
+watch(isOpenCatalog, () => {
+  if(isOpenCatalog.value) {
+    isOpenMore.value = false;
+  }
+})
+
+watch(isOpenMore, () => {
+  if(isOpenMore.value) {
+    isOpenCatalog.value = false;
+  }
+})
+
 
 const productsList = ref<Product[]>();
 
