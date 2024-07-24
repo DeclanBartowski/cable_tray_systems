@@ -13,6 +13,7 @@ const props = defineProps<{
   isBar?: boolean;
   quantity?: string;
   id: number;
+  offer: boolean;
 }>()
 
 
@@ -21,7 +22,7 @@ defineEmits<{
   toggleFavorite?: [id: number, favoriteStatus: boolean];
   toggleCompare?: [id: number, compareStatus: boolean];
 }>()
-
+const router = useRouter();
 const isHover = ref(false)
 const isFavorite = computed(() => props.isFavorite);
 const isBar = computed(() => props.isBar);
@@ -42,6 +43,9 @@ const minusCurrent = (): void => {
   }
 }
 
+const redirectTo = () => {
+  router.push(props.to);
+};
 watch(current, () => {
   if(current.value <= 1) {
     current.value = (+props?.ratio || 1);
@@ -134,7 +138,20 @@ watch(current, () => {
             <plus class="text-black" />
           </button>
         </div>
-        <common-button-cart @click="addProductInCart(id, current)" />
+        <template v-if="offer">
+          <button
+              class="border-none"
+              @click.prevent="redirectTo"
+          >
+            <img
+                src="/svg/cart.svg"
+                alt="Перейти к товару"
+            />
+          </button>
+        </template>
+        <template v-else>
+          <common-button-cart @click="addProductInCart(id, current)" />
+        </template>
       </div>
     </div>
     <ui-promotion class="top-4 right-4" />

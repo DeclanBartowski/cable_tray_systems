@@ -42,6 +42,8 @@ export interface ProductElement {
 	similar_items: Product[];
 
 	text_tooltip: string;
+
+	offers: object[];
 }
 
 export interface SliderItem {

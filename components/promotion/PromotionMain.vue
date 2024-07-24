@@ -56,6 +56,7 @@ watch(categoryPageSortField, () => {
           :is-favorite="product.favorite"
           :is-bar="product.compare"
           :ratio="product.ratio"
+          :offer="product.offer"
           @toggle-favorite="toggleFavoriteCategory"
           @toggle-compare="toggleCompareCategory"
         />

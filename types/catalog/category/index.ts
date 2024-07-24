@@ -46,7 +46,7 @@ export interface Value {
 export interface Product {
 	id: number;
 	code: string;
-	ratio: string;
+	ratio: string | null;
 	section_code: string;
 	section_name: string;
 	name: string;
@@ -57,6 +57,7 @@ export interface Product {
 	favorite: boolean;
 	compare: boolean;
 	url: string;
+	offer: boolean | null;
 }
 export interface SortField {
 	name: string;
