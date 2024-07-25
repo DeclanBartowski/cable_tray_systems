@@ -36,6 +36,8 @@ watch(sortField, () => {
           :ratio="product.ratio"
           :is-favorite="product.favorite"
           :is-bar="product.compare"
+          :offer="product.offer"
+          :discount-percent="product.discount_percent"
         />
       </div>
       <common-button-more />

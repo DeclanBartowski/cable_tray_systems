@@ -207,7 +207,7 @@ const updateCurrentOffer = (offerId: number) => {
           </div>
           <span
             class="text-xl3 font-medium lining-nums proportional-nums"
-            v-html="currentOffer.price"
+            v-html="currentOffer.price || product.price"
           />
         </div>
         <div class="flex items-center justify-between text-gray200 text-s lining-nums proportional-nums">
@@ -243,10 +243,10 @@ const updateCurrentOffer = (offerId: number) => {
           fill="fill"
           text="В корзину"
           class="w-[142px]"
-          @click="addProductInCart(currentOffer.id, current)"
+          @click="addProductInCart(currentOffer.id || product.id, current)"
         />
       </div>
     </div>
-    <ui-promotion class="-top-5 right-0 laptop:-top-10 tablet:-top-5 mobile:top-0" />
+    <ui-promotion v-if="product.discount_percent && product.discount_percent !=''" :promotion="product.discount_percent" class="-top-5 right-0 laptop:-top-10 tablet:-top-5 mobile:top-0" />
   </div>
 </template>

@@ -19,6 +19,8 @@
           :description="product.description"
           :price="product.price"
           :old-price="product.oldPrice"
+          :offer="product.offer"
+          :discount-percent="product.discount_percent"
         />
       </div>
       <common-button-more />

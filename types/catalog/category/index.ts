@@ -57,7 +57,8 @@ export interface Product {
 	favorite: boolean;
 	compare: boolean;
 	url: string;
-	offer: boolean | null;
+	offer: boolean;
+	discount_percent: boolean;
 }
 export interface SortField {
 	name: string;

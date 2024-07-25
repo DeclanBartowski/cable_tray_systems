@@ -76,6 +76,8 @@ const toggleCompareCategory = (id: number, compareStatus: boolean) => emit('togg
             :is-favorite="product.favorite"
             :is-bar="product.compare"
             :ratio="product.ratio"
+            :offer="product.offer"
+            :discount-percent="product.discount_percent"
             @toggle-favorite="toggleFavoriteCategory"
             @toggle-compare="toggleCompareCategory"
         />
