@@ -31,7 +31,8 @@ const toggleCompareCategory = (id: number, compareStatus: boolean) => emit('togg
         </button>
       </div>
     </div>
-    <swiper
+      <nuxt-error-boundary @error="() => {}">
+        <swiper
       :modules="[SwiperNavigation]"
       :height="320"
       :navigation="{
@@ -80,5 +81,6 @@ const toggleCompareCategory = (id: number, compareStatus: boolean) => emit('togg
         />
       </swiper-slide>
     </swiper>
+      </nuxt-error-boundary>
   </div>
 </template>
