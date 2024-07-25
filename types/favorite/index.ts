@@ -24,4 +24,6 @@ export interface ProductItem {
 	discount: string;
 	favorite: boolean;
 	compare: boolean;
+	offer: boolean;
+	discount_percent: string;
 }

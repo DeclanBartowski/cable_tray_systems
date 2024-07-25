@@ -247,6 +247,6 @@ const updateCurrentOffer = (offerId: number) => {
         />
       </div>
     </div>
-    <ui-promotion class="-top-5 right-0 laptop:-top-10 tablet:-top-5 mobile:top-0" />
+    <ui-promotion v-if="product.discount_percent && product.discount_percent !=''" :promotion="product.discount_percent" class="-top-5 right-0 laptop:-top-10 tablet:-top-5 mobile:top-0" />
   </div>
 </template>

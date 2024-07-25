@@ -102,6 +102,8 @@ const config = useRuntimeConfig();
           :old-price="item.discount ? item.price : ''"
           :is-bar="item.compare"
           :ratio="item.ratio"
+          :offer="item.offer"
+          :discount-percent="item.discount_percent"
           @toggle-favorite="toggleRelatedProductFavorite"
           @toggle-compare="toggleRelatedProductCompare"
         />

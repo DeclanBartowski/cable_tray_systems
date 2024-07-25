@@ -71,6 +71,8 @@ const config = useRuntimeConfig();
           :is-favorite="item.favorite"
           :is-bar="item.compare"
           :ratio="item.ratio"
+          :offer="item.offer"
+          :discount-percent="item.discount_percent"
           @toggle-favorite="toggleFavorite"
           @toggle-compare="toggleCompare"
         />

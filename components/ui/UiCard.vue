@@ -14,6 +14,7 @@ const props = defineProps<{
   quantity?: string;
   id: number;
   offer: boolean;
+  discountPercent: string;
 }>()
 
 
@@ -154,6 +155,6 @@ watch(current, () => {
         </template>
       </div>
     </div>
-    <ui-promotion class="top-4 right-4" />
+    <ui-promotion v-if="discountPercent && discountPercent !=''" :promotion="discountPercent" class="top-4 right-4" />
   </nuxt-link>
 </template>

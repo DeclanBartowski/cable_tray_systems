@@ -23,13 +23,14 @@ export interface ProductElement {
 	text: string;
 	price: string;
 	discount: string;
+	discount_percent: string;
 	favorite: boolean;
 	compare: boolean;
 	element_code: string;
 	gabarite: string;
 	rozn_price: string;
 	ratio_format: string;
-
+	offer: boolean;
 	slider: SliderItem[];
 
 	detail_text: string;
@@ -75,4 +76,6 @@ export interface Product {
 	favorite: boolean;
 	compare: boolean;
 	charecter: Array<any>;
+	discount_percent: string;
+	offer: boolean;
 }
