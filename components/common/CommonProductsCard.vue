@@ -5,6 +5,7 @@ withDefaults(defineProps<{
   src: string,
   alt?: string,
   item?: string
+  picture?: string
 }>(), {
   alt: '',
   item: ''
@@ -28,6 +29,7 @@ withDefaults(defineProps<{
     </div>
     <div class="flex justify-end tablet:justify-normal">
       <img
+        v-if="picture"
         :src="src"
         :alt="title"
         class="w-[240px] h-[110px] laptop:w-[220px] laptop:h-[100px] tablet:w-[200px] tablet:h-20 mobile:w-[180px] mobile:h-[60px]"

@@ -77,6 +77,10 @@ watch(
         }
       });
       category.value = res.value;
+      productsList.value = [];
+      if (Array.isArray(res.value?.data?.products)) {
+        productsList.value.push(...res.value?.data?.products)
+      }
     }, {
       deep: true,
       immediate: true,
@@ -189,9 +193,9 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
           </div>
         </div>
         <catalog-related-slider-interesting
-            :interested="interestedList || []"
-            @toggle-compare="toggleCompareCategory"
-            @toggle-favorite="toggleFavoriteCategory"
+          :interested="interestedList || []"
+          @toggle-compare="toggleCompareCategory"
+          @toggle-favorite="toggleFavoriteCategory"
         />
       </template>
       <template v-else-if="category?.data?.type === 'multi_sections'">
@@ -201,18 +205,20 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
         <div class="flex flex-col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
           <div class="flex items-start gap-5 tablet:gap-6 tablet:flex-col">
             <div class="grid grid-cols-4 gap-5 tablet:gap-4 mobile:grid-cols-1">
-              <common-products-card v-for="item in category?.data?.tree?.sub  || []"
-                                    :to="item.link"
-                                    :tree="item?.sub"
-                                    :title="item?.name"
-                                    :src="`${config.public.baseURL}/${item?.picture}`"
+              <common-products-card
+                v-for="item in category?.data?.tree?.sub || []"
+                :to="item.link"
+                :tree="item?.sub"
+                :title="item?.name"
+                :src="`${config.public.baseURL}/${item?.picture}`"
+                :picture="item?.pricture"
               />
             </div>
           </div>
           <catalog-related-slider-interesting
-              :interested="interestedList || []"
-              @toggle-compare="toggleCompareCategory"
-              @toggle-favorite="toggleFavoriteCategory"
+            :interested="interestedList || []"
+            @toggle-compare="toggleCompareCategory"
+            @toggle-favorite="toggleFavoriteCategory"
           />
         </div>
       </template>

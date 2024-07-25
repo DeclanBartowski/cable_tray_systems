@@ -14,7 +14,7 @@ const props = defineProps<{
   isFavorite: boolean,
   productId: number;
   quantity?: number;
-  ratio: string;
+  ratio: number;
   isBar: boolean;
 }>()
 

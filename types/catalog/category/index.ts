@@ -58,7 +58,7 @@ export interface Product {
 	compare: boolean;
 	url: string;
 	offer: boolean;
-	discount_percent: boolean;
+	discount_percent: string;
 }
 export interface SortField {
 	name: string;

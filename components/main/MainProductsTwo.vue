@@ -28,9 +28,10 @@ const config = useRuntimeConfig()
         :to="d.link"
         :src="`${config.public.baseURL}${d.picture}`"
         :title="d.name"
+        :picture="d?.pricture"
       />
     </div>
-    <div class="mx-auto"> 
+    <div class="mx-auto">
       <ui-button
         item="color"
         :to="data.link"
