@@ -14,7 +14,7 @@ defineProps(['categories']);
         :src="`${config.public.baseURL}${cable.picture.src}`"
         :title="cable.name"
         :item="cable.new"
-        :picture="cable?.pricture"
+        :picture="cable?.picture"
       />
     </div>
   </div>

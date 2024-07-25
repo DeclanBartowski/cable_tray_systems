@@ -177,12 +177,12 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
       <template v-if="category?.data?.type === 'elements'">
         <div class="flex -col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
           <div class="flex items-start gap-5 tablet:gap-6 tablet:flex-col">
-            <catalog-related-filter
-              :view-filter="viewFilter || {}"
-              :type-filter="typeFilter || {}"
-              :price-filter="priceFilter || {}"
-              :height-filter="heightFilter || {}"
-            />
+<!--            <catalog-related-filter-->
+<!--              :view-filter="viewFilter || {}"-->
+<!--              :type-filter="typeFilter || {}"-->
+<!--              :price-filter="priceFilter || {}"-->
+<!--              :height-filter="heightFilter || {}"-->
+<!--            />-->
             <promotion-main
               :pagination="category?.data?.pagination || null"
               :category-products="productsList || []"
@@ -211,7 +211,7 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
                 :tree="item?.sub"
                 :title="item?.name"
                 :src="`${config.public.baseURL}/${item?.picture}`"
-                :picture="item?.pricture"
+                :picture="item?.picture"
               />
             </div>
           </div>

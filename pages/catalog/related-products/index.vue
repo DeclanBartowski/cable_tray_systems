@@ -36,7 +36,7 @@ useServerSeoMeta({
                                     :tree="item?.sub"
                                     :title="item?.name"
                                     :src="`${config.public.baseURL}/${item?.picture}`"
-                                    :picture="item?.pricture"
+                                    :picture="item?.picture"
               />
             </div>
           </div>

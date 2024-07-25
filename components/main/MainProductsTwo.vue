@@ -28,7 +28,7 @@ const config = useRuntimeConfig()
         :to="d.link"
         :src="`${config.public.baseURL}${d.picture}`"
         :title="d.name"
-        :picture="d?.pricture"
+        :picture="d?.picture"
       />
     </div>
     <div class="mx-auto">
