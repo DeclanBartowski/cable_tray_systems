@@ -13,7 +13,7 @@ const config = useRuntimeConfig();
 </script>
 
 <template>
-  <div class="flex flex-col gap-8 laptop:gap-7 tablet:gap-6">
+  <div class="flex flex-col gap-8 laptop:gap-7 tablet:gap-6" v-if="recommendedItems.length">
     <div class="flex items-center justify-between">
       <h2 class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4">
         Рекомендуем
