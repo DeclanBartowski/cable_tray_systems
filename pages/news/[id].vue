@@ -1,8 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import type { NewsDetailDto } from '~/types/news'
+const route = useRoute();
 
-const { data: detailNews } = await useContentFetch<NewsDetailDto>('news/zaklyuchaem-kontrakty-na-postavku-kabelnoy-produktsii-3', {
+const { data: detailNews } = await useContentFetch<NewsDetailDto>(`news/${route.params.id}`, {
   method: 'GET'
 })
 
