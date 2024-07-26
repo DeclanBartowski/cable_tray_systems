@@ -28,12 +28,12 @@ useHead({
         </ul>
         <ul class="flex flex-col gap-6">
           <li class="text-tabletM transition-all hover:text-gray300">
-            <nuxt-link to="/promotion">
+            <nuxt-link to="/catalog/promotion">
               Акции (распродажи)
             </nuxt-link>
           </li>
           <li class="text-tabletM transition-all hover:text-gray300">
-            <nuxt-link to="/metal-trim">
+            <nuxt-link to="/catalog/metal-trim">
               Металлическая обрезь (обрезки производства)
             </nuxt-link>
           </li>
