@@ -10,12 +10,13 @@ const { data: favorite } = await useContentFetch<FavoriteDto>('favorite/', {
   method: 'GET'
 })
 
-useServerSeoMeta({
-  ogTitle: () => favorite.value!.data.seo.title,
-  title: () => favorite.value!.data.seo.title,
-  description: () => favorite.value!.data.seo.description,
-  ogDescription: () => favorite.value!.data.seo.description,
-  keywords: () => favorite.value!.data.seo.keywords
+
+useSeoMeta({
+    ogTitle: () => favorite.value!.data.seo.title,
+    title: () => favorite.value!.data.seo.title,
+    description: () => favorite.value!.data.seo.description,
+    ogDescription: () => favorite.value!.data.seo.description,
+    keywords: () => favorite.value!.data.seo.keywords
 })
 </script>
 

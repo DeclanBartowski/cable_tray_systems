@@ -6,13 +6,14 @@ const { data: price } = await useContentFetch<PriceDto>('pricelist', {
   method: 'GET'
 })
 
-useServerSeoMeta({
-  ogTitle: () => price.value!.data.seo.title,
-  title: () => price.value!.data.seo.title,
-  description: () => price.value!.data.seo.description,
-  ogDescription: () => price.value!.data.seo.description,
-  keywords: () => price.value!.data.seo.keywords
+useSeoMeta({
+    ogTitle: () => price.value!.data.seo.title,
+    title: () => price.value!.data.seo.title,
+    description: () => price.value!.data.seo.description,
+    ogDescription: () => price.value!.data.seo.description,
+    keywords: () => price.value!.data.seo.keywords
 })
+
 </script>
 
 <template>

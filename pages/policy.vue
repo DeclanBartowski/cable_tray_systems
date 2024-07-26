@@ -6,13 +6,14 @@ const { data: policy } = await useContentFetch<PolicyDto>('text-page/policy', {
   method: 'GET'
 })
 
-useServerSeoMeta({
-  ogTitle: () => policy.value!.data.seo.title,
-  title: () => policy.value!.data.seo.title,
-  description: () => policy.value!.data.seo.description,
-  ogDescription: () => policy.value!.data.seo.description,
-  keywords: () => policy.value!.data.seo.keywords
+useSeoMeta({
+    ogTitle: () => policy.value!.data.seo.title,
+    title: () => policy.value!.data.seo.title,
+    description: () => policy.value!.data.seo.description,
+    ogDescription: () => policy.value!.data.seo.description,
+    keywords: () => policy.value!.data.seo.keywords
 })
+
 </script>
 
 <template>

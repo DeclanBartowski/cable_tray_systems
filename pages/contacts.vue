@@ -6,13 +6,14 @@ const { data: contacts } = await useContentFetch<ContactsDto>('contacts', {
   method: 'GET'
 })
 
-useServerSeoMeta({
-  ogTitle: () => contacts.value!.data.seo.title,
-  title: () => contacts.value!.data.seo.title,
-  description: () => contacts.value!.data.seo.description,
-  ogDescription: () => contacts.value!.data.seo.description,
-  keywords: () => contacts.value!.data.seo.keywords
+useSeoMeta({
+    ogTitle: () => contacts.value!.data.seo.title,
+    title: () => contacts.value!.data.seo.title,
+    description: () => contacts.value!.data.seo.description,
+    ogDescription: () => contacts.value!.data.seo.description,
+    keywords: () => contacts.value!.data.seo.keywords
 })
+
 </script>
 
 <template>

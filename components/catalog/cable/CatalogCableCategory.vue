@@ -20,6 +20,7 @@ const config = useRuntimeConfig();
           :tree="item?.sub"
           :title="subItem?.name"
           :src="`${config.public.baseURL}/${subItem?.picture}`"
+          :picture="subItem?.picture"
         />
       </div>
     </div>

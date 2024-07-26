@@ -17,10 +17,8 @@ const {products, total} = toRefs(useCartStore());
 const {$api} = useNuxtApp();
 
 const closeFastOrder = () => {
-  if(products.value.length > 0) {
     isShowHeader.value = true;
     isOpenOrderFast.value = false;
-  }
 }
 
 

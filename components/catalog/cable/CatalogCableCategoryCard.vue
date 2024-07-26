@@ -9,6 +9,7 @@ defineProps<{
   title: string;
   src: string;
   tree: TreeItem[];
+  picture?: string;
 }>()
 </script>
 
@@ -38,6 +39,7 @@ defineProps<{
         </li>
       </ul>
       <img
+              v-if="picture"
         :src="src"
         alt="Продукт"
         class="w-[280px] h-[160px] laptop:w-[220px] laptop:h-[140px]"

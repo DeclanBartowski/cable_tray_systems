@@ -6,12 +6,12 @@ const { data: home } = await useContentFetch<HomeDto>('home', {
   method: 'GET'
 })
 
-useServerSeoMeta({
-  ogTitle: () => home.value!.data.seo.title,
-  title: () => home.value!.data.seo.title,
-  description: () => home.value!.data.seo.description,
-  ogDescription: () => home.value!.data.seo.description,
-  keywords: () => home.value!.data.seo.keywords
+useSeoMeta({
+    ogTitle: () => home.value!.data.seo.title,
+    title: () => home.value!.data.seo.title,
+    description: () => home.value!.data.seo.description,
+    ogDescription: () => home.value!.data.seo.description,
+    keywords: () => home.value!.data.seo.keywords
 })
 </script>
 

@@ -6,12 +6,12 @@ const { data: delivery } = await useContentFetch<DeliveryDto>('delivery', {
   method: 'GET'
 })
 
-useServerSeoMeta({
-  ogTitle: () => delivery.value!.data.seo.title,
-  title: () => delivery.value!.data.seo.title,
-  description: () => delivery.value!.data.seo.description,
-  ogDescription: () => delivery.value!.data.seo.description,
-  keywords: () => delivery.value!.data.seo.keywords
+useSeoMeta({
+    ogTitle: () => delivery.value!.data.seo.title,
+    title: () => delivery.value!.data.seo.title,
+    description: () => delivery.value!.data.seo.description,
+    ogDescription: () => delivery.value!.data.seo.description,
+    keywords: () => delivery.value!.data.seo.keywords
 })
 </script>
 

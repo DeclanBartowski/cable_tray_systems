@@ -79,9 +79,9 @@ const updateCurrentOffer = (offerId: number) => {
             {{ product.name }}
           </h2>
           <div class="flex gap-8 text-s lining-nums proportional-nums text-gray300 laptop:gap-7 tablet:gap-5 mobile:gap-2 mobile:flex-wrap">
-            <span>Код товара: {{ product.element_code }}</span>
-            <span>Габариты: {{ product.gabarite }}</span>
-            <span>Заказ: по {{ product.ratio_format }}</span>
+            <span v-if="product.element_code">Код товара: {{ product.element_code }}</span>
+            <span v-if="product.gabarite">Габариты: {{ product.gabarite }}</span>
+            <span>Заказ: {{ product.ratio_format }}</span>
           </div>
         </div>
         <p

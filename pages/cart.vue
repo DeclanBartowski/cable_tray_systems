@@ -15,12 +15,12 @@ const { data: cart} = await useContentFetch<CartDto>('basket/', {
   },
 })
 
-useServerSeoMeta({
-  ogTitle: () => cart?.value!.data.seo.title,
-  title: () => cart?.value!.data.seo.title,
-  description: () => cart?.value!.data.seo.description,
-  ogDescription: () => cart?.value!.data.seo.description,
-  keywords: () => cart?.value!.data.seo.keywords
+useSeoMeta({
+    ogTitle: () => cart.value!.data.seo.title,
+    title: () => cart.value!.data.seo.title,
+    description: () => cart.value!.data.seo.description,
+    ogDescription: () => cart.value!.data.seo.description,
+    keywords: () => cart.value!.data.seo.keywords
 })
 
 </script>

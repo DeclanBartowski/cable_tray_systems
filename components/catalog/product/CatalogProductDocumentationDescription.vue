@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <div class="flex gap-[133px] laptop:gap-[100px] tablet:gap-20 mobile:flex-col mobile:gap-6">
-    <div class="w-full max-w-[307px] flex flex-col gap-5 tablet:w-full tablet:gap-4">
+    <div class="w-full max-w-[307px] flex flex-col gap-5 tablet:w-full tablet:gap-4" v-if="characters.length > 0">
       <h4 class="text-m text-gray300 laptop:text-laptopM mobile:text-mobileM">
         Технические характеристики
       </h4>

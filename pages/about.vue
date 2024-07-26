@@ -5,13 +5,12 @@ import type { AboutDto } from '~/types/about'
 const { data: about } = await useContentFetch<AboutDto>('about', {
   method: 'GET'
 })
-
-useServerSeoMeta({
-  ogTitle: () => about.value!.data.seo.title,
-  title: () => about.value!.data.seo.title,
-  description: () => about.value!.data.seo.description,
-  ogDescription: () => about.value!.data.seo.description,
-  keywords: () => about.value!.data.seo.keywords
+useSeoMeta({
+    ogTitle: () => about.value!.data.seo.title,
+    title: () => about.value!.data.seo.title,
+    description: () => about.value!.data.seo.description,
+    ogDescription: () => about.value!.data.seo.description,
+    keywords: () => about.value!.data.seo.keywords
 })
 </script>
 

@@ -18,12 +18,13 @@ const { data: news } = await useAsyncData<NewsDto>(
   watch: [page]
 })
 
-useServerSeoMeta({
-  ogTitle: () => news.value!.data.seo.title,
-  title: () => news.value!.data.seo.title,
-  description: () => news.value!.data.seo.description,
-  ogDescription: () => news.value!.data.seo.description,
-  keywords: () => news.value!.data.seo.keywords
+
+useSeoMeta({
+    ogTitle: () => news.value!.data.seo.title,
+    title: () => news.value!.data.seo.title,
+    description: () => news.value!.data.seo.description,
+    ogDescription: () => news.value!.data.seo.description,
+    keywords: () => news.value!.data.seo.keywords
 })
 
 watchEffect(() => {

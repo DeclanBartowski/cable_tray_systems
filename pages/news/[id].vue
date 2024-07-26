@@ -7,12 +7,12 @@ const { data: detailNews } = await useContentFetch<NewsDetailDto>(`news/${route.
   method: 'GET'
 })
 
-useServerSeoMeta({
-  ogTitle: () => detailNews.value!.data.seo.title,
-  title: () => detailNews.value!.data.seo.title,
-  description: () => detailNews.value!.data.seo.description,
-  ogDescription: () => detailNews.value!.data.seo.description,
-  keywords: () => detailNews.value!.data.seo.keywords
+useSeoMeta({
+    ogTitle: () => detailNews.value!.data.seo.title,
+    title: () => detailNews.value!.data.seo.title,
+    description: () => detailNews.value!.data.seo.description,
+    ogDescription: () => detailNews.value!.data.seo.description,
+    keywords: () => detailNews.value!.data.seo.keywords
 })
 </script>
 
