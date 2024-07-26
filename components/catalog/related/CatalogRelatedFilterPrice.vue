@@ -23,12 +23,13 @@ const filters = useFilterStore();
 
 const {priceTo, priceFrom, query} = toRefs(useFilterStore());
 
-const price = ref<number[]>([+min.VALUE, +max.VALUE]);
+const minMaxPrice = ref<number[]>([+min.VALUE, +max.VALUE]);
+const price = ref<number[]>([+min.HTML_VALUE | +min.VALUE, +max.HTML_VALUE | +max.VALUE]);
+
 filters.setPriceFrom(price.value[0]);
 filters.setPriceTo(price.value[1]);
 
 const router = useRouter();
-
 watch(() => price.value, () => {
   filters.setPriceFrom(price.value[0]);
   filters.setPriceTo(price.value[1]);
@@ -54,7 +55,7 @@ watch(() => filters.getPriceTo, () => {
       :pt="{ headerAction: ({ context }) => ({ class: context.active ? 'active flex flex-row-reverse items-center justify-between' : 'flex flex-row-reverse items-center justify-between'}), headerTitle: { class: 'text-xl font-medium font-sans text-black' }, header: { class: 'pt-6 pb-5 px-6 bg-gray rounded-t-s transition-all' }, content: { class: 'pl-6 pr-20 pb-6 pt-2 bg-gray text-m font-sans text-black' } }"
     >
       <div class="w-[195px] flex flex-col gap-4">
-        <ui-slider v-model="price" />
+        <ui-slider v-model="price" :min-max="minMaxPrice"/>
         <div class="flex items-center gap-3">
           <label>
             <input

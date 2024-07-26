@@ -40,20 +40,9 @@ $api('/catalog/'+route.params.category, {
   onResponse({response}) {
     if (response.status == 201 || response.status == 200) {
       interestedList.value = response?._data?.data?.interested;
-      if (Array.isArray(response?._data?.data?.products)) {
-        productsList.value.push(...response?._data?.data?.products)
-      }
     }
   },
 })
-
-
-
-
-const priceFilter = ref(category.value?.data?.filter?.find((el) => el.CODE == 'PRICE'));
-const typeFilter = ref(category.value?.data?.filter?.find((el) => el.CODE == 'TYPE'));
-const viewFilter = ref(category.value?.data?.filter?.find((el) => el.CODE == 'VID'));
-const heightFilter = ref(category.value?.data?.filter?.find((el) => el.CODE == 'BORT'));
 
 const filters = useFilterStore();
 const query = {};
@@ -177,12 +166,9 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
       <template v-if="category?.data?.type === 'elements'">
         <div class="flex -col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
           <div class="flex items-start gap-5 tablet:gap-6 tablet:flex-col">
-<!--            <catalog-related-filter-->
-<!--              :view-filter="viewFilter || {}"-->
-<!--              :type-filter="typeFilter || {}"-->
-<!--              :price-filter="priceFilter || {}"-->
-<!--              :height-filter="heightFilter || {}"-->
-<!--            />-->
+            <catalog-related-filter
+              :filters-data="category?.data?.filter"
+            />
             <promotion-main
               :pagination="category?.data?.pagination || null"
               :category-products="productsList || []"
