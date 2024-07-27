@@ -36,6 +36,7 @@ export interface ProductItem {
 	favorite: boolean;
 	compare: boolean,
 	ratio: number;
+	url?: string;
 }
 
 export interface ProductItemParam {

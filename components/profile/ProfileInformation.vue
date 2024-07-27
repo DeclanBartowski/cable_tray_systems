@@ -143,13 +143,16 @@ watchEffect(() => {
           label="ИНН"
           placeholder="4565556545"
         />
-        <ui-input
-            v-model="v$.tel.$model"
-            :error="v$.tel.$error"
-            :error-message="v$.tel.required.$message"
-          label="Телефон"
-          placeholder="+7 495 555 66 77"
-        />
+        <client-only>
+          <ui-input
+              v-model="v$.tel.$model"
+              :error="v$.tel.$error"
+              :error-message="v$.tel.required.$message"
+              label="Телефон"
+              placeholder="+7 495 555 66 77"
+              point="phone"
+          />
+        </client-only>
       </fieldset>
     </div>
     <div class="flex flex-col gap-6 mobile:gap-4">

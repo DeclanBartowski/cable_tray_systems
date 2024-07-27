@@ -5,6 +5,7 @@ const {$api} = useNuxtApp();
 
 const {products, total} = toRefs(useCartStore());
 
+
 const config = useRuntimeConfig();
 const deleteItemFromCart = async (itemId: number) => {
   await $api('basket-delete/', {
@@ -41,6 +42,7 @@ const deleteAllItemsFromCart = async () => {
       </div>
       <div class="flex flex-col gap-5">
         <cart-card v-for="(item,index) in products"
+                   :url="item.url"
                    :id="item.id"
                    :key="index"
                    :product-id="item.product_id"

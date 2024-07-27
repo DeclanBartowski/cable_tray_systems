@@ -152,6 +152,7 @@ const toggleCompareCategory = async (id: number, compareStatus: boolean) => {
       <div class="flex flex-col gap-[108px] laptop:gap-20 tablet:gap-14 mobile:gap-6">
         <div class="flex items-start gap-5 tablet:gap-6 tablet:flex-col">
           <promotion-main
+              without-filters
               @toggle-compare="toggleCompareCategory"
               @toggle-favorite="toggleFavoriteCategory"
               :pagination="search?.data?.pagination || null"

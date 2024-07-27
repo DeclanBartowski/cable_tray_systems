@@ -16,7 +16,7 @@ defineProps<{
       >
         <template #header>
           <div class="flex items-center justify-between" v-if="tabItem.sub.length">
-            <span class="text-m text-black laptop:text-laptopM mobile:text-mobileM">{{tabItem.name}}</span>
+            <span class="text-m text-black laptop:text-laptopM mobile:text-mobile">{{tabItem.name}}</span>
             <img
               src="/svg/next.svg"
               alt="Открыть"

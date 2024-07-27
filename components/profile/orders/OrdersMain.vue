@@ -4,6 +4,8 @@ import useVuelidate from "@vuelidate/core";
 import type {OrderDto} from "~/types/orders";
 import type { YMap } from '@yandex/ymaps3-types';
 import { YandexMap, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
+import {storeToRefs} from "pinia";
+import {useCartStore} from "~/stores/cart";
 
 const { data: orderInfo } = await useContentFetch<OrderDto>('order-info/', {
   method: 'GET'
@@ -11,7 +13,7 @@ const { data: orderInfo } = await useContentFetch<OrderDto>('order-info/', {
 
 const rootStore = useRootStore()
 const { isOpenModalSuccess } = storeToRefs(rootStore)
-const {products} = toRefs(useCartStore());
+const {total, products, recommendedItems } = storeToRefs(useCartStore());
 
 const map = shallowRef<null | YMap>(null);
 
@@ -51,7 +53,20 @@ const rules = computed(() => ({
   }
 }))
 
-const v$ = useVuelidate(rules, form)
+const v$ = useVuelidate(rules, form);
+
+const getCart = async () => {
+  await $api('basket/', {
+    method: 'GET',
+    onResponse({response}) {
+      products.value = response._data?.data?.products || [];
+      if(response._data?.data?.total) {
+        total.value = response._data?.data?.total;
+      }
+      recommendedItems.value = response._data.data?.recomendItem;
+    }
+  })
+}
 
 const sendForm = async (): Promise<void> => {
   const result = await v$.value.$validate()
@@ -87,6 +102,8 @@ const sendForm = async (): Promise<void> => {
       }
     }
   })
+
+  await getCart();
 }
 
 useServerSeoMeta({
@@ -112,14 +129,16 @@ useServerSeoMeta({
             placeholder="Название организации"
             label="Организация"
           />
-          <ui-input
-              v-model="v$.tel.$model"
-              :error="v$.tel.$error"
-              :error-message="v$.tel.required.$message"
-              placeholder="8 800 792-92-92"
-              label="Телефон"
-              point="phone"
-          />
+          <client-only>
+            <ui-input
+                v-model="v$.tel.$model"
+                :error="v$.tel.$error"
+                :error-message="v$.tel.required.$message"
+                placeholder="8 800 792-92-92"
+                label="Телефон"
+                point="phone"
+            />
+          </client-only>
           <ui-input
             v-model="v$.email.$model"
             :error="v$.email.$error"

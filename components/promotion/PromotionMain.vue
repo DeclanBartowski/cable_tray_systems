@@ -7,6 +7,7 @@ import type {Page, Seo} from "~/types/root";
 defineProps<{
   categoryProducts: Product[];
   pagination: Page;
+  withoutFilters: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -42,7 +43,10 @@ watch(categoryPageSortField, () => {
       <ui-select :sort-fields="categoryPageSortFields" v-model="categoryPageSortField" />
     </div>
     <div class="flex flex-col gap-5 tablet:gap-4">
-      <div class="grid grid-cols-3 auto-rows-default laptop:auto-rows-defaultLaptop tablet:auto-rows-defaultTablet mobile:auto-rows-defaultMobile gap-5 items-start laptop:grid-cols-3 tablet:grid-cols-2 tablet:gap-4 mobile:grid-cols-1">
+      <div
+          class="grid auto-rows-default laptop:auto-rows-defaultLaptop tablet:auto-rows-defaultTablet mobile:auto-rows-defaultMobile gap-5 items-start laptop:grid-cols-3 tablet:grid-cols-2 tablet:gap-4 mobile:grid-cols-1"
+          :class="{'grid-cols-4': withoutFilters, 'grid-cols-3': !withoutFilters}"
+      >
         <ui-card
           v-for="product in categoryProducts"
           :id="product.id"
