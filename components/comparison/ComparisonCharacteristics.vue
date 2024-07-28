@@ -4,7 +4,7 @@ import type {ProductItem} from "~/types/comparison";
 import {useCompareStore} from "~/stores/compare";
 import {useCartStore} from "~/stores/cart";
 
-defineProps<{
+const props = defineProps<{
   compareItems: ProductItem[];
 }>();
 
@@ -25,8 +25,10 @@ const config = useRuntimeConfig();
         показать только отличия
       </button>
       <div class="flex gap-5 tablet:overflow-x-auto mobile:overflow-x-hidden">
-        <comparison-product-card v-for="item in compareItems"
-         :id="item.id"
+        <comparison-product-card
+          v-for="item in compareItems"
+          :url="item.url"
+          :id="item.id"
           :src="`${config.public.baseURL}${item.image}`"
           :name="`${item.name}`"
           :price="`${item.price}`"

@@ -17,7 +17,7 @@ const toggleCompareCategory = (id: number, compareStatus: boolean) => emit('togg
 </script>
 
 <template>
-  <div class="flex flex-col gap-8 laptop:gap-7 tablet:gap-6" v-if="interested && interested.length">
+  <div class="flex flex-col gap-8 mt-16 laptop:gap-7 tablet:gap-6" v-if="interested && interested.length">
     <div class="flex items-center justify-between">
       <h2 class="text-xl4 font-medium laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4">
         Возможно, вас заинтересует

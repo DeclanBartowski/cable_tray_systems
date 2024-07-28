@@ -40,7 +40,7 @@ const deleteItemFromCart = async (itemId: number) => {
 </script>
 
 <template>
-  <div class="bg-white text-black absolute top-0 right-0 h-screen overflow-hidden w-[640px] z-10 mobile:w-[calc(100%-24px)]">
+  <div class="bg-white text-black fixed top-0 right-0 h-screen overflow-hidden w-[640px] z-10 mobile:w-[calc(100%-24px)]">
     <div class="pt-10 laptop:pt-9 tablet:pt-8 mobile:pt-7">
       <div class="flex items-start justify-between pl-9 pr-11 laptop:px-10 tablet:pl-7 tablet:pr-8 mobile:px-4 mb-10 laptop:mb-9 tablet:mb-8 mobile:mb-7">
         <h2 class="text-xl3 font-medium lining-nums proportional-nums laptop:text-laptopXl3 tablet:text-tabletXl3 mobile:text-mobileXl3">

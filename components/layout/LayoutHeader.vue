@@ -168,7 +168,7 @@ onMounted(() => {
           <nuxt-link
             v-else
             to="/profile"
-            class="mobile:hidden"
+            class="ml-5 mobile:hidden"
           >
             <img src="/svg/user.svg">
           </nuxt-link>
@@ -253,13 +253,16 @@ onMounted(() => {
                   {{ d.title }}
                 </nuxt-link>
               </li>
+              <li>
+                <button
+                    class="p-4 border-none"
+                    @click="isOpenMore = !isOpenMore"
+                >
+                  <more />
+                </button>
+              </li>
             </ul>
-            <button
-              class="border-none"
-              @click="isOpenMore = !isOpenMore"
-            >
-              <more />
-            </button>
+
             <lazy-layout-header-more v-if="isOpenMore" />
           </nav>
           <nav

@@ -70,8 +70,8 @@ withDefaults(defineProps<{
       inputmode="numeric"
       class="py-4 border border-solid flex items-center outline-none w-full font-sans text-m text-black lining-nums proportional-nums placeholder:lining-nums placeholder:proportional-nums placeholder:text-m placeholder:font-sans laptop:text-laptopM laptop:placeholder:text-laptopM mobile:text-mobileM mobile:placeholder:text-mobileM"
       :class="[
-        item === 'default' ? 'pl-[22px] pr-[47px]' : '', 
-        item === 'icon' ? 'pl-[23px] pr-[47px]' : '',
+        (item === 'default') ? 'pl-[22px] pr-[47px]' : '',
+        (item === 'icon') ? 'pl-[23px] pr-[47px]' : '',
         className === 'default' ? 'rounded-l' : '',
         className === 'small' ? 'rounded-m' : '',
         error ? 'border-red placeholder:text-red' : 'border-gray100 placeholder:text-gray300'

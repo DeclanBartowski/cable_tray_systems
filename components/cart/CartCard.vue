@@ -16,6 +16,7 @@ const props = defineProps<{
   quantity?: number;
   ratio: number;
   isBar: boolean;
+  url: string;
 }>()
 
 const current = ref<number>(props?.quantity || 1);
@@ -46,7 +47,7 @@ watch(current, () => {
 </script>
 
 <template>
-  <div class="relative px-5 pb-[18px] flex gap-[60px] border-b border-solid border-gray100 mobile:flex-col mobile:gap-9">
+  <nuxt-link :to="url" class="relative px-5 pb-[18px] flex gap-[60px] border-b border-solid border-gray100 mobile:flex-col mobile:gap-9">
     <div class="relative pt-[23px] mobile:pt-0">
       <img v-if="src"
         :src="src"
@@ -133,5 +134,5 @@ watch(current, () => {
     <button @click.once="deleteProductFromCart(id)" class="absolute top-[9px] right-0 border-none text-gray200 transition-all hover:text-black mobile:top-0 mobile:bottom-[-80%] mobile:right-8">
       <delete />
     </button>
-  </div>
+  </nuxt-link>
 </template>

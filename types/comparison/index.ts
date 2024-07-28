@@ -25,6 +25,7 @@ export interface ProductItem {
 	favorite: boolean;
 	compare: boolean;
 	charecter: CharecterItem[];
+	url: string;
 }
 
 export interface CharecterItem {
