@@ -17,6 +17,8 @@ const rules = computed(() => ({
   }
 }))
 
+const errorMessage = ref('');
+
 const v$ = useVuelidate(rules, form.value)
 
 const onSubmit = async () => {
@@ -31,6 +33,10 @@ const onSubmit = async () => {
     },
     onResponse({ response }) {
       if (response.status == 201 || response.status == 200) {
+        if(response?._data?.status !== 'success') {
+          errorMessage.value = response._data.errors[0].message;
+          return;
+        }
         isOpenAuthModal.value = false
         form.value = {
           email: ''
@@ -62,6 +68,7 @@ const onSubmit = async () => {
         label="Электронная почта"
         placeholder="Введите почту"
       />
+      <span v-if="errorMessage" v-html="errorMessage" class="mt-2 mb-2 text-s text-red text-center w-[300px] mobile:w-[260px]"></span>
       <ui-button
         type="submit"
         fill="fill"

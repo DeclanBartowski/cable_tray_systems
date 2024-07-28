@@ -40,7 +40,7 @@ const deleteAllItemsFromCart = async () => {
           Удалить все товары
         </button>
       </div>
-      <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-5" v-if="products.length">
         <cart-card v-for="(item,index) in products"
                    :url="item.url"
                    :id="item.id"
@@ -56,6 +56,11 @@ const deleteAllItemsFromCart = async () => {
                    :ratio="item.ratio"
                    :is-bar="item.compare"
         />
+      </div>
+      <div v-else class="flex justify-center items-center">
+        <h2 class="text-xl mt-20 font-medium mb-[33px] laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4 laptop:mb-8 tablet:mb-7 mobile:mb-6">
+          В корзине нет товаров
+        </h2>
       </div>
     </div>
     <div class="pt-4 tablet:pt-0 tablet:w-full">

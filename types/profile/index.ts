@@ -17,5 +17,14 @@ export interface HistoryOrder {
 	PRICE: string;
 	DATE_CREATE: string;
 	DATE_CHANGE: string;
-	BASKET: unknown[];
+	BASKET: BasketItem[];
+}
+
+export interface BasketItem {
+	final_price: number;
+	measure: string;
+	name: string;
+	picture: string;
+	price: number;
+	quantity: number;
 }

@@ -43,7 +43,7 @@ const addFilter = (heightItem: Value) => {
       :pt="{ headerAction: ({ context }) => ({ class: context.active ? 'active flex flex-row-reverse items-center justify-between' : 'flex flex-row-reverse items-center justify-between'}), headerTitle: { class: 'text-xl font-medium font-sans text-black' }, header: ({ context }) => ({ class: context.active ? 'pt-6 pb-5 px-6 bg-gray rounded-b-none transition-all' : 'pt-6 pb-5 px-6 bg-gray rounded-b-s transition-all'}), content: { class: 'pl-6 pr-9 pb-6 rounded-b-s bg-gray text-m font-sans text-black' }, root: { class: 'w-[310px] tablet:w-full' } }"
     >
       <div class="flex flex-col gap-5 tablet:gap-4">
-        <div class="height h-[212px] overflow-y-auto flex flex-col gap-3">
+        <div class="height min-h-8 max-h-52 overflow-y-auto flex flex-col gap-3">
           <ui-checkbox
             v-for="heightItem in heightFilter.VALUES"
             :key="heightItem.CONTROL_NAME"

@@ -50,7 +50,7 @@ const deleteItemFromCart = async (itemId: number) => {
           <close @click="closeFastOrder" />
         </button>
       </div>
-      <div class="flex flex-col gap-5 pl-4 pr-6 w-full mb-11 laptop:mb-10 tablet:gap-4 tablet:pr-5 tablet:mb-9 mobile:mb-8 mobile:pr-4">
+      <div v-if="products.length" class="flex flex-col gap-5 pl-4 pr-6 w-full mb-11 laptop:mb-10 tablet:gap-4 tablet:pr-5 tablet:mb-9 mobile:mb-8 mobile:pr-4">
         <cart-card v-for="item in products"
                    :src="`${item.image ? config.public.baseURL + '/' +item.image: ''}`"
                    :name="item.name"
@@ -59,11 +59,17 @@ const deleteItemFromCart = async (itemId: number) => {
                    :old-price="item.discount ? item.finalPriceFormat : ''"
                    @delete-basket-item="deleteItemFromCart"
                    :id="item.id"
+                   :url="item.url"
                    :product-id="item.product_id"
                    :quantity="item.quantity"
                    :ratio="item.ratio"
                    :is-bar="item.compare"
         />
+      </div>
+      <div v-else  class="flex items-start justify-between pl-9 pr-11 laptop:px-10 tablet:pl-7 tablet:pr-8 mobile:px-4 mb-10 laptop:mb-9 tablet:mb-8 mobile:mb-7">
+        <h2 class="text-xl font-medium lining-nums proportional-nums laptop:text-laptopXl3 tablet:text-tabletXl3 mobile:text-mobileXl3">
+          В корзине нет товаров
+        </h2>
       </div>
       <div class="flex items-end gap-[65px] pl-9 mb-5 laptop:pl-10 tablet:pl-7 mobile:pl-4 tablet:mb-4">
         <span class="text-xl font-medium laptop:text-laptopXl mobile:text-mobileM">Итого к оплате:</span>
