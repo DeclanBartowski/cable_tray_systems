@@ -14,13 +14,13 @@ defineEmits<{
 </script>
 
 <template>
-  <nuxt-link :to="url" class="relative bg-white pt-[19px] pr-3 pb-3 pl-4 border border-solid border-gray100 rounded-s flex flex-col gap-2 max-w-[200px] min-h-[200px] laptop:py-3 laptop:px-3 laptop:w-[165px]">
+  <div class="relative bg-white pt-[19px] pr-3 pb-3 pl-4 border border-solid border-gray100 rounded-s flex flex-col gap-2 max-w-[200px] min-h-[200px] laptop:py-3 laptop:px-3 laptop:w-[165px]">
     <img
       :src="src"
       alt="Продукт"
       class="mx-auto w-20 h-20"
     >
-    <div class="flex flex-col gap-2 laptop:gap-3">
+    <nuxt-link :to="url" class="flex flex-col gap-2 laptop:gap-3">
       <h4 class="text-s text-center">
         {{ name }}
       </h4>
@@ -28,7 +28,7 @@ defineEmits<{
         <span class="text-m font-medium lining-nums proportional-nums  laptop:text-laptopM mobile:text-mobileM" v-html="price"></span>
         <common-button-cart @click="$emit('addInCart', id, 100)" />
       </div>
-    </div>
+    </nuxt-link>
     <close @click="$emit('deleteFromCompare', id)" class="text-gray200 absolute top-2 right-4 transition-all hover:text-black laptop:right-3" />
-  </nuxt-link>
+  </div>
 </template>

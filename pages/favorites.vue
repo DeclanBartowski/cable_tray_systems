@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import type {FavoriteDto} from "~/types/favorite";
+import {useFavoriteStore} from "~/stores/favorite";
 
 const breadcrumbs = ref([
 	{ label: 'Избранное', route: '/favorites' },
@@ -10,7 +11,7 @@ const { data: favorite } = await useContentFetch<FavoriteDto>('favorite/', {
   method: 'GET'
 })
 
-
+const {favorites} = toRefs(useFavoriteStore());
 useSeoMeta({
     ogTitle: () => favorite.value!.data.seo.title,
     title: () => favorite.value!.data.seo.title,
@@ -30,6 +31,10 @@ useSeoMeta({
         Избранное
       </h2>
       <favorites-main />
+
+      <h2 v-if="!favorites.length" class="text-xl mt-12 font-medium mb-[33px] laptop:text-laptopXl4 tablet:text-tabletXl4 mobile:text-mobileXl4 laptop:mb-8 tablet:mb-7 mobile:mb-6">
+        В избранных нет товаров
+      </h2>
     </div>
   </div>
 </template>

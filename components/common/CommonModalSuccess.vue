@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const rootStore = useRootStore()
-const { isOpenModalSuccess } = storeToRefs(rootStore)
+const { isOpenModalSuccess } = storeToRefs(rootStore);
+
+const redirectToMain = () => {
+  navigateTo('/');
+  isOpenModalSuccess.value = false;
+}
+
 </script>
 
 <template>
@@ -20,7 +26,7 @@ const { isOpenModalSuccess } = storeToRefs(rootStore)
         text="Понятно"
         class="w-[310px] mobile:w-[230px]"
         fill="fill"
-        @click="isOpenModalSuccess = false"
+        @click="redirectToMain()"
       />
     </div>
   </ui-modal>

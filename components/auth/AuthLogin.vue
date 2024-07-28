@@ -34,6 +34,8 @@ const showPassword = (): void => {
   isShowPassword.value = true
 }
 
+const errorMessage = ref('');
+
 const onSubmit = async () => {
   const result = await v$.value.$validate()
   if (!result) {
@@ -47,6 +49,9 @@ const onSubmit = async () => {
     },
     onResponse({ response }) {
       if (response.status == 201 || response.status == 200) {
+        if(response?._data?.status !== 'success') {
+          errorMessage.value = response._data.errors[0].message;
+        }
         token.value = response._data.data.token
         isOpenAuthModal.value = false
         form.value = {
@@ -86,6 +91,7 @@ const onSubmit = async () => {
             placeholder="Введите пароль"
           />
         </fieldset>
+        <span v-if="errorMessage" v-html="errorMessage" class="mt-2 mb-2 text-s text-red text-center w-[350px] mobile:w-[260px]"></span>
         <button
           class="border-none text-xs text-blue flex items-start"
           @click="showPassword()"

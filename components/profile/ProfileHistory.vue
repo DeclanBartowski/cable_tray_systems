@@ -9,6 +9,9 @@ const { data: orders } = await useAsyncData<HistoryDto>(
     method: 'GET'
   })
 )
+
+const config = useRuntimeConfig();
+
 </script>
 
 <template>
@@ -38,89 +41,26 @@ const { data: orders } = await useAsyncData<HistoryDto>(
             class="icon w-5 h-5"
           >
         </template>
-        <div class="history flex flex-col gap-1 h-[240px] overflow-y-auto mb-3">
-          <div class="px-[2px] mr-[82px] flex items-center justify-between border-b border-solid border-gray100 text-s lining-nums proportional-nums tablet:mr-10 mobile:items-start mobile:mr-5 mobile:gap-4 mobile:justify-normal mobile:pb-3 mobile:flex-col">
-            <img
-              src="/images/products-1.png"
+        <div class="history flex flex-col gap-1 mb-10 overflow-y-auto">
+          <div v-for="orderItem in order.BASKET" class="px-[2px] mr-[82px] flex items-center justify-between border-b border-solid border-gray100 text-s lining-nums proportional-nums tablet:mr-10 mobile:items-start mobile:mr-5 mobile:gap-4 mobile:justify-normal mobile:pb-3 mobile:flex-col">
+            <img v-if="orderItem.picture"
+              :src="`${config.public.baseURL}/${orderItem.picture}`"
               class="w-[60px] h-10"
             >
-            <p>Потолочный держатель</p>
+            <div v-else class="w-[60px] h-10"></div>
+            <p>{{orderItem.name}}</p>
             <div class="flex items-center gap-4">
-              <span>2450 ₽</span>
+              <span>{{orderItem.price}} ₽</span>
               <span>х</span>
-              <span>100шт</span>
+              <span>{{orderItem.quantity}} {{orderItem.measure}}</span>
             </div>
-            <span>2450 ₽</span>
+            <span>{{orderItem.final_price}} ₽</span>
           </div>
-          <div class="px-[2px] mr-[82px] flex items-center justify-between border-b border-solid border-gray100 text-s lining-nums proportional-nums tablet:mr-10 mobile:items-start mobile:mr-5 mobile:gap-4 mobile:justify-normal mobile:pb-3 mobile:flex-col">
-            <img
-              src="/images/products-1.png"
-              class="w-[60px] h-10"
-            >
-            <p>Потолочный держатель</p>
-            <div class="flex items-center gap-4">
-              <span>2450 ₽</span>
-              <span>х</span>
-              <span>100шт</span>
-            </div>
-            <span>2450 ₽</span>
-          </div>
-          <div class="px-[2px] mr-[82px] flex items-center justify-between border-b border-solid border-gray100 text-s lining-nums proportional-nums tablet:mr-10 mobile:items-start mobile:mr-5 mobile:gap-4 mobile:justify-normal mobile:pb-3 mobile:flex-col">
-            <img
-              src="/images/products-1.png"
-              class="w-[60px] h-10"
-            >
-            <p>Потолочный держатель</p>
-            <div class="flex items-center gap-4">
-              <span>2450 ₽</span>
-              <span>х</span>
-              <span>100шт</span>
-            </div>
-            <span>2450 ₽</span>
-          </div>
-          <div class="px-[2px] mr-[82px] flex items-center justify-between border-b border-solid border-gray100 text-s lining-nums proportional-nums tablet:mr-10 mobile:items-start mobile:mr-5 mobile:gap-4 mobile:justify-normal mobile:pb-3 mobile:flex-col">
-            <img
-              src="/images/products-1.png"
-              class="w-[60px] h-10"
-            >
-            <p>Потолочный держатель</p>
-            <div class="flex items-center gap-4">
-              <span>2450 ₽</span>
-              <span>х</span>
-              <span>100шт</span>
-            </div>
-            <span>2450 ₽</span>
-          </div>
-          <div class="px-[2px] mr-[82px] flex items-center justify-between border-b border-solid border-gray100 text-s lining-nums proportional-nums tablet:mr-10 mobile:items-start mobile:mr-5 mobile:gap-4 mobile:justify-normal mobile:pb-3 mobile:flex-col">
-            <img
-              src="/images/products-1.png"
-              class="w-[60px] h-10"
-            >
-            <p>Потолочный держатель</p>
-            <div class="flex items-center gap-4">
-              <span>2450 ₽</span>
-              <span>х</span>
-              <span>100шт</span>
-            </div>
-            <span>2450 ₽</span>
-          </div>
-          <div class="px-[2px] mr-[82px] flex items-center justify-between border-b border-solid border-gray100 text-s lining-nums proportional-nums tablet:mr-10 mobile:items-start mobile:mr-5 mobile:gap-4 mobile:justify-normal mobile:pb-3 mobile:flex-col">
-            <img
-              src="/images/products-1.png"
-              class="w-[60px] h-10"
-            >
-            <p>Потолочный держатель</p>
-            <div class="flex items-center gap-4">
-              <span>2450 ₽</span>
-              <span>х</span>
-              <span>100шт</span>
-            </div>
-            <span>2450 ₽</span>
-          </div>
+
         </div>
         <div class="flex items-center justify-between ml-[195px] mr-[82px] text-m font-medium lining-nums proportional-nums laptop:text-laptopM tablet:mr-10 tablet:ml-[100px] mobile:text-mobileM mobile:ml-0">
           <span>Итого:</span>
-          <span>12 149 ₽</span>
+          <span v-html="order.PRICE"></span>
         </div>
       </AccordionTab>
     </Accordion>

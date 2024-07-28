@@ -48,6 +48,8 @@ const rules = computed(() => ({
 
 const v$ = useVuelidate(rules, form.value)
 
+const errorMessage = ref('');
+
 const onSubmit = async (): Promise<void> => {
   const result = await v$.value.$validate()
   if (!result) {
@@ -66,6 +68,9 @@ const onSubmit = async (): Promise<void> => {
     },
     onResponse({ response }) {
       if (response.status == 201 || response.status == 200) {
+        if(response?._data?.status !== 'success') {
+          errorMessage.value = response._data.errors[0].message;
+        }
         token.value = response._data.data.token;
         isOpenAuthModal.value = false
         form.value = {
@@ -144,6 +149,7 @@ const onSubmit = async (): Promise<void> => {
         placeholder="Подтвердите пароль"
       />
     </fieldset>
+    <span v-if="errorMessage" v-html="errorMessage" class="mt-2 mb-2 text-s text-red text-center w-[350px] mobile:w-[260px]"></span>
     <div class="flex flex-col items-center gap-2">
       <ui-button
         type="submit"
