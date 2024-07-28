@@ -43,7 +43,7 @@ const {total} = toRefs(useCartStore());
       />
     </div>
     <span class="text-s text-gray300">Нажимая на кнопку, вы соглашаетесь <nuxt-link
-      to="/"
+      to="/policy"
       class="text-blue"
     >на обработку ваших персональных данных</nuxt-link></span>
   </div>

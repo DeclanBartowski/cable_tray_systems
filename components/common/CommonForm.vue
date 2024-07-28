@@ -169,7 +169,7 @@ const config = useRuntimeConfig()
             Нажимая на кнопку, вы соглашаетесь
           </p>
           <nuxt-link
-            to="/"
+            to="/policy"
             class="text-blue"
           >
             на обработку ваших персональных данных

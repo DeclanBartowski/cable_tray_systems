@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     'vue-yandex-maps/nuxt'
   ],
 	yandexMaps: {
-		apiKey: 'feb05bcb-4657-41d0-9253-ae1b80dcf4a8'
+		apiKey: 'e40eb9fd-fdef-4717-9ac9-e5947d51696f'
 	},
   devServer: {
     host: '0.0.0.0'
@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     },
   },
   yandexMaps: {
-    apikey: 'b1b1f0d8-af65-4ce4-8911-b8207fa4cc06',
+    apikey: 'e40eb9fd-fdef-4717-9ac9-e5947d51696f',
   },
   imports: {
     dirs: ['stores'],
