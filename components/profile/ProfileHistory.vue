@@ -10,6 +10,8 @@ const { data: orders } = await useAsyncData<HistoryDto>(
   })
 )
 
+console.log(orders.value);
+
 const config = useRuntimeConfig();
 
 </script>

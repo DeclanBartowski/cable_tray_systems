@@ -63,7 +63,7 @@ const deleteAllItemsFromCart = async () => {
         </h2>
       </div>
     </div>
-    <div class="pt-4 tablet:pt-0 tablet:w-full">
+    <div class="pt-4 tablet:pt-0 tablet:w-full" v-if="products.length">
       <cart-order/>
     </div>
   </div>

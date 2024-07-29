@@ -59,6 +59,8 @@ const getUser = async () => {
   })
 }
 
+const errorMessage = ref('');
+
 const sendForm = async (): Promise<void> => {
   const result = await v$.value.$validate()
   if (!result) {
@@ -78,6 +80,9 @@ const sendForm = async (): Promise<void> => {
     },
     onResponse({ response }) {
       if (response.status == 201 || response.status == 200) {
+        if(response?._data?.status !== 'success') {
+          errorMessage.value = response._data.errors[0].message;
+        }
         isChangeDataSuccessActive.value = true;
         form.value = {
           name: user.value?.name || '',
@@ -191,6 +196,7 @@ watchEffect(() => {
           />
         </div>
       </fieldset>
+      <span v-if="errorMessage" v-html="errorMessage" class="mt-2 mb-2 text-s text-red text-center w-[400px] mobile:w-[260px]"></span>
     </div>
     <ui-button
       type="submit"
