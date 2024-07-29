@@ -158,7 +158,7 @@ const onSubmit = async (): Promise<void> => {
         class="w-[310px] mobile:w-[260px]"
       />
       <span class="text-s text-center text-gray200 w-[297px] mobile:w-[260px]">Нажимая на кнопку, вы соглашаетесь
-        <nuxt-link class="text-blue">на обработку ваших персональных данных</nuxt-link></span>
+        <nuxt-link to="/policy" class="text-blue">на обработку ваших персональных данных</nuxt-link></span>
     </div>
   </form>
 </template>
