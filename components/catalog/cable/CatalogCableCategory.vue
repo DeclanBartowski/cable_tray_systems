@@ -17,7 +17,7 @@ const config = useRuntimeConfig();
       <div class="grid grid-cols-2 gap-5 tablet:gap-4 mobile:grid-cols-1">
         <catalog-cable-category-card
           v-for="subItem in item?.sub"
-          :tree="item?.sub"
+          :tree="subItem?.sub"
           :title="subItem?.name"
           :src="`${config.public.baseURL}/${subItem?.picture}`"
           :picture="subItem?.picture"
