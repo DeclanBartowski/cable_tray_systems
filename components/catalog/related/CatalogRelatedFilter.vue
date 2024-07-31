@@ -12,8 +12,6 @@ const router = useRouter();
 const priceFilter = computed(() => props.filtersData.find(filter => filter.CODE === 'PRICE'));
 const resetFilters = () => {
 
-  filters.resetFilters();
-
   const priceFilterValue = priceFilter.value;
 
   if (priceFilterValue) {
@@ -25,7 +23,11 @@ const resetFilters = () => {
       filters.setPriceTo(+maxValue.VALUE);
     }
   }
-  router.push({ query: {} });
+
+  filters.resetFilters();
+
+  console.log(filters.query);
+  router.push({ query: filters.query });
 }
 </script>
 

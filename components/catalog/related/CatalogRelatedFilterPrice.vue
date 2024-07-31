@@ -37,14 +37,19 @@ watch(() => price.value, () => {
 
 watch(() => filters.getPriceFrom, () => {
   price.value[0] = filters.getPriceFrom;
-  query.value[min.CONTROL_NAME] = filters.getPriceFrom;
-  router.replace({query: {...query.value }});
+  if(minMaxPrice.value[0] !=  filters.getPriceFrom) {
+    query.value[min.CONTROL_NAME] = filters.getPriceFrom;
+    router.replace({query: {...query.value }});
+  }
+
 })
 
 watch(() => filters.getPriceTo, () => {
   price.value[1] = filters.getPriceTo;
-  query.value[max.CONTROL_NAME] = filters.getPriceTo;
-  router.replace({query: {...query.value }});
+  if(minMaxPrice.value[1] !=  filters.getPriceTo) {
+    query.value[max.CONTROL_NAME] = filters.getPriceTo;
+    router.replace({query: {...query.value }});
+  }
 })
 </script>
 

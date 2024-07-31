@@ -1,9 +1,13 @@
 <script setup lang="ts">
 
 import type {TreeItem} from "~/types/catalog/cable-support-systems/category";
+const rootStore = useRootStore();
+const { isOpenIndividual} = storeToRefs(rootStore)
 
-const rootStore = useRootStore()
-const { isOpenModalIndividual } = storeToRefs(rootStore)
+const toggleIndividual = (): void => {
+  isOpenIndividual.value = !isOpenIndividual.value;
+  console.log(isOpenIndividual.value);
+}
 
 defineProps<{
   title: string;
@@ -32,7 +36,7 @@ defineProps<{
         <li class="text-s transition-all hover:text-gray300">
           <button
             class="border-none"
-            @click="isOpenModalIndividual = true"
+            @click="toggleIndividual()"
           >
             По индивидуальным размерам
           </button>

@@ -13,17 +13,15 @@ defineProps<{
     >
 
         <TabPanel v-for="tabItem in sections"
-            :pt="{ headerAction: { class: 'bg-white font-sans font-normal rounded-none border-l border-solid border-l-transparent border-b-none block w-[340px] h-[53px] border-b-none laptop:w-[300px] tablet:px-4 tablet:w-[290px] mobile:w-[240px] mobile:px-3' } }"
+            :pt="{ headerAction: { class: 'bg-white font-sans font-normal p-0 rounded-none border-l border-solid border-l-transparent border-b-none block w-[340px] h-[53px] border-b-none laptop:w-[300px] tablet:px-4 tablet:w-[290px] mobile:w-[240px] mobile:px-3' } }"
         >
           <template #header>
-            <nuxt-link :to="tabItem.link" class=" flex items-center justify-between" v-if="!tabItem.sub.length">
-              <span class="text-tabs text-black laptop:text-laptopTabs mobile:text-mobileTabs">{{tabItem.name}}</span>
-              <img
-                  src="/svg/next.svg"
-                  alt="Открыть"
-              >
+            <nuxt-link :to="tabItem.link" class="flex items-center justify-between" v-if="!tabItem.sub.length">
+              <div class="py-4 pl-5 pr-6">
+                <span class="text-tabs text-black laptop:text-laptopTabs mobile:text-mobileTabs">{{tabItem.name}}</span>
+              </div>
             </nuxt-link>
-            <div v-else class="flex items-center justify-between">
+            <div v-else class="py-4 pl-5 pr-6 flex items-center justify-between">
               <span class="text-tabs text-black laptop:text-laptopTabs mobile:text-mobileTabs">{{tabItem.name}}</span>
               <img
                   src="/svg/next.svg"

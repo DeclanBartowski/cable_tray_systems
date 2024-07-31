@@ -5,7 +5,7 @@ import {storeToRefs} from "pinia";
 import {useCompareStore} from "~/stores/compare";
 
 const rootStore = useRootStore()
-const { isOpenOrderFast } = storeToRefs(rootStore)
+const { isOpenOrderFast, isOpenIndividual } = storeToRefs(rootStore)
 
 const { $api } = useNuxtApp()
 
@@ -91,4 +91,5 @@ watchEffect(async () => {
   <lazy-common-modal-success />
   <lazy-cart-order-fast v-if="isOpenOrderFast" />
   <lazy-auth-modal v-if="isOpenAuthModal" />
+  <lazy-catalog-cable-modal v-show="isOpenIndividual"/>
 </template>

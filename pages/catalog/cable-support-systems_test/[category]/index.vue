@@ -32,5 +32,4 @@ useServerSeoMeta({
       </div>
     </div>
   </div>
-  <catalog-cable-modal />
 </template>
