@@ -37,8 +37,7 @@ const config = useRuntimeConfig()
             :src="`${config.public.baseURL}${data.info.address.src}`"
             alt="Адрес"
           >
-          <address class="not-italic">
-            {{ data.info.address.value }}
+          <address class="not-italic" v-html="data.info.address.value">
           </address>
         </div>
         <div class="flex items-center gap-7 laptop:gap-6 tablet:gap-5 mobile:gap-4">
